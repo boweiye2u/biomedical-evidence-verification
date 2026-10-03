@@ -4,22 +4,9 @@ An evidence-grounded biomedical claim verification system evaluated on SciFact. 
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    C[Biomedical claim] --> B[BGE query encoder]
-    B --> F[FAISS exact search\n5,183 SciFact documents]
-    F --> E[Top-1 full abstract]
-    E --> Q[Qwen2.5-7B-Instruct\ngrounded-v2 prompt]
-    Q --> O[Label + evidence IDs\n+ explanation]
-```
+![Biomedical retrieval and verification architecture](docs/images/architecture.svg)
 
-```mermaid
-flowchart LR
-    U[HTTP client] --> A[FastAPI]
-    A --> R[BGE + FAISS]
-    R --> V[vLLM / Qwen]
-    V --> J[Validated JSON]
-```
+![Local serving architecture](docs/images/serving.svg)
 
 ## Key results
 

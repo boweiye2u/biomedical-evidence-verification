@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="190" viewBox="0 0 940 190" role="img" aria-labelledby="title desc">
+  <title id="title">Local serving architecture</title>
+  <desc id="desc">An HTTP client calls FastAPI, which runs BGE and FAISS retrieval followed by Qwen generation through vLLM and returns validated JSON.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .box { fill: #f8fafc; stroke: #64748b; stroke-width: 1.5; }
+      .service { fill: #eff6ff; stroke: #2563eb; }
+      .output { fill: #ecfdf5; stroke: #059669; }
+      .arrow { fill: none; stroke: #475569; stroke-width: 2; marker-end: url(#arrow); }
+      .label { fill: #0f172a; font: 600 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+      .detail { fill: #475569; font: 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <path class="arrow" d="M170 100 H197"/>
+  <path class="arrow" d="M347 100 H374"/>
+  <path class="arrow" d="M544 100 H571"/>
+  <path class="arrow" d="M751 100 H778"/>
+
+  <rect class="box" x="20" y="52" width="150" height="96" rx="10"/>
+  <text class="label" x="95" y="105">HTTP client</text>
+
+  <rect class="box service" x="197" y="52" width="150" height="96" rx="10"/>
+  <text class="label" x="272" y="105">FastAPI</text>
+
+  <rect class="box service" x="374" y="52" width="170" height="96" rx="10"/>
+  <text class="label" x="459" y="94">BGE + FAISS</text>
+  <text class="detail" x="459" y="120">exact retrieval</text>
+
+  <rect class="box service" x="571" y="52" width="180" height="96" rx="10"/>
+  <text class="label" x="661" y="94">vLLM / Qwen</text>
+  <text class="detail" x="661" y="120">grounded generation</text>
+
+  <rect class="box output" x="778" y="52" width="142" height="96" rx="10"/>
+  <text class="label" x="849" y="94">Validated</text>
+  <text class="label" x="849" y="116">JSON</text>
+</svg>
