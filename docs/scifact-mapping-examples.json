@@ -1,0 +1,289 @@
+[
+  {
+    "query_id": "4",
+    "claim": "1-1% of colorectal cancer patients are diagnosed with regional or distant metastases.",
+    "qrel_document_ids": [
+      "22942787"
+    ],
+    "cited_document_ids": [
+      22942787
+    ],
+    "evidence": []
+  },
+  {
+    "query_id": "6",
+    "claim": "10% of sudden infant death syndrome (SIDS) deaths happen in newborns aged less than 6 months.",
+    "qrel_document_ids": [
+      "2613775"
+    ],
+    "cited_document_ids": [
+      2613775
+    ],
+    "evidence": []
+  },
+  {
+    "query_id": "47",
+    "claim": "A strong bias in the phage genome locations where the spacers were derived has been observed in many CRISPR subtypes that confer the immunity to phage.",
+    "qrel_document_ids": [
+      "26996935",
+      "3512154"
+    ],
+    "cited_document_ids": [
+      3512154,
+      26996935
+    ],
+    "evidence": [
+      {
+        "doc_id": "26996935",
+        "title": "Strong bias in the bacterial CRISPR elements that confer immunity to phage.",
+        "label": "SUPPORT",
+        "sentence_ids": [
+          6
+        ],
+        "sentences": [
+          "We detect a strong and reproducible bias in the phage genome locations from which spacers derive."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "60",
+    "claim": "ART has no effect on the infectiveness of HIV-positive people.",
+    "qrel_document_ids": [
+      "13899137",
+      "13901073"
+    ],
+    "cited_document_ids": [
+      13899137,
+      13901073
+    ],
+    "evidence": [
+      {
+        "doc_id": "13899137",
+        "title": "HIV Treatment as Prevention: Systematic Comparison of Mathematical Models of the Potential Impact of Antiretroviral Therapy on HIV Incidence in South Africa",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          5
+        ],
+        "sentences": [
+          "For a scenario in which 80% of HIV-infected individuals start treatment on average 1 y after their CD4 count drops below 350 cells/\u00b5l and 85% remain on treatment after 3 y, the models projected that HIV incidence would be 35% to 54% lower 8 y after the introduction of ART, compared to a counterfactual scenario in which there is no ART."
+        ]
+      },
+      {
+        "doc_id": "13899137",
+        "title": "HIV Treatment as Prevention: Systematic Comparison of Mathematical Models of the Potential Impact of Antiretroviral Therapy on HIV Incidence in South Africa",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          9
+        ],
+        "sentences": [
+          "Considering the actual scale-up of ART in South Africa, seven models estimated that current HIV incidence is 17% to 32% lower than it would have been in the absence of ART."
+        ]
+      },
+      {
+        "doc_id": "13899137",
+        "title": "HIV Treatment as Prevention: Systematic Comparison of Mathematical Models of the Potential Impact of Antiretroviral Therapy on HIV Incidence in South Africa",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          11
+        ],
+        "sentences": [
+          "CONCLUSIONS Mathematical models evaluating the impact of ART vary substantially in structure, complexity, and parameter choices, but all suggest that ART, at high levels of access and with high adherence, has the potential to substantially reduce new HIV infections."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "2",
+    "claim": "1 in 5 million in UK have abnormal PrP positivity.",
+    "qrel_document_ids": [
+      "13734012"
+    ],
+    "cited_document_ids": [
+      13734012
+    ],
+    "evidence": [
+      {
+        "doc_id": "13734012",
+        "title": "Prevalent abnormal prion protein in human appendixes after bovine spongiform encephalopathy epizootic: large scale survey",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          4
+        ],
+        "sentences": [
+          "RESULTS Of the 32,441 appendix samples 16 were positive for abnormal PrP, indicating an overall prevalence of 493 per million population (95% confidence interval 282 to 801 per million)."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "32",
+    "claim": "A country's Vaccine Alliance (GAVI) eligibility is not indictivate of accelerated adoption of the Hub vaccine.",
+    "qrel_document_ids": [
+      "12428497"
+    ],
+    "cited_document_ids": [
+      12428497
+    ],
+    "evidence": [
+      {
+        "doc_id": "12428497",
+        "title": "Accelerating Policy Decisions to Adopt Haemophilus influenzae Type b Vaccine: A Global, Multivariable Analysis",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          8
+        ],
+        "sentences": [
+          "CONCLUSIONS This study substantiates previous findings related to vaccine price and presents new evidence to suggest that GAVI eligibility is associated with accelerated decisions to adopt Hib vaccine."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "40",
+    "claim": "A diminished ovarian reserve is a very strong indicator of infertility, even in an a priori non-infertile population.",
+    "qrel_document_ids": [
+      "13497630"
+    ],
+    "cited_document_ids": [
+      13497630
+    ],
+    "evidence": [
+      {
+        "doc_id": "13497630",
+        "title": "Association Between Biomarkers of Ovarian Reserve and Infertility Among Older Women of Reproductive Age",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          7
+        ],
+        "sentences": [
+          "After adjusting for age, body mass index, race, current smoking status, and recent hormonal contraceptive use, women with low AMH values (<0.7 ng/mL [n = 84]) did not have a significantly different predicted probability of conceiving by 6 cycles of attempt (65%; 95% CI, 50%-75%) compared with women (n = 579) with normal values (62%; 95% CI, 57%-66%) or by 12 cycles of attempt (84% [95% CI, 70%-91%] vs 75% [95% CI, 70%-79%], respectively)."
+        ]
+      },
+      {
+        "doc_id": "13497630",
+        "title": "Association Between Biomarkers of Ovarian Reserve and Infertility Among Older Women of Reproductive Age",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          8
+        ],
+        "sentences": [
+          "Women with high serum FSH values (>10 mIU/mL [n = 83]) did not have a significantly different predicted probability of conceiving after 6 cycles of attempt (63%; 95% CI, 50%-73%) compared with women (n = 654) with normal values (62%; 95% CI, 57%-66%) or after 12 cycles of attempt (82% [95% CI, 70%-89%] vs 75% [95% CI, 70%-78%], respectively)."
+        ]
+      },
+      {
+        "doc_id": "13497630",
+        "title": "Association Between Biomarkers of Ovarian Reserve and Infertility Among Older Women of Reproductive Age",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          9
+        ],
+        "sentences": [
+          "Women with high urinary FSH values (>11.5 mIU/mg creatinine [n = 69]) did not have a significantly different predicted probability of conceiving after 6 cycles of attempt (61%; 95% CI, 46%-74%) compared with women (n = 660) with normal values (62%; 95% CI, 58%-66%) or after 12 cycles of attempt (70% [95% CI, 54%-80%] vs 76% [95% CI, 72%-80%], respectively)."
+        ]
+      },
+      {
+        "doc_id": "13497630",
+        "title": "Association Between Biomarkers of Ovarian Reserve and Infertility Among Older Women of Reproductive Age",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          10
+        ],
+        "sentences": [
+          "Inhibin B levels (n = 737) were not associated with the probability of conceiving in a given cycle (hazard ratio per 1-pg/mL increase, 0.999; 95% CI, 0.997-1.001)."
+        ]
+      },
+      {
+        "doc_id": "13497630",
+        "title": "Association Between Biomarkers of Ovarian Reserve and Infertility Among Older Women of Reproductive Age",
+        "label": "CONTRADICT",
+        "sentence_ids": [
+          11
+        ],
+        "sentences": [
+          "Conclusions and Relevance Among women aged 30 to 44 years without a history of infertility who had been trying to conceive for 3 months or less, biomarkers indicating diminished ovarian reserve compared with normal ovarian reserve were not associated with reduced fertility."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "9",
+    "claim": "32% of liver transplantation programs required patients to discontinue methadone treatment in 2001.",
+    "qrel_document_ids": [
+      "44265107"
+    ],
+    "cited_document_ids": [
+      44265107
+    ],
+    "evidence": [
+      {
+        "doc_id": "44265107",
+        "title": "Liver transplantation and opioid dependence.",
+        "label": "SUPPORT",
+        "sentence_ids": [
+          15
+        ],
+        "sentences": [
+          "Policies requiring discontinuation of methadone in 32% of all programs contradict the evidence base for efficacy of long-term replacement therapies and potentially result in relapse of previously stable patients."
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "12",
+    "claim": "40mg/day dosage of folic acid and 2mg/day dosage of vitamin B12 does not affect chronic kidney disease (CKD) progression.",
+    "qrel_document_ids": [
+      "33409100"
+    ],
+    "cited_document_ids": [
+      33409100
+    ],
+    "evidence": [
+      {
+        "doc_id": "33409100",
+        "title": "Effect of homocysteine lowering on mortality and vascular disease in advanced chronic kidney disease and end-stage renal disease: a randomized controlled trial.",
+        "label": "SUPPORT",
+        "sentence_ids": [
+          8
+        ],
+        "sentences": [
+          "RESULTS Mean baseline homocysteine level was 24.0 micromol/L in the vitamin group and 24.2 micromol/L in the placebo group."
+        ]
+      },
+      {
+        "doc_id": "33409100",
+        "title": "Effect of homocysteine lowering on mortality and vascular disease in advanced chronic kidney disease and end-stage renal disease: a randomized controlled trial.",
+        "label": "SUPPORT",
+        "sentence_ids": [
+          12
+        ],
+        "sentences": [
+          "CONCLUSION Treatment with high doses of folic acid and B vitamins did not improve survival or reduce the incidence of vascular disease in patients with advanced chronic kidney disease or end-stage renal disease.   \n"
+        ]
+      }
+    ]
+  },
+  {
+    "query_id": "22",
+    "claim": "76-85% of people with severe mental disorder receive no treatment in low and middle income countries.",
+    "qrel_document_ids": [
+      "6490571"
+    ],
+    "cited_document_ids": [
+      6490571
+    ],
+    "evidence": [
+      {
+        "doc_id": "6490571",
+        "title": "Prevalence, severity, and unmet need for treatment of mental disorders in the World Health Organization World Mental Health Surveys.",
+        "label": "SUPPORT",
+        "sentence_ids": [
+          7
+        ],
+        "sentences": [
+          "Although disorder severity was correlated with probability of treatment in almost all countries, 35.5% to 50.3% of serious cases in developed countries and 76.3% to 85.4% in less-developed countries received no treatment in the 12 months before the interview."
+        ]
+      }
+    ]
+  }
+]

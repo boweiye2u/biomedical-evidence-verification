@@ -1,0 +1,66 @@
+{
+  "status": "frozen_modeling_protocol_with_documented_post_access_path_correction",
+  "run_id": "milestone6a-test-v1",
+  "scope": {
+    "split": "official_SciFact_TEST_only",
+    "test_is_confirmatory": true,
+    "training_or_model_selection_allowed": false,
+    "post_test_modeling_changes_allowed": false
+  },
+  "sources": {
+    "beir_archive": "data/scifact/archives/beir.zip",
+    "beir_qrels_member": "scifact/qrels/test.tsv",
+    "beir_queries_member": "scifact/queries.jsonl",
+    "original_archive": "data/scifact/archives/original.tar.gz",
+    "original_test_claims_member": "data/claims_dev.jsonl",
+    "beir_archive_sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+    "original_archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+    "split_mapping": "BEIR SciFact test.tsv query IDs and texts exactly match original SciFact claims_dev.jsonl (300/300), not claims_test.jsonl; this release-level naming mismatch was verified after the initial path assertion failed."
+  },
+  "retriever": {
+    "name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "document_format": "title + single space + abstract",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "pooling": "CLS",
+    "normalization": "L2",
+    "score": "exact inner product over normalized float32 embeddings",
+    "index": "faiss.IndexFlatIP",
+    "max_length": 512,
+    "batch_size": 32,
+    "corpus_size": 5183,
+    "embedding_cache": "embeddings/scifact-bge-a53fd0d3b47586f0"
+  },
+  "verifier": {
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "precision": "bfloat16",
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "evidence_depth": 1,
+    "evidence_format": "full abstract with [EVIDENCE_ID: raw_id] markers",
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20261009,
+    "max_input_tokens": 16384,
+    "max_evidence_tokens": 12000
+  },
+  "conditions": {
+    "T1": "zero-shot BGE top-1 full abstract then frozen Qwen",
+    "T_gold": "first numeric annotated evidence document then frozen Qwen; only if original TEST labels are genuinely available"
+  },
+  "verification_availability_policy": {
+    "available_only_if": "official claims_test records contain a non-withheld mixture of explicit evidence annotations with valid SUPPORT/CONTRADICT labels; missing evidence or an all-empty evidence field is treated as withheld, not INSUFFICIENT",
+    "if_unavailable": "run and validate T1 predictions but do not compute verification accuracy/F1, evidence diagnostics, error decomposition, or T_gold"
+  },
+  "gold_document_rule": "first numeric annotated evidence document, matching Milestone 5A D3",
+  "uncertainty": {
+    "method": "ordinary query bootstrap because frozen DEV related-claim groups do not cover TEST",
+    "replicates": 20000,
+    "ndcg_seed": 20261016,
+    "accuracy_seed": 20261017,
+    "macro_f1_seed": 20261018
+  },
+  "selection_candidates": [],
+  "stop_rule": "Stop after the one-time frozen TEST evaluation; no post-TEST tuning or ablation."
+}

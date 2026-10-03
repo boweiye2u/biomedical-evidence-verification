@@ -1,0 +1,44 @@
+"""Validate and publish Milestone 6B results without rerunning inference."""
+import hashlib,json,os
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]; ART=Path(os.environ.get('RAG_ROOT', Path.home()/'rag')); RUN=ART/'runs/milestone6b-serving-v1'
+cfg=json.loads((ROOT/'configs/serving-6b-v1.json').read_text()); gen=json.loads((RUN/'generator-benchmark.json').read_text()); e2e=json.loads((RUN/'end_to_end-benchmark.json').read_text()); eq=json.loads((RUN/'functional-equivalence.json').read_text()); env=json.loads((RUN/'environment.json').read_text())
+assert len(gen['results'])==9 and all(x['requests']==100 and x['failure_rate']==0 for x in gen['results'])
+assert len(e2e['results'])==3 and all(x['requests']==100 and x['failure_rate']==0 and x['invalid_output_rate']==0 for x in e2e['results'])
+assert eq['retrieval_matches']==eq['valid_outputs']==eq['label_matches']==eq['citation_valid']==eq['count']==10
+assert cfg['retriever']['production_top_k']==1 and cfg['generator']['max_new_tokens']==192
+payload={'status':'complete','config':cfg,'environment':env,'functional_equivalence':{k:v for k,v in eq.items() if k!='records'},'generator_results':gen['results'],'end_to_end_results':e2e['results'],'interpretation':{'quality_changed':False,'test_rerun':False,'bottleneck':'generation','recommended_operating_point':'concurrency 8 for throughput under the measured workload; concurrency 1 for minimum latency'}}
+(ROOT/'docs/milestone6b-serving-results.json').write_text(json.dumps(payload,indent=2)+'\n')
+
+def f(x): return f'{x:.2f}'
+lines=['# Milestone 6B — local vLLM + FastAPI serving and performance','',
+'> **Scope:** This is an engineering evaluation of the frozen final system. No retriever, checkpoint, prompt, evidence depth, label mapping, decoding policy, or TEST result was changed or selected from serving measurements.','',
+'## Frozen service','',
+'The service exposes `GET /health`, `POST /retrieve`, and `POST /verify`. Production `/verify` is fixed to zero-shot BGE top-1 over all 5,183 SciFact documents, the full abstract in the unchanged grounded-v2 prompt, and Qwen2.5-7B-Instruct with greedy decoding and a 192-token production maximum. Corpus embeddings and the exact FAISS `IndexFlatIP` index load once at startup. Invalid generations are returned with parsing errors and retained in structured JSONL logs; they are never repaired into labels.','',
+'Both BGE and vLLM ran on one NVIDIA L40S. vLLM reserved 72% of GPU memory, leaving room for the BGE encoder in the FastAPI process. Requests use the exact locally rendered Qwen chat prompt through the completion endpoint, avoiding an extra server-side chat template. The checkpoint-retained repetition penalty of 1.05 is explicit; temperature is 0.','',
+'## Environment and compatibility','',
+f"Python {env['python']}; PyTorch {env['torch']} / CUDA {env['torch_cuda']}; vLLM {env['vllm']}; transformers {env['transformers']}; FastAPI {env['fastapi']}; FAISS {env['faiss']}; {env['gpu']}; NVIDIA driver {env['driver']}.",'',
+'The initially installed current vLLM 0.30.0 pulled a CUDA 13.0 PyTorch build, which driver 565.57.01 cannot run. The serving environment was corrected to vLLM 0.9.2 with PyTorch 2.7.0+cu126. The optional FlashInfer sampler also could not JIT-compile with the host CUDA toolkit (`nvcc` rejected `--compress-mode=size`), so `VLLM_USE_FLASHINFER_SAMPLER=0` selects vLLM\'s PyTorch-native sampler. This does not alter greedy decoding. `pip check` reports no broken requirements.','',
+'## Functional validation','',
+'On the first 10 numeric frozen DEV IDs, live serving matched the frozen Milestone 5A/6A behavior as follows:','',
+'| Check | Result |','|---|---:|',f"| Exact top-1 retrieval | {eq['retrieval_matches']}/{eq['count']} |",f"| Valid strict JSON/schema | {eq['valid_outputs']}/{eq['count']} |",f"| Verification-label agreement | {eq['label_matches']}/{eq['count']} |",f"| Citation validity | {eq['citation_valid']}/{eq['count']} |",f"| Byte-identical raw generation | {eq['raw_matches']}/{eq['count']} |",'',
+'All labels and citations agree, although wording is byte-identical on only 4/10 examples. This is semantic/schema equivalence, not bitwise engine equivalence. Health, validation errors, deterministic retrieval, top-1 enforcement, malformed-output handling, frozen hashes/revisions, timing fields, and restart behavior were also checked.','',
+'## Generator-only benchmark','',
+'The generator benchmark used 20 warmup requests followed by 100 measured streaming requests per row. The frozen DEV set contains no prompt near 2,000 tokens; its longest representative prompt is 1,503 tokens, which was retained instead of fabricating padding. The benchmark maximum is 128 output tokens; production remains 192.','',
+'| Input tokens | Concurrency | Mean ms | P50 ms | P95 ms | TTFT P50/P95 ms | Mean TPOT ms | Req/s | Output tok/s | Failure | Peak GPU MiB |','|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|']
+for x in gen['results']:
+ lines.append(f"| {x['actual_input_tokens']} | {x['concurrency']} | {f(x['latency_ms']['mean'])} | {f(x['latency_ms']['p50'])} | {f(x['latency_ms']['p95'])} | {f(x['ttft_ms']['p50'])} / {f(x['ttft_ms']['p95'])} | {f(x['tpot_ms_mean'])} | {f(x['request_throughput_per_s'])} | {f(x['generated_tokens_per_s'])} | {x['failure_rate']:.1%} | {x['gpu']['peak_memory_mib']:.0f} |")
+lines += ['','GPU utilization averaged about 96% in each measured configuration. Continuous batching raises generated-token throughput from roughly 47.5 tokens/s at concurrency 1 to about 337–339 tokens/s at concurrency 8. Median and P95 TTFT remain below 57 ms and 101 ms respectively at concurrency 8. Latency rises moderately with concurrency while throughput increases substantially.','',
+'## End-to-end benchmark','',
+'The end-to-end benchmark used 20 warmups and 100 measured requests per concurrency over the frozen 162-claim DEV workload.','',
+'| Concurrency | Mean/P50/P95 total ms | Embed mean ms | FAISS mean ms | Retrieval mean ms | Generation mean ms | Req/s | Failure | Invalid | Peak GPU MiB |','|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|']
+for x in e2e['results']:
+ c=x['component_ms']; lines.append(f"| {x['concurrency']} | {f(x['latency_ms']['mean'])} / {f(x['latency_ms']['p50'])} / {f(x['latency_ms']['p95'])} | {f(c['embedding']['mean'])} | {f(c['faiss']['mean'])} | {f(c['retrieval']['mean'])} | {f(c['generation']['mean'])} | {f(x['request_throughput_per_s'])} | {x['failure_rate']:.1%} | {x['invalid_output_rate']:.1%} | {x['gpu']['peak_memory_mib']:.0f} |")
+lines += ['','Generation is the clear bottleneck: it accounts for about 98% of mean service time, while exact retrieval averages 13–22 ms and FAISS itself remains below 1 ms. Concurrency 8 is the throughput-oriented operating point for this measured workload: 4.34 req/s, 1.65 s median, and 2.43 s P95, with zero failures and zero invalid outputs. Concurrency 1 is appropriate when the lowest single-request latency matters: 0.63 req/s, 1.50 s median, and 2.21 s P95.','',
+'The measured peak was 34,896 MiB of 46,068 MiB on GPU 0, leaving about 11 GiB of device capacity. System RAM use remained 1.5–1.6% on the approximately 1 TiB host. These numbers describe this model, input/output mix, software stack, and one L40S; they are not universal capacity guarantees.','',
+'## Commands','', '```bash','source scripts/env.sh','scripts/start_vllm_6b.sh       # terminal 1','scripts/start_api_6b.sh        # terminal 2','python -m scripts.validate_serving_6b','python -m scripts.benchmark_serving_6b --phase generator','python -m scripts.benchmark_serving_6b --phase end-to-end','python -m pytest -q tests/test_serving_6b.py','python -m pytest -q --ignore=tests/test_serving_6b.py','```','',
+'## Artifacts','',
+'- Frozen serving config: `configs/serving-6b-v1.json`','- FastAPI implementation: `serving/`','- Reproducible launch/benchmark scripts: `scripts/start_vllm_6b.sh`, `scripts/start_api_6b.sh`, `scripts/benchmark_serving_6b.py`','- Dependency freeze: `environments/serving-6b-pip-freeze.txt`',f'- External run: `{RUN}`',f'- Structured request log: `{RUN}/service-requests.jsonl`',f'- Functional equivalence: `{RUN}/functional-equivalence.json`',f'- Raw summaries, per-request measurements, and telemetry: `{RUN}/{{generator-benchmark.json,end_to_end-benchmark.json}}`',f'- Environment manifest: `{RUN}/environment.json`',f'- Exact snapshot: `{RUN}/source/exact-source-config-dependencies.tar.gz`','',
+'No TEST evaluation, retraining, reranking, passage localization, prompt change, or quality optimization was performed. Milestone 6B stops here.','']
+(ROOT/'docs/milestone6b-serving-report.md').write_text('\n'.join(lines))
+print(json.dumps({'generator_configs':len(gen['results']),'end_to_end_configs':len(e2e['results']),'equivalence':eq['label_matches'],'report':str(ROOT/'docs/milestone6b-serving-report.md')},indent=2))

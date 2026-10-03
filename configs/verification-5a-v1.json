@@ -1,0 +1,157 @@
+{
+  "status": "final_prompt_and_budget_frozen",
+  "run_id": "milestone5a-verification-v1",
+  "scope": {
+    "split": "DEV_only",
+    "query_count": 162,
+    "test_qrels_or_labels_allowed": false,
+    "retriever_training_allowed": false
+  },
+  "model": {
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "local_path": "models/Qwen2.5-7B-Instruct",
+    "tokenizer": "same pinned repository",
+    "precision": "bfloat16",
+    "attention": "sdpa",
+    "native_config_context_length": 32768
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20261009,
+    "batch_size": 8,
+    "max_input_tokens": 16384,
+    "max_evidence_tokens": 12000
+  },
+  "development": {
+    "condition": "D1_zero_shot_BGE",
+    "prompt_candidates": {
+      "baseline-v1": "Use only the evidence documents below. Classify the claim as SUPPORT, CONTRADICT, or INSUFFICIENT. Cite only supplied DOC identifiers. If the documents do not establish or refute the claim, choose INSUFFICIENT. In evidence_ids, copy the exact raw identifier shown after EVIDENCE_ID, such as 12345; never add a DOC_ prefix. Return exactly one JSON object with keys label, evidence_ids, explanation.",
+      "grounded-v2": "You are verifying one biomedical claim using only the supplied evidence. First determine whether a supplied document directly establishes the same entities, relation, population, and polarity as the claim. Choose SUPPORT only when the evidence directly entails the claim; choose CONTRADICT only when it directly establishes the opposite; otherwise choose INSUFFICIENT. Do not use outside knowledge. evidence_ids must contain only supplied DOC identifiers that justify the decision and must be empty for INSUFFICIENT. Copy each raw identifier exactly as printed after EVIDENCE_ID (for example, use \"12345\", never \"DOC_12345\"). Return exactly one valid JSON object and no markdown: {\"label\":\"SUPPORT|CONTRADICT|INSUFFICIENT\",\"evidence_ids\":[\"DOC_ID\"],\"explanation\":\"concise evidence-based explanation\"}"
+    },
+    "prompt_hashes": {
+      "baseline-v1": "eef1b77d607e6efed4590b5be253b5d18d804d63710f9728c03d3ef6c23f062a",
+      "grounded-v2": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4"
+    },
+    "top_k_candidates": [
+      1,
+      3,
+      5
+    ],
+    "candidate_count": 6,
+    "selection_order": [
+      "macro_f1_max",
+      "accuracy_max",
+      "invalid_output_rate_min",
+      "top_k_min",
+      "prompt_name_lexical"
+    ],
+    "failure_specific_retuning": false
+  },
+  "conditions": {
+    "D1": {
+      "name": "zero_shot_BGE",
+      "role": "primary",
+      "rankings": "runs/scifact_dev_v1/bge-rankings.json"
+    },
+    "D2": {
+      "name": "random_negative_BGE_seed_20261003_epoch_3",
+      "role": "diagnostic",
+      "selection_basis": "highest frozen retrieval NDCG@10 among the already-selected random checkpoints; no verification results used",
+      "rankings": "runs/milestone4b-replication-v1/seed-20261003/random/epoch-3-rankings.json",
+      "retrieval_ndcg_at_10": 0.7635846369134991
+    },
+    "D3": {
+      "name": "original_SciFact_annotated_evidence_documents",
+      "role": "diagnostic_reference_not_strict_upper_bound"
+    }
+  },
+  "labels": [
+    "SUPPORT",
+    "CONTRADICT",
+    "INSUFFICIENT"
+  ],
+  "output_schema": {
+    "label": "SUPPORT|CONTRADICT|INSUFFICIENT",
+    "evidence_ids": [
+      "provided document ID"
+    ],
+    "explanation": "non-empty string"
+  },
+  "evidence_format": "full original SciFact abstract as numbered sentences using [EVIDENCE_ID: raw_id] markers; deterministic token-budget truncation",
+  "final_selection": {
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "top_k": 1,
+    "selection_source": "D1 DEV development search only",
+    "metrics_at_selection": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530864197530863,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7580645161290323,
+          "recall": 0.734375,
+          "f1": 0.7460317460317459,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 62,
+        "CONTRADICT": 35,
+        "SUPPORT": 65
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 62,
+      "abstention_rate": 0.38271604938271603,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 14,
+        "insufficient_or_ambiguous_evidence": 17,
+        "annotated_evidence_not_retrieved": 7
+      },
+      "evidence_tokens": {
+        "mean_before": 534.1604938271605,
+        "mean_after": 534.1604938271605,
+        "truncated_count": 0
+      }
+    }
+  },
+  "limitations": [
+    "Development and final reporting use the same frozen DEV claims.",
+    "Empty original evidence annotations map to INSUFFICIENT but do not prove no evidence exists.",
+    "D3 is a diagnostic reference, not a strict upper bound."
+  ],
+  "stop_rule": "Stop after DEV verification evaluation and report.",
+  "feasibility": {
+    "v1_observation": "3/3 labels correct and JSON parseable, but SUPPORT/CONTRADICT citations added an unsupported DOC_ prefix.",
+    "correction": "Both candidate prompts now require exact raw identifiers after DOC; no model, decoding, evidence, or label change.",
+    "v2_path": "runs/milestone5a-verification-v1/feasibility-v2/generations.jsonl",
+    "v2_observation": "Exact-ID wording alone did not prevent DOC_ prefixes.",
+    "v3_change": "Use the single permitted evidence-format variant, [EVIDENCE_ID: raw_id], before development.",
+    "v3_path": "runs/milestone5a-verification-v1/feasibility-v3/generations.jsonl"
+  }
+}

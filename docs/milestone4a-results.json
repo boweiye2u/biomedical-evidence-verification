@@ -1,0 +1,58 @@
+{
+  "medcpt": {
+    "metrics": {
+      "NDCG@10": 0.7181409640459443,
+      "Recall@10": 0.8320987654320988,
+      "Recall@100": 0.9691358024691358,
+      "MRR@10": 0.6941651969429746
+    },
+    "dev_queries": 162,
+    "corpus_documents": 5183,
+    "corpus_encoding_seconds": 20.240323830395937,
+    "reused": false,
+    "mean_ms": 5.3536921601604535,
+    "p50_ms": 5.337100476026535,
+    "p95_ms": 5.479480139911175,
+    "peak_torch_allocated_mib": 1406.958984375,
+    "revisions": {
+      "ncbi/MedCPT-Query-Encoder": "d83a36cc6b8e3a5c5e9d9d6ba156808c1643dcbc",
+      "ncbi/MedCPT-Article-Encoder": "d05a736da4bb84ee4057b7f7999485be6ed85465"
+    },
+    "cache": "scifact-medcpt-ea35dd1c515c552d",
+    "query_max_length": 64,
+    "article_max_length": 512,
+    "warmup": 5,
+    "query_batch_size": 1,
+    "cpu_threads": 4,
+    "device": "NVIDIA L40S"
+  },
+  "training_audit": {
+    "seed": 20261002,
+    "train_queries": 647,
+    "positive_pairs_per_arm": 737,
+    "negatives_per_pair": 5,
+    "groups_with_multiple_positives": 63,
+    "corpus_duplicate_content_count": 0,
+    "random_hard_overlap_slots": 5,
+    "cross_query_positive_negative_slots": {
+      "random": 263,
+      "hard": 297
+    },
+    "known_positive_collisions": 0,
+    "negative_content_duplicates_within_query": 0,
+    "dev_queries_used_for_mining": 0,
+    "files": {
+      "random": {
+        "path": "data/scifact/training_v1/random.jsonl",
+        "sha256": "1238051a846c8ae6612a4bc060f5ffe6e415f39c1935658e66a5a2fcaa39bc89"
+      },
+      "hard": {
+        "path": "data/scifact/training_v1/hard.jsonl",
+        "sha256": "381c5a3f61080a2cbdb2817d96e5af4330aa7f784b69dfdd323aa7abbb309245"
+      }
+    },
+    "split_sha256": "6a4dcc3d654621590b860ce6ec4ed5722c91913546386470d545c425f01a2ff0",
+    "corpus_sha256": "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+    "bge_revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a"
+  }
+}

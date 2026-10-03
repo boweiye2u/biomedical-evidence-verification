@@ -1,0 +1,65 @@
+# Python and test tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Environments and local machine configuration
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+conda-meta/
+
+# IDE and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Personal reference material and planning drafts
+*.pdf
+2026-09-30-biomedical-retrieval-project-proposal-v4.md
+2026-09-30-biomedical-retrieval-project-v4.1-patch.md
+
+# Datasets, models, indexes, caches, and training artifacts
+data/
+datasets/
+models/
+checkpoints/
+embeddings/
+indexes/
+cache/
+.cache/
+huggingface/
+hf_cache/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.faiss
+*.npy
+*.npz
+*.parquet
+
+# Runtime outputs
+runs/
+logs/
+*.log
+
+# Archives and temporary files
+*.tar.gz
+*.tgz
+*.zip
+*.part
+tmp/
+temp/

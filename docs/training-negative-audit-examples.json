@@ -1,0 +1,218 @@
+[
+  {
+    "query_id": "352",
+    "claim": "Distant CREs are less conserved among species.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "596817",
+        "title": "Genetic Tests for Ecological and Allopatric Speciation in Anoles on an Island Archipelago"
+      },
+      {
+        "kind": "hard",
+        "doc_id": "28193026",
+        "title": "A unified concept of species and its consequences for the future of taxonomy"
+      },
+      {
+        "kind": "random",
+        "doc_id": "8093935",
+        "title": "Structure of the Guanine Nucleotide Exchange Factor Sec7 Domain of Human Arno and Analysis of the Interaction with ARF GTPase"
+      },
+      {
+        "kind": "random",
+        "doc_id": "15925931",
+        "title": "Prediction of coronary artery disease by a systemic atherosclerosis score index derived from whole-body MR angiography"
+      }
+    ],
+    "review_note": "Hard samples are species/evolution papers without a direct cis-regulatory-element conservation result; lexical distractors."
+  },
+  {
+    "query_id": "316",
+    "claim": "Decreased conversion of PGE 2 to PPARy ligand 15-ket-PGE 2 causes accumulation of PGE.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "21181273",
+        "title": "15-Hydroxyprostaglandin dehydrogenase is down-regulated in colorectal cancer."
+      },
+      {
+        "kind": "hard",
+        "doc_id": "9159125",
+        "title": "Lipopolysaccharide-dependent prostaglandin E(2) production is regulated by the glutathione-dependent prostaglandin E(2) synthase gene induced by the Toll-like receptor 4/MyD88/NF-IL6 pathway."
+      },
+      {
+        "kind": "random",
+        "doc_id": "9588931",
+        "title": "Quercetin attenuates vascular calcification by inhibiting oxidative stress and mitochondrial fission."
+      },
+      {
+        "kind": "random",
+        "doc_id": "26409363",
+        "title": "Diminished linear growth during intermittent calcitriol therapy in children undergoing CCPD."
+      }
+    ],
+    "review_note": "21181273 discusses PGE2 degradation and is potentially relevant despite not being cited; flag ambiguity. 9159125 focuses biosynthesis rather than the conversion claimed."
+  },
+  {
+    "query_id": "1214",
+    "claim": "The deregulated and prolonged activation of monocytes improves inflammatory disease outcomes.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "22621251",
+        "title": "Ly6Chi monocytes direct alternatively activated profibrotic macrophage regulation of lung fibrosis."
+      },
+      {
+        "kind": "hard",
+        "doc_id": "29509926",
+        "title": "High-Density Lipoproteins Exert Pro-inflammatory Effects on Macrophages via Passive Cholesterol Depletion and PKC-NF-\u03baB/STAT1-IRF1 Signaling."
+      },
+      {
+        "kind": "random",
+        "doc_id": "37249641",
+        "title": "CTCF and Cohesin in Genome Folding and Transcriptional Gene Regulation."
+      },
+      {
+        "kind": "random",
+        "doc_id": "24082820",
+        "title": "Emtricitabine-tenofovir concentrations and pre-exposure prophylaxis efficacy in men who have sex with men."
+      }
+    ],
+    "review_note": "22621251 links monocytes to worsened fibrosis and may be relevant contradictory evidence; flag ambiguity. 29509926 concerns macrophage activation and infection clearance, related but different intervention."
+  },
+  {
+    "query_id": "812",
+    "claim": "Mutant mice lacking SVCT2 have severely reduced ascorbic acid levels in both brain and adrenals.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "23868856",
+        "title": "Downregulation of Superoxide Dismutase Activity and Gene Expression in Cultured Rat Brain Astrocytes after Incubation with Vitamin C"
+      },
+      {
+        "kind": "hard",
+        "doc_id": "13277039",
+        "title": "CRTC2 (TORC2) contributes to the transcriptional response to fasting in the liver but is not required for the maintenance of glucose homeostasis."
+      },
+      {
+        "kind": "random",
+        "doc_id": "16806763",
+        "title": "A long non-coding RNA signature to improve prognosis prediction of colorectal cancer"
+      },
+      {
+        "kind": "random",
+        "doc_id": "15153602",
+        "title": "Haplotype-based variant detection from short-read sequencing"
+      }
+    ],
+    "review_note": "Hard samples cover vitamin C/SOD and CRTC2/glucose regulation rather than SVCT2 deficiency; entity or mechanism mismatch."
+  },
+  {
+    "query_id": "912",
+    "claim": "PKG-la plays an essential role in expression of spinal long term potentiation in PGK-la knockout mice.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "16208091",
+        "title": "Synaptic Incorporation of AMPA Receptors during LTP Is Controlled by a PKC Phosphorylation Site on GluR1"
+      },
+      {
+        "kind": "hard",
+        "doc_id": "14188138",
+        "title": "Abnormal Spine Morphology and Enhanced LTP in LIMK-1 Knockout Mice"
+      },
+      {
+        "kind": "random",
+        "doc_id": "3514540",
+        "title": "Prospective study of body fat distribution and the risk of endometrial cancer."
+      },
+      {
+        "kind": "random",
+        "doc_id": "7285256",
+        "title": "COPD: epidemiology, prevalence, morbidity and mortality, and disease heterogeneity."
+      }
+    ],
+    "review_note": "Hard samples concern PKC/GluR1 or LIMK1 rather than the claimed PKG mechanism; related LTP distractors."
+  },
+  {
+    "query_id": "767",
+    "claim": "Men are more susceptible to death due to pneumonia when compared to women.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "7640792",
+        "title": "Sex differences in mortality following acute coronary syndromes."
+      },
+      {
+        "kind": "hard",
+        "doc_id": "12145359",
+        "title": "Relationship between reduced forced expiratory volume in one second and the risk of lung cancer: a systematic review and meta-analysis."
+      },
+      {
+        "kind": "random",
+        "doc_id": "5764562",
+        "title": "Chemical tools for biomolecular imaging."
+      },
+      {
+        "kind": "random",
+        "doc_id": "38830961",
+        "title": "Interaction of TNF with TNF receptor type 2 promotes expansion and function of mouse CD4+CD25+ T regulatory cells."
+      }
+    ],
+    "review_note": "Hard samples address coronary mortality or lung cancer rather than pneumonia mortality; disease mismatch."
+  },
+  {
+    "query_id": "205",
+    "claim": "CDK6 shows improved binding to loss-of-function variants of p18 INK4C.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "36399107",
+        "title": "High frequency of p16 (CDKN2/MTS-1/INK4A) inactivation in head and neck squamous cell carcinoma."
+      },
+      {
+        "kind": "hard",
+        "doc_id": "15570691",
+        "title": "Pharmacologic inhibition of cyclin-dependent kinases 4 and 6 arrests the growth of glioblastoma multiforme intracranial xenografts."
+      },
+      {
+        "kind": "random",
+        "doc_id": "1522647",
+        "title": "Circulating Mitochondrial DNA in Patients in the ICU as a Marker of Mortality: Derivation and Validation"
+      },
+      {
+        "kind": "random",
+        "doc_id": "6077214",
+        "title": "Genetic control of mosquitoes."
+      }
+    ],
+    "review_note": "Hard samples address p16 inactivation and pharmacological CDK4/6 inhibition rather than p18 variant binding; related pathway distractors."
+  },
+  {
+    "query_id": "1119",
+    "claim": "Sympathetic nerve activity is elevated throughout normal pregnancy.",
+    "negative_examples": [
+      {
+        "kind": "hard",
+        "doc_id": "26710772",
+        "title": "Sympathetic activation during early pregnancy in humans."
+      },
+      {
+        "kind": "hard",
+        "doc_id": "8596837",
+        "title": "Sympathetic neural and cardiovascular responses during static handgrip exercise in women with a history of hypertensive pregnancy"
+      },
+      {
+        "kind": "random",
+        "doc_id": "15790930",
+        "title": "Guidelines for the selection of highly effective siRNA sequences for mammalian and chick RNA interference."
+      },
+      {
+        "kind": "random",
+        "doc_id": "28647122",
+        "title": "Endotoxin tolerance: new mechanisms, molecules and clinical significance."
+      }
+    ],
+    "review_note": "26710772 directly studies sympathetic activity in early pregnancy and is plausibly relevant partial evidence; flag ambiguity. 8596837 studies women with a prior hypertensive pregnancy, a different population/time."
+  }
+]

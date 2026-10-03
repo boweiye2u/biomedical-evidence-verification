@@ -1,0 +1,73 @@
+{
+  "status": "frozen_before_reranker_scoring",
+  "run_id": "milestone5b-reranking-v1",
+  "scope": {
+    "split": "DEV_only",
+    "query_count": 162,
+    "test_qrels_or_labels_allowed": false,
+    "retriever_or_reranker_training_allowed": false
+  },
+  "primary_retriever": {
+    "name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "rankings": "runs/scifact_dev_v1/bge-rankings.json",
+    "saved_score_semantics": "rank-derived scores, not cosine similarity"
+  },
+  "reranker": {
+    "name": "ncbi/MedCPT-Cross-Encoder",
+    "revision": "71caf65d4927987813984f54c284405a13fcca49",
+    "local_path": "models/MedCPT-Cross-Encoder",
+    "tokenizer": "same pinned repository",
+    "precision": "float32",
+    "max_length": 512,
+    "pair_format": "tokenizer([claim, title + space + joined abstract sentences])",
+    "truncation": true,
+    "padding": true,
+    "score": "single raw relevance logit; higher is more relevant",
+    "batch_size": 32
+  },
+  "conditions": {
+    "R1": {
+      "description": "frozen BGE top-1; reuse Milestone 5A D1"
+    },
+    "R2": {
+      "description": "BGE top-10 reranked by MedCPT; pass top-1"
+    },
+    "R3": {
+      "description": "retrieval-only diagnostic: BGE top-20 reranked by MedCPT; pass top-1",
+      "qwen_inference": false
+    },
+    "R_gold": {
+      "description": "reuse Milestone 5A D3; diagnostic reference"
+    }
+  },
+  "candidate_depth": {
+    "primary": 10,
+    "diagnostic": 20
+  },
+  "frozen_generator": {
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "precision": "bfloat16",
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "top_k": 1,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20261009
+  },
+  "paired_analysis": {
+    "primary_metric": "per-query accuracy",
+    "reason": "Accuracy has an exact paired per-query contribution; macro F1 is non-decomposable.",
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20261010,
+    "sign_flip_permutations": 100000,
+    "sign_flip_seed": 20261011,
+    "macro_f1_bootstrap_seed": 20261012
+  },
+  "feasibility": {
+    "query_selection": "first five numeric DEV IDs; verification labels not used",
+    "determinism_tolerance": 1e-07
+  },
+  "stop_rule": "Stop after DEV reranking/evidence-selection analysis."
+}

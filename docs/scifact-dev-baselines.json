@@ -1,0 +1,125 @@
+{
+  "split_id": "scifact_train_dev_v1",
+  "seed": 20261001,
+  "dev_count": 162,
+  "corpus_size": 5183,
+  "split_sha256": "6a4dcc3d654621590b860ce6ec4ed5722c91913546386470d545c425f01a2ff0",
+  "revisions": {
+    "BAAI/bge-base-en-v1.5": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "ncbi/MedCPT-Query-Encoder": "d83a36cc6b8e3a5c5e9d9d6ba156808c1643dcbc",
+    "ncbi/MedCPT-Article-Encoder": "d05a736da4bb84ee4057b7f7999485be6ed85465"
+  },
+  "gpu": "NVIDIA L40S",
+  "cuda_runtime": "12.6",
+  "cpu_threads": 4,
+  "versions": {
+    "torch": "2.9.1+cu126",
+    "transformers": "4.57.6",
+    "sentence-transformers": "5.7.0",
+    "beir": "2.2.0",
+    "pytrec-eval-terrier": "0.5.10",
+    "rank-bm25": "0.2.2",
+    "faiss-cpu": "1.15.1",
+    "numpy": "2.4.6"
+  },
+  "systems": {
+    "bm25": {
+      "metrics": {
+        "NDCG@10": 0.6981856055026037,
+        "Recall@10": 0.8275720164609053,
+        "Recall@100": 0.9144032921810701,
+        "MRR@10": 0.6717813051146386
+      },
+      "latency": {
+        "mean_ms": 7.923119046069957,
+        "p50_ms": 7.413143292069435,
+        "p95_ms": 13.383047096431255,
+        "count": 162
+      },
+      "index_build_seconds": 0.4415692090988159,
+      "k1": 1.5,
+      "b": 0.75,
+      "epsilon": 0.25,
+      "tie_policy": "stable ascending numeric document ID",
+      "score_file_semantics": "rank-derived scores, not raw BM25 scores"
+    },
+    "bge": {
+      "metrics": {
+        "NDCG@10": 0.7604357006929091,
+        "Recall@10": 0.8938271604938273,
+        "Recall@100": 0.9814814814814815,
+        "MRR@10": 0.7279125024495395
+      },
+      "latency": {
+        "mean_ms": 5.539244109833682,
+        "p50_ms": 5.5182743817567825,
+        "p95_ms": 5.64173199236393,
+        "count": 162
+      },
+      "corpus_encoding_seconds": 20.189904734492302,
+      "embeddings_reused": false,
+      "index_build_seconds": 0.0009013526141643524,
+      "query_encoding_latency": {
+        "mean_ms": 5.163245730929905,
+        "p50_ms": 5.141407251358032,
+        "p95_ms": 5.2657729014754295,
+        "count": 162
+      },
+      "search_latency": {
+        "mean_ms": 0.3759983789037775,
+        "p50_ms": 0.3763008862733841,
+        "p95_ms": 0.38370005786418915,
+        "count": 162
+      },
+      "peak_torch_allocated_mib": 1036.2294921875,
+      "embedding_bytes": 15922176,
+      "cache_key": "a53fd0d3b47586f0",
+      "sanity_shape": [
+        3,
+        768
+      ],
+      "repeat_max_abs_diff": 0.0,
+      "score_file_semantics": "rank-derived scores, not cosine scores"
+    }
+  },
+  "medcpt_sanity": {
+    "status": "passed",
+    "training_query_ids": [
+      "2",
+      "4",
+      "6"
+    ],
+    "query_shape": [
+      3,
+      768
+    ],
+    "article_shape": [
+      3,
+      768
+    ],
+    "score_matrix": [
+      [
+        62.20154571533203,
+        45.18553161621094,
+        49.47642517089844
+      ],
+      [
+        49.05493927001953,
+        56.49349594116211,
+        43.659996032714844
+      ],
+      [
+        48.6456413269043,
+        44.15336227416992,
+        65.41329193115234
+      ]
+    ],
+    "pooling": "CLS",
+    "normalization": "none",
+    "score": "inner product",
+    "query_max_length": 64,
+    "article_max_length": 512,
+    "article_format": "tokenizer title/abstract pair; segment IDs checked",
+    "full_benchmark": false
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "status": "frozen_before_passage_scoring",
+  "run_id": "milestone5c-passage-v1",
+  "scope": {
+    "split": "DEV_only",
+    "query_count": 162,
+    "test_qrels_or_labels_allowed": false,
+    "training_allowed": false
+  },
+  "document_retriever": {
+    "name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "rankings": "runs/scifact_dev_v1/bge-rankings.json",
+    "candidate_depth": 3
+  },
+  "sentence_segmentation": {
+    "method": "original SciFact corpus abstract sentence arrays",
+    "indexing": "zero-based original array index",
+    "normalization": "none"
+  },
+  "passage": {
+    "type": "one original sentence",
+    "scoring_format": "[claim, title + space + original sentence]",
+    "qwen_format": "document title plus one original indexed sentence with the frozen EVIDENCE_ID marker"
+  },
+  "reranker": {
+    "name": "ncbi/MedCPT-Cross-Encoder",
+    "revision": "71caf65d4927987813984f54c284405a13fcca49",
+    "local_path": "models/MedCPT-Cross-Encoder",
+    "precision": "float32",
+    "max_length": 512,
+    "truncation": true,
+    "score": "single raw relevance logit; higher is more relevant",
+    "batch_size": 64
+  },
+  "conditions": {
+    "P1": "reuse Milestone 5A D1: BGE top-1 full abstract",
+    "P2": "BGE top-3 documents, global MedCPT sentence ranking, top-1 sentence",
+    "G_full": "reuse Milestone 5A D3: deterministic annotated document full abstract",
+    "G_rationale": "one deterministic annotated rationale set, or no evidence for empty annotations"
+  },
+  "gold_rationale_selection": {
+    "rule": "minimum (sentence count, numeric document ID, sentence-index tuple)",
+    "uses_qwen_outputs": false
+  },
+  "frozen_generator": {
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "precision": "bfloat16",
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "top_k": 1,
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20261009
+  },
+  "paired_analysis": {
+    "primary_metric": "per-query accuracy",
+    "bootstrap_replicates": 20000,
+    "bootstrap_seed": 20261013,
+    "sign_flip_permutations": 100000,
+    "sign_flip_seed": 20261014,
+    "macro_f1_bootstrap_seed": 20261015
+  },
+  "feasibility": {
+    "query_selection": "first five numeric DEV IDs; verification labels not used",
+    "determinism_tolerance": 1e-7
+  },
+  "optional_P3_executed": false,
+  "stop_rule": "Stop after passage-level DEV analysis."
+}

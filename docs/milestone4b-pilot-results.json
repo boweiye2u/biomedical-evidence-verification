@@ -1,0 +1,143 @@
+{
+  "seed": 20261002,
+  "config_sha256": "035c39c5c0409836d5c6415cd31f48a668b402b7930e87579d06316a56073e04",
+  "gpu": "NVIDIA L40S",
+  "torch": "2.9.1+cu126",
+  "cuda": "12.6",
+  "arms": {
+    "random": {
+      "initial_state_sha256": "24ba89273c20027dac89c0d0a395e88c94d89e7ebb8a03c3144caafb35b7a92a",
+      "epochs": [
+        {
+          "epoch": 1,
+          "step": 47,
+          "metrics": {
+            "NDCG@10": 0.7526443084377799,
+            "Recall@10": 0.8709876543209876,
+            "Recall@100": 0.9876543209876543,
+            "MRR@10": 0.722322653341172
+          },
+          "train_loss": 0.08505916153523045,
+          "gradient_norm_mean": 2.308451750494064,
+          "learning_rate_first": 0.0,
+          "learning_rate_last": 1.507936507936508e-05,
+          "train_seconds": 69.20504382625222,
+          "eval_seconds": 21.263958726078272,
+          "peak_allocated_mib": 6400.2119140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/random/epoch-1",
+          "row_order_sha256": "1d78dd2e27c4f03658d7bab34c5dc38d4557a138658c5ee869c822d05eabf3b1",
+          "model_sha256": "caf0492c5389bc5d9a26c1f5654dbb5da13fd8f7f27d7f746e839da61950b592"
+        },
+        {
+          "epoch": 2,
+          "step": 94,
+          "metrics": {
+            "NDCG@10": 0.7583886873042803,
+            "Recall@10": 0.8648148148148148,
+            "Recall@100": 0.9876543209876543,
+            "MRR@10": 0.7319174995100921
+          },
+          "train_loss": 0.007137790340863881,
+          "gradient_norm_mean": 0.3435686497770725,
+          "learning_rate_first": 1.4920634920634922e-05,
+          "learning_rate_last": 7.61904761904762e-06,
+          "train_seconds": 70.13622043281794,
+          "eval_seconds": 21.333517242223024,
+          "peak_allocated_mib": 6400.2119140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/random/epoch-2",
+          "row_order_sha256": "5ccb909ba8b9703eb80dc33699faefc6e5706bcac5a448471588ee1409eb275b",
+          "model_sha256": "0065ce76185416d31b3ca5b1a554fdc7e219366c429e5130d96f944dcb049ddb"
+        },
+        {
+          "epoch": 3,
+          "step": 141,
+          "metrics": {
+            "NDCG@10": 0.7621685342088026,
+            "Recall@10": 0.8709876543209876,
+            "Recall@100": 0.9876543209876543,
+            "MRR@10": 0.7352856163041348
+          },
+          "train_loss": 0.003574454943994452,
+          "gradient_norm_mean": 0.17398234821380454,
+          "learning_rate_first": 7.460317460317461e-06,
+          "learning_rate_last": 1.5873015873015874e-07,
+          "train_seconds": 70.1256928704679,
+          "eval_seconds": 21.422129042446613,
+          "peak_allocated_mib": 6400.2119140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/random/epoch-3",
+          "row_order_sha256": "94d1849ad1c24633f01428cea85b2b8cd6d91a845be1d723a783f4a19a7ed3d5",
+          "model_sha256": "a3f91f79c3c5ab31b544b1e009a9c508095f059e865b0b1bee3bfd91b638e2b5"
+        }
+      ],
+      "selected_epoch": 3,
+      "selected_checkpoint": "checkpoints/milestone4b-pilot-v1/random/epoch-3"
+    },
+    "hard": {
+      "initial_state_sha256": "24ba89273c20027dac89c0d0a395e88c94d89e7ebb8a03c3144caafb35b7a92a",
+      "epochs": [
+        {
+          "epoch": 1,
+          "step": 47,
+          "metrics": {
+            "NDCG@10": 0.7250848321064197,
+            "Recall@10": 0.8360082304526749,
+            "Recall@100": 0.9537037037037037,
+            "MRR@10": 0.702278071722516
+          },
+          "train_loss": 1.1670169006613573,
+          "gradient_norm_mean": 9.002368703801581,
+          "learning_rate_first": 0.0,
+          "learning_rate_last": 1.507936507936508e-05,
+          "train_seconds": 70.23763694241643,
+          "eval_seconds": 21.303693562746048,
+          "peak_allocated_mib": 6401.6494140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/hard/epoch-1",
+          "row_order_sha256": "1d78dd2e27c4f03658d7bab34c5dc38d4557a138658c5ee869c822d05eabf3b1",
+          "model_sha256": "d63b76f23ea7d3e1128f2ddbd1c783985ced040aeb1411f0e81a88fc987bbf07"
+        },
+        {
+          "epoch": 2,
+          "step": 94,
+          "metrics": {
+            "NDCG@10": 0.6944327730066246,
+            "Recall@10": 0.781275720164609,
+            "Recall@100": 0.9259259259259259,
+            "MRR@10": 0.6814618851655888
+          },
+          "train_loss": 0.5876231503090348,
+          "gradient_norm_mean": 8.751529490694086,
+          "learning_rate_first": 1.4920634920634922e-05,
+          "learning_rate_last": 7.61904761904762e-06,
+          "train_seconds": 70.43140160664916,
+          "eval_seconds": 21.321183506399393,
+          "peak_allocated_mib": 6401.6494140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/hard/epoch-2",
+          "row_order_sha256": "5ccb909ba8b9703eb80dc33699faefc6e5706bcac5a448471588ee1409eb275b",
+          "model_sha256": "af853d38091d1ba993bd36c3e0e923ad3e2577ce5f32f4355d9929a6023034ec"
+        },
+        {
+          "epoch": 3,
+          "step": 141,
+          "metrics": {
+            "NDCG@10": 0.6718473387570797,
+            "Recall@10": 0.7637860082304527,
+            "Recall@100": 0.8919753086419753,
+            "MRR@10": 0.6577111503037429
+          },
+          "train_loss": 0.3240496339920903,
+          "gradient_norm_mean": 8.558082418238863,
+          "learning_rate_first": 7.460317460317461e-06,
+          "learning_rate_last": 1.5873015873015874e-07,
+          "train_seconds": 70.29248560965061,
+          "eval_seconds": 21.213613275438547,
+          "peak_allocated_mib": 6401.6494140625,
+          "checkpoint": "checkpoints/milestone4b-pilot-v1/hard/epoch-3",
+          "row_order_sha256": "94d1849ad1c24633f01428cea85b2b8cd6d91a845be1d723a783f4a19a7ed3d5",
+          "model_sha256": "cbcc5d19d567b08f1521fe3022262ebe496b48713b9d54169dc9f10327135553"
+        }
+      ],
+      "selected_epoch": 1,
+      "selected_checkpoint": "checkpoints/milestone4b-pilot-v1/hard/epoch-1"
+    }
+  }
+}

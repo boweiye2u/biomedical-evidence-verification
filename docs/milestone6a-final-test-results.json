@@ -1,0 +1,362 @@
+{
+  "milestone": "6A",
+  "scope": "first and only frozen held-out SciFact TEST evaluation",
+  "confirmatory": true,
+  "frozen_system": {
+    "retriever": {
+      "name": "BAAI/bge-base-en-v1.5",
+      "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+      "document_format": "title + single space + abstract",
+      "query_prefix": "Represent this sentence for searching relevant passages: ",
+      "pooling": "CLS",
+      "normalization": "L2",
+      "score": "exact inner product over normalized float32 embeddings",
+      "index": "faiss.IndexFlatIP",
+      "max_length": 512,
+      "batch_size": 32,
+      "corpus_size": 5183,
+      "embedding_cache": "embeddings/scifact-bge-a53fd0d3b47586f0"
+    },
+    "verifier": {
+      "model_name": "Qwen/Qwen2.5-7B-Instruct",
+      "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "precision": "bfloat16",
+      "prompt_name": "grounded-v2",
+      "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+      "evidence_depth": 1,
+      "evidence_format": "full abstract with [EVIDENCE_ID: raw_id] markers",
+      "do_sample": false,
+      "max_new_tokens": 192,
+      "seed": 20261009,
+      "max_input_tokens": 16384,
+      "max_evidence_tokens": 12000
+    },
+    "condition": "zero-shot BGE top-1 full abstract then frozen Qwen"
+  },
+  "pre_run_validation": {
+    "manifest": "/home/boweiye2/rag/runs/milestone6a-test-v1/pre-run-manifest.json",
+    "git_commit": null,
+    "git_status": "not_a_git_repository",
+    "tests_before_access": 34,
+    "prior_dev_hashes_recorded": true
+  },
+  "implementation_corrections_after_test_access": [
+    {
+      "timestamp_utc": "2026-10-02T23:46:21.385678+00:00",
+      "stage": "after TEST file access but before any retrieval ranking, Qwen generation, or metric result",
+      "type": "allowed wrong file path / official split-name mapping correction",
+      "failure": "BEIR test.tsv IDs did not match original data/claims_test.jsonl",
+      "correction": "Use data/claims_dev.jsonl for verification annotations because its 300 IDs and claim texts exactly match BEIR test.tsv; claims_test has a disjoint ID set and no evidence field.",
+      "evidence": {
+        "beir_test_query_count": 300,
+        "claims_dev_count": 300,
+        "id_sets_equal": true,
+        "claim_text_mismatches": 0,
+        "claims_dev_nonempty_evidence": 188,
+        "claims_test_nonempty_evidence": 0
+      },
+      "modeling_changes": false,
+      "retriever_changes": false,
+      "prompt_or_generator_changes": false,
+      "metric_changes": false,
+      "original_config_sha256": "d47a86588736ca07763b98702a1a6de9c9d2ae6b012d76e84b2f8bfe923c8694",
+      "corrected_config_sha256": "8acdf63d1aee14e1cfb877f2387e3178a6625e00049e111021d5d14e9e8b9630",
+      "results_seen_before_correction": false,
+      "additional_reporting_corrections": [
+        {
+          "timestamp_utc": "2026-10-02T23:53:39.208253+00:00",
+          "type": "reporting completeness",
+          "correction": "Add explicit INVALID column to confusion matrix and attach the existing split-path correction to final-summary.json.",
+          "predictions_changed": false,
+          "primary_metrics_changed": false
+        }
+      ]
+    }
+  ],
+  "retrieval": {
+    "scope": "official held-out SciFact TEST",
+    "query_count": 300,
+    "corpus_size": 5183,
+    "metrics": {
+      "NDCG@10": 0.7403912879186786,
+      "Recall@10": 0.8742222222222221,
+      "Recall@100": 0.9666666666666667,
+      "MRR@10": 0.7033862433862432
+    },
+    "top1_known_positive_rate": 0.6166666666666667,
+    "known_relevant_documents_per_query": {
+      "min": 1,
+      "median": 1.0,
+      "max": 5,
+      "mean": 1.13,
+      "distribution": {
+        "1": 277,
+        "2": 14,
+        "5": 2,
+        "4": 3,
+        "3": 4
+      }
+    },
+    "positive_rank_distribution": {
+      "at_1": 185,
+      "at_2_to_10": 111,
+      "at_11_to_100": 33,
+      "beyond_100": 10,
+      "total_known_positives": 339
+    },
+    "query_inference_seconds": 0.1737660877406597,
+    "repeat_max_abs_difference": 0.0,
+    "verification_labels_available": true,
+    "verification_availability_reason": "explicit_labeled_evidence_available",
+    "test_access_performed": true,
+    "post_test_tuning_performed": false,
+    "original_annotation_member_used": "data/claims_dev.jsonl",
+    "implementation_path_correction": true
+  },
+  "verification": {
+    "label_distribution": {
+      "SUPPORT": 124,
+      "CONTRADICT": 64,
+      "INSUFFICIENT": 112
+    },
+    "T1": {
+      "accuracy": 0.7,
+      "macro_f1": 0.6859072885465697,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.7540983606557377,
+          "recall": 0.7419354838709677,
+          "f1": 0.7479674796747967,
+          "accuracy": 0.7419354838709677,
+          "support": 124
+        },
+        "CONTRADICT": {
+          "precision": 0.6229508196721312,
+          "recall": 0.59375,
+          "f1": 0.608,
+          "accuracy": 0.59375,
+          "support": 64
+        },
+        "INSUFFICIENT": {
+          "precision": 0.6896551724137931,
+          "recall": 0.7142857142857143,
+          "f1": 0.7017543859649122,
+          "accuracy": 0.7142857142857143,
+          "support": 112
+        }
+      },
+      "count": 300,
+      "prediction_counts": {
+        "CONTRADICT": 61,
+        "INSUFFICIENT": 116,
+        "SUPPORT": 122,
+        "INVALID": 1
+      },
+      "invalid_output_count": 1,
+      "invalid_output_rate": 0.0033333333333333335,
+      "citation_valid_count": 299,
+      "citation_valid_rate": 0.9966666666666667,
+      "abstention_count": 116,
+      "abstention_rate": 0.38666666666666666,
+      "annotated_evidence_coverage_count": 149,
+      "annotated_evidence_eligible_count": 188,
+      "annotated_evidence_coverage": 0.7925531914893617,
+      "accuracy_when_annotated_evidence_retrieved": 0.7583892617449665,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.4358974358974359,
+      "error_categories": {
+        "insufficient_or_ambiguous_evidence": 32,
+        "annotated_evidence_not_retrieved": 22,
+        "evidence_retrieved_but_model_misclassified": 35,
+        "citation_or_output_failure": 1
+      },
+      "evidence_tokens": {
+        "mean_before": 572.68,
+        "mean_after": 572.68,
+        "truncated_count": 0
+      }
+    },
+    "T_gold": {
+      "accuracy": 0.83,
+      "macro_f1": 0.8002533919493023,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8695652173913043,
+          "recall": 0.8064516129032258,
+          "f1": 0.8368200836820083,
+          "accuracy": 0.8064516129032258,
+          "support": 124
+        },
+        "CONTRADICT": {
+          "precision": 0.7708333333333334,
+          "recall": 0.578125,
+          "f1": 0.6607142857142857,
+          "accuracy": 0.578125,
+          "support": 64
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8235294117647058,
+          "recall": 1.0,
+          "f1": 0.9032258064516129,
+          "accuracy": 1.0,
+          "support": 112
+        }
+      },
+      "count": 300,
+      "prediction_counts": {
+        "INSUFFICIENT": 136,
+        "CONTRADICT": 48,
+        "SUPPORT": 115,
+        "INVALID": 1
+      },
+      "invalid_output_count": 1,
+      "invalid_output_rate": 0.0033333333333333335,
+      "citation_valid_count": 299,
+      "citation_valid_rate": 0.9966666666666667,
+      "abstention_count": 136,
+      "abstention_rate": 0.4533333333333333,
+      "annotated_evidence_coverage_count": 188,
+      "annotated_evidence_eligible_count": 188,
+      "annotated_evidence_coverage": 1.0,
+      "accuracy_when_annotated_evidence_retrieved": 0.7287234042553191,
+      "accuracy_when_annotated_evidence_not_retrieved": null,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 50,
+        "citation_or_output_failure": 1
+      },
+      "evidence_tokens": {
+        "mean_before": 388.8,
+        "mean_after": 388.8,
+        "truncated_count": 0
+      }
+    },
+    "input_tokens": {
+      "mean": 776.56,
+      "min": 363,
+      "max": 2459
+    },
+    "output_tokens": {
+      "mean": 69.74666666666667,
+      "min": 34,
+      "max": 153
+    }
+  },
+  "uncertainty": {
+    "NDCG@10": {
+      "lower": 0.6997520643239414,
+      "upper": 0.7794908533002552,
+      "replicates": 20000,
+      "seed": 20261016
+    },
+    "verification": {
+      "accuracy": {
+        "lower": 0.6466666666666666,
+        "upper": 0.75,
+        "replicates": 20000,
+        "seed": 20261017
+      },
+      "macro_f1": {
+        "lower": 0.6297561576783889,
+        "upper": 0.7390801291155392,
+        "replicates": 20000,
+        "seed": 20261018
+      }
+    },
+    "bootstrap_unit": "ordinary query",
+    "reason": "DEV related-claim groups do not cover TEST and no TEST clusters were constructed"
+  },
+  "evidence_selection": {
+    "eligible_claims": 188,
+    "annotated_evidence_top1_count": 149,
+    "annotated_evidence_top1_coverage": 0.7925531914893617,
+    "annotated_evidence_top3_count": 171,
+    "annotated_evidence_top3_coverage": 0.9095744680851063,
+    "accuracy_when_annotated_evidence_selected": 0.7583892617449665,
+    "accuracy_when_annotated_evidence_not_selected": 0.4358974358974359
+  },
+  "error_decomposition": {
+    "categories": {
+      "insufficient_or_ambiguous_evidence": 32,
+      "annotated_evidence_not_retrieved": 22,
+      "evidence_retrieved_but_model_misclassified": 35,
+      "citation_or_output_failure": 1
+    },
+    "confusion_matrix": {
+      "SUPPORT": {
+        "SUPPORT": 92,
+        "CONTRADICT": 8,
+        "INSUFFICIENT": 23,
+        "INVALID": 1
+      },
+      "CONTRADICT": {
+        "SUPPORT": 13,
+        "CONTRADICT": 38,
+        "INSUFFICIENT": 13,
+        "INVALID": 0
+      },
+      "INSUFFICIENT": {
+        "SUPPORT": 17,
+        "CONTRADICT": 15,
+        "INSUFFICIENT": 80,
+        "INVALID": 0
+      }
+    },
+    "selected_review": "/home/boweiye2/rag/runs/milestone6a-test-v1/selected-error-review.json"
+  },
+  "dev_vs_test": {
+    "retrieval": {
+      "NDCG@10": {
+        "DEV": 0.7604357006929091,
+        "TEST": 0.7403912879186786,
+        "absolute_difference": -0.020044412774230524
+      },
+      "Recall@10": {
+        "DEV": 0.8938271604938273,
+        "TEST": 0.8742222222222221,
+        "absolute_difference": -0.019604938271605143
+      },
+      "Recall@100": {
+        "DEV": 0.9814814814814815,
+        "TEST": 0.9666666666666667,
+        "absolute_difference": -0.014814814814814836
+      },
+      "MRR@10": {
+        "DEV": 0.7279125024495395,
+        "TEST": 0.7033862433862432,
+        "absolute_difference": -0.024526259063296307
+      }
+    },
+    "verification": {
+      "accuracy": {
+        "DEV": 0.7654320987654321,
+        "TEST": 0.7,
+        "absolute_difference": -0.0654320987654321
+      },
+      "macro_f1": {
+        "DEV": 0.7530864197530863,
+        "TEST": 0.6859072885465697,
+        "absolute_difference": -0.06717913120651664
+      }
+    },
+    "gold_diagnostic": {
+      "accuracy": {
+        "DEV": 0.8765432098765432,
+        "TEST": 0.83,
+        "absolute_difference": -0.04654320987654326
+      },
+      "macro_f1": {
+        "DEV": 0.8636110958393656,
+        "TEST": 0.8002533919493023,
+        "absolute_difference": -0.06335770389006323
+      }
+    },
+    "role": "descriptive only; no DEV-TEST significance test"
+  },
+  "post_test_tuning_performed": false,
+  "artifacts": {
+    "external_run": "/home/boweiye2/rag/runs/milestone6a-test-v1",
+    "config": "configs/final-test-6a-v1.json",
+    "final_summary": "/home/boweiye2/rag/runs/milestone6a-test-v1/final-summary.json",
+    "pre_test_snapshot": "/home/boweiye2/rag/runs/milestone6a-test-v1/source/pre-test-source-config-dependencies.tar.gz",
+    "final_snapshot": "/home/boweiye2/rag/runs/milestone6a-test-v1/source/exact-source-config-dependencies.tar.gz"
+  }
+}

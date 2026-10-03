@@ -1,0 +1,8 @@
+# Bootstrap only; install the pip stack using the commands in environments/README.md.
+name: scientific-rag-retrieval
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  - pip

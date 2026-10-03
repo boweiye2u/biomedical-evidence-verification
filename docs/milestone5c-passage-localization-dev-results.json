@@ -1,0 +1,360 @@
+{
+  "milestone": "5C",
+  "scope": "frozen DEV only; post-development diagnostics",
+  "configuration": {
+    "sentence_splitter": "original SciFact abstract sentence arrays",
+    "sentence_indexing": "zero-based",
+    "passage": "one original sentence",
+    "document_candidate_depth": 3,
+    "scorer": "ncbi/MedCPT-Cross-Encoder",
+    "scorer_revision": "71caf65d4927987813984f54c284405a13fcca49",
+    "optional_P3_executed": false,
+    "gold_rationale_selection": "minimum (sentence count, numeric document ID, sentence-index tuple)"
+  },
+  "feasibility": {
+    "query_ids": [
+      "0",
+      "10",
+      "11",
+      "14",
+      "17"
+    ],
+    "pair_count": 153,
+    "max_repeat_abs_difference": 0.0,
+    "score_direction": "higher raw logit is more relevant",
+    "labels_consulted": false
+  },
+  "tokenization": {
+    "max_length": 512,
+    "truncated_pair_count": 0,
+    "max_pre_truncation_tokens": 229
+  },
+  "localization": {
+    "eligible_claims": 98,
+    "top1_hit_count": 42,
+    "top1_hit_rate": 0.42857142857142855,
+    "top3_hit_count": 75,
+    "top3_hit_rate": 0.7653061224489796,
+    "selected_annotated_document_count": 85,
+    "selected_annotated_document_rate": 0.8673469387755102
+  },
+  "verification": {
+    "P1": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530864197530863,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7580645161290323,
+          "recall": 0.734375,
+          "f1": 0.7460317460317459,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 62,
+        "CONTRADICT": 35,
+        "SUPPORT": 65
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 62,
+      "abstention_rate": 0.38271604938271603,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 14,
+        "insufficient_or_ambiguous_evidence": 17,
+        "annotated_evidence_not_retrieved": 7
+      },
+      "evidence_tokens": {
+        "mean_before": 534.1604938271605,
+        "mean_after": 534.1604938271605,
+        "truncated_count": 0
+      }
+    },
+    "P2": {
+      "accuracy": 0.6851851851851852,
+      "macro_f1": 0.66466903933204,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8245614035087719,
+          "recall": 0.6714285714285714,
+          "f1": 0.7401574803149606,
+          "accuracy": 0.6714285714285714,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.4634146341463415,
+          "recall": 0.6785714285714286,
+          "f1": 0.5507246376811594,
+          "accuracy": 0.6785714285714286,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.703125,
+          "recall": 0.703125,
+          "f1": 0.703125,
+          "accuracy": 0.703125,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 64,
+        "CONTRADICT": 41,
+        "SUPPORT": 57
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 64,
+      "abstention_rate": 0.3950617283950617,
+      "annotated_evidence_coverage_count": 85,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8673469387755102,
+      "accuracy_when_annotated_evidence_retrieved": 0.7294117647058823,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.3076923076923077,
+      "error_categories": {
+        "insufficient_or_ambiguous_evidence": 19,
+        "evidence_retrieved_but_model_misclassified": 23,
+        "annotated_evidence_not_retrieved": 9
+      },
+      "evidence_tokens": {
+        "mean_before": 99.27777777777777,
+        "mean_after": 99.27777777777777,
+        "truncated_count": 0
+      }
+    },
+    "G_full": {
+      "accuracy": 0.8765432098765432,
+      "macro_f1": 0.8636110958393656,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.9491525423728814,
+          "recall": 0.8,
+          "f1": 0.8682170542635659,
+          "accuracy": 0.8,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8311688311688312,
+          "recall": 1.0,
+          "f1": 0.9078014184397163,
+          "accuracy": 1.0,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 77,
+        "CONTRADICT": 26,
+        "SUPPORT": 59
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 77,
+      "abstention_rate": 0.47530864197530864,
+      "annotated_evidence_coverage_count": 98,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 1.0,
+      "accuracy_when_annotated_evidence_retrieved": 0.7959183673469388,
+      "accuracy_when_annotated_evidence_not_retrieved": null,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 20
+      },
+      "evidence_tokens": {
+        "mean_before": 334.8024691358025,
+        "mean_after": 334.8024691358025,
+        "truncated_count": 0
+      }
+    },
+    "G_rationale": {
+      "accuracy": 0.845679012345679,
+      "macro_f1": 0.8212996260607587,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.9122807017543859,
+          "recall": 0.7428571428571429,
+          "f1": 0.8188976377952757,
+          "accuracy": 0.7428571428571429,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.7,
+          "recall": 0.75,
+          "f1": 0.7241379310344827,
+          "accuracy": 0.75,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8533333333333334,
+          "recall": 1.0,
+          "f1": 0.9208633093525179,
+          "accuracy": 1.0,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 75,
+        "CONTRADICT": 30,
+        "SUPPORT": 57
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 75,
+      "abstention_rate": 0.46296296296296297,
+      "annotated_evidence_coverage_count": 98,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 1.0,
+      "accuracy_when_annotated_evidence_retrieved": 0.7448979591836735,
+      "accuracy_when_annotated_evidence_not_retrieved": null,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 25
+      },
+      "evidence_tokens": {
+        "mean_before": 75.88888888888889,
+        "mean_after": 75.88888888888889,
+        "truncated_count": 0
+      }
+    }
+  },
+  "conditional_verification": {
+    "rationale_localized": {
+      "count": 42,
+      "accuracy": 0.8571428571428571
+    },
+    "annotated_document_selected_rationale_not_localized": {
+      "count": 43,
+      "accuracy": 0.6046511627906976
+    },
+    "annotated_document_not_selected": {
+      "count": 13,
+      "accuracy": 0.3076923076923077
+    },
+    "no_annotated_rationale_localized": {
+      "count": 56,
+      "accuracy": 0.5357142857142857
+    }
+  },
+  "paired_analysis": {
+    "primary": {
+      "metric": "per-query accuracy",
+      "mean_difference": -0.08024691358024691,
+      "counts": {
+        "improved": 10,
+        "unchanged": 129,
+        "degraded": 23
+      },
+      "cluster_bootstrap_95ci": {
+        "lower": -0.15286624203821655,
+        "upper": -0.00625,
+        "replicates": 20000,
+        "seed": 20261013
+      },
+      "cluster_sign_flip": {
+        "p_value": 0.05869941300586994,
+        "extreme_count": 5869,
+        "permutations": 100000,
+        "seed": 20261014,
+        "two_sided": true,
+        "plus_one_correction": true
+      }
+    },
+    "macro_f1_exploratory": {
+      "P1": 0.7530864197530863,
+      "P2": 0.66466903933204,
+      "difference": -0.0884173804210463,
+      "cluster_bootstrap_95ci": {
+        "lower": -0.15993264293314718,
+        "upper": -0.01886138039982615,
+        "replicates": 20000,
+        "seed": 20261015
+      },
+      "role": "exploratory; macro F1 is non-decomposable and no sign-flip p-value is reported"
+    }
+  },
+  "gold_rationale_vs_full": {
+    "accuracy_difference": -0.030864197530864196,
+    "counts": {
+      "improved": 5,
+      "unchanged": 147,
+      "degraded": 10
+    },
+    "macro_f1_difference": -0.04231146977860689,
+    "role": "diagnostic descriptive comparison",
+    "document_mismatch_query_ids": [
+      "962"
+    ],
+    "same_document_sensitivity": {
+      "count": 161,
+      "accuracy_difference": -0.024844720496894408,
+      "counts": {
+        "improved": 5,
+        "unchanged": 147,
+        "degraded": 9
+      },
+      "macro_f1_difference": -0.03722899240754318
+    }
+  },
+  "failure_transition_counts": {
+    "prediction_unchanged": 124,
+    "prediction_changed": 38,
+    "fixed_error": 10,
+    "new_error": 23,
+    "changed_prediction_same_correctness": 5,
+    "passage_caused_abstention": 16,
+    "exact_rationale_selected_qwen_wrong": 6
+  },
+  "validation": {
+    "test_count": 30,
+    "test_qrels_or_labels_loaded": false,
+    "P1_reused_from": "milestone5a-verification-v1/final/D1",
+    "G_full_reused_from": "milestone5a-verification-v1/final/D3"
+  },
+  "artifacts": {
+    "external_run": "/home/boweiye2/rag/runs/milestone5c-passage-v1",
+    "config": "configs/passage-localization-5c-v1.json",
+    "failure_analysis": "/home/boweiye2/rag/runs/milestone5c-passage-v1/failure-analysis.json",
+    "selected_failure_review": "/home/boweiye2/rag/runs/milestone5c-passage-v1/selected-failure-review.json"
+  },
+  "limitations": [
+    "All choices and evaluation are on the frozen DEV set.",
+    "A single sentence may omit context needed to interpret an annotated rationale.",
+    "The gold-rationale selection chose a different annotated document from reused G_full for one claim; a same-document sensitivity is reported.",
+    "Non-annotated passages are not automatically incorrect evidence."
+  ]
+}

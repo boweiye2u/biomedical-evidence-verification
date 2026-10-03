@@ -1,0 +1,60 @@
+{
+  "status": "frozen_serving_protocol",
+  "run_id": "milestone6b-serving-v1",
+  "retriever": {
+    "model_name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "local_path": "cache/huggingface/hub/models--BAAI--bge-base-en-v1.5/snapshots/a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "embedding_cache": "embeddings/scifact-bge-a53fd0d3b47586f0",
+    "corpus": "data/scifact/original/corpus.jsonl",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "pooling": "CLS",
+    "normalize": true,
+    "dtype": "float32",
+    "max_length": 512,
+    "production_top_k": 1,
+    "corpus_size": 5183
+  },
+  "generator": {
+    "model_name": "Qwen/Qwen2.5-7B-Instruct",
+    "served_model_name": "qwen2.5-7b-instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "local_path": "models/Qwen2.5-7B-Instruct",
+    "base_url": "http://127.0.0.1:8001",
+    "precision": "bfloat16",
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "max_input_tokens": 16384,
+    "max_evidence_tokens": 12000,
+    "max_new_tokens": 192,
+    "seed": 20261009,
+    "temperature": 0.0,
+    "repetition_penalty": 1.05
+  },
+  "service": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "request_log": "runs/milestone6b-serving-v1/service-requests.jsonl",
+    "max_debug_k": 10
+  },
+  "benchmark": {
+    "prompt_token_targets": [
+      512,
+      1000,
+      2000
+    ],
+    "concurrency": [
+      1,
+      4,
+      8
+    ],
+    "warmup_requests": 20,
+    "measured_requests": 100,
+    "generator_max_tokens": 128,
+    "representative_split": "frozen_DEV",
+    "seed": 20261019
+  },
+  "quality_changes_allowed": false,
+  "test_evaluation_allowed": false,
+  "artifact_root_env": "RAG_ROOT"
+}

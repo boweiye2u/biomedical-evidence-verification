@@ -1,0 +1,315 @@
+{
+  "milestone": "5B",
+  "scope": "frozen DEV only; post-development diagnostics",
+  "reranker": {
+    "name": "ncbi/MedCPT-Cross-Encoder",
+    "revision": "71caf65d4927987813984f54c284405a13fcca49",
+    "local_path": "/home/boweiye2/rag/models/MedCPT-Cross-Encoder",
+    "precision": "float32",
+    "max_length": 512,
+    "score": "single raw relevance logit; higher is more relevant"
+  },
+  "feasibility": {
+    "query_ids": [
+      "0",
+      "10",
+      "11",
+      "14",
+      "17"
+    ],
+    "selection": "first five numeric DEV IDs; labels not consulted",
+    "pair_format": "tokenizer([claim, title + space + joined abstract sentences])",
+    "score_direction": "higher is more relevant, per official model card",
+    "max_repeat_abs_difference": 0.0,
+    "candidate_sets_preserved": true,
+    "truncated_pair_count": 205,
+    "candidate_pairs": 3240,
+    "max_pre_truncation_tokens": 1866
+  },
+  "retrieval_metrics": {
+    "R1": {
+      "NDCG@10": 0.7604357006929091,
+      "Recall@10": 0.8938271604938273,
+      "Recall@100": 0.9814814814814815,
+      "MRR@10": 0.7279125024495395
+    },
+    "R2": {
+      "NDCG@10": 0.7872316757211382,
+      "Recall@10": 0.8938271604938273,
+      "Recall@100": 0.9814814814814815,
+      "MRR@10": 0.759266607877719
+    },
+    "R3": {
+      "NDCG@10": 0.7866054038433925,
+      "Recall@10": 0.8927983539094649,
+      "Recall@100": 0.9814814814814815,
+      "MRR@10": 0.7573706643151087
+    }
+  },
+  "annotated_evidence_coverage": {
+    "R1": {
+      "top1": 0.8571428571428571,
+      "top3": 0.9489795918367347
+    },
+    "R2": {
+      "top1": 0.8367346938775511,
+      "top3": 0.9693877551020408
+    },
+    "R3": {
+      "top1": 0.826530612244898,
+      "top3": 0.9795918367346939
+    }
+  },
+  "changes_vs_R1": {
+    "R2": {
+      "top1_unchanged": 118,
+      "annotated_evidence_promoted_to_top1": 5,
+      "annotated_evidence_demoted_from_top1": 7,
+      "beir_positive_promoted_to_top1": 13,
+      "beir_positive_demoted_from_top1": 9
+    },
+    "R3": {
+      "top1_unchanged": 117,
+      "annotated_evidence_promoted_to_top1": 4,
+      "annotated_evidence_demoted_from_top1": 7,
+      "beir_positive_promoted_to_top1": 12,
+      "beir_positive_demoted_from_top1": 9
+    }
+  },
+  "verification": {
+    "R1": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530864197530863,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7580645161290323,
+          "recall": 0.734375,
+          "f1": 0.7460317460317459,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 62,
+        "CONTRADICT": 35,
+        "SUPPORT": 65
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 62,
+      "abstention_rate": 0.38271604938271603,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 14,
+        "insufficient_or_ambiguous_evidence": 17,
+        "annotated_evidence_not_retrieved": 7
+      },
+      "evidence_tokens": {
+        "mean_before": 534.1604938271605,
+        "mean_after": 534.1604938271605,
+        "truncated_count": 0
+      }
+    },
+    "R2": {
+      "accuracy": 0.7407407407407407,
+      "macro_f1": 0.7308950617283951,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8153846153846154,
+          "recall": 0.7571428571428571,
+          "f1": 0.7851851851851851,
+          "accuracy": 0.7571428571428571,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6111111111111112,
+          "recall": 0.7857142857142857,
+          "f1": 0.6875000000000001,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7377049180327869,
+          "recall": 0.703125,
+          "f1": 0.72,
+          "accuracy": 0.703125,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 61,
+        "SUPPORT": 65,
+        "CONTRADICT": 36
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 61,
+      "abstention_rate": 0.3765432098765432,
+      "annotated_evidence_coverage_count": 82,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8367346938775511,
+      "accuracy_when_annotated_evidence_retrieved": 0.8536585365853658,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.3125,
+      "error_categories": {
+        "insufficient_or_ambiguous_evidence": 19,
+        "evidence_retrieved_but_model_misclassified": 12,
+        "annotated_evidence_not_retrieved": 11
+      },
+      "evidence_tokens": {
+        "mean_before": 530.0617283950618,
+        "mean_after": 530.0617283950618,
+        "truncated_count": 0
+      }
+    },
+    "R_gold": {
+      "accuracy": 0.8765432098765432,
+      "macro_f1": 0.8636110958393656,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.9491525423728814,
+          "recall": 0.8,
+          "f1": 0.8682170542635659,
+          "accuracy": 0.8,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8311688311688312,
+          "recall": 1.0,
+          "f1": 0.9078014184397163,
+          "accuracy": 1.0,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 77,
+        "CONTRADICT": 26,
+        "SUPPORT": 59
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 77,
+      "abstention_rate": 0.47530864197530864,
+      "annotated_evidence_coverage_count": 98,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 1.0,
+      "accuracy_when_annotated_evidence_retrieved": 0.7959183673469388,
+      "accuracy_when_annotated_evidence_not_retrieved": null,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 20
+      },
+      "evidence_tokens": {
+        "mean_before": 334.8024691358025,
+        "mean_after": 334.8024691358025,
+        "truncated_count": 0
+      }
+    }
+  },
+  "paired_analysis": {
+    "primary": {
+      "metric": "per-query accuracy",
+      "mean_difference": -0.024691358024691357,
+      "counts": {
+        "improved": 4,
+        "unchanged": 150,
+        "degraded": 8
+      },
+      "cluster_bootstrap_95ci": {
+        "lower": -0.07017543859649122,
+        "upper": 0.013795498084290978,
+        "replicates": 20000,
+        "seed": 20261010
+      },
+      "cluster_sign_flip": {
+        "p_value": 0.3984260157398426,
+        "extreme_count": 39842,
+        "permutations": 100000,
+        "seed": 20261011,
+        "two_sided": true,
+        "plus_one_correction": true
+      }
+    },
+    "macro_f1_exploratory": {
+      "R1": 0.7530864197530863,
+      "R2": 0.7308950617283951,
+      "difference": -0.022191358024691188,
+      "cluster_bootstrap_95ci": {
+        "lower": -0.06510983738843161,
+        "upper": 0.01622942419932321,
+        "replicates": 20000,
+        "seed": 20261012
+      },
+      "role": "exploratory; macro F1 is non-decomposable and no sign-flip p-value is reported"
+    },
+    "grouping": {
+      "count": 112,
+      "sizes": {
+        "1": 69,
+        "5": 1,
+        "2": 39,
+        "3": 2,
+        "4": 1
+      }
+    }
+  },
+  "failure_analysis_counts": {
+    "top1_changed_prediction_unchanged": 31,
+    "top1_unchanged": 118,
+    "changed_context_new_error_other": 6,
+    "annotated_evidence_demoted_new_error": 2,
+    "changed_context_prediction_fixed_other": 4,
+    "annotated_evidence_promoted_model_still_wrong": 1
+  },
+  "validation": {
+    "test_count": 27,
+    "test_qrels_or_labels_loaded": false,
+    "candidate_sets_preserved": true,
+    "R1_reused_from": "milestone5a-verification-v1/final/D1",
+    "R_gold_reused_from": "milestone5a-verification-v1/final/D3"
+  },
+  "artifacts": {
+    "external_run": "/home/boweiye2/rag/runs/milestone5b-reranking-v1",
+    "config": "configs/reranking-5b-v1.json",
+    "failure_analysis": "/home/boweiye2/rag/runs/milestone5b-reranking-v1/failure-analysis.json",
+    "selected_failure_review": "/home/boweiye2/rag/runs/milestone5b-reranking-v1/selected-failure-review.json"
+  },
+  "limitations": [
+    "All model selection and evaluation are on the frozen DEV set.",
+    "The primary paired inferential metric is accuracy because macro F1 has no per-query additive contribution; macro F1 is reported with an exploratory cluster bootstrap.",
+    "MedCPT truncates paired inputs beyond 512 tokens; 205 of 3,240 scored pairs were truncated.",
+    "R_gold is a diagnostic reference, not a strict upper bound."
+  ]
+}

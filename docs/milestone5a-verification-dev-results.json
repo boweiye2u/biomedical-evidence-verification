@@ -1,0 +1,684 @@
+{
+  "scope": "DEV-only verification; prompt and evidence budget selected on this same DEV set; no unseen-test inference",
+  "model": {
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+    "local_path": "models/Qwen2.5-7B-Instruct",
+    "tokenizer": "same pinned repository",
+    "precision": "bfloat16",
+    "attention": "sdpa",
+    "native_config_context_length": 32768
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 192,
+    "seed": 20261009,
+    "batch_size": 8,
+    "max_input_tokens": 16384,
+    "max_evidence_tokens": 12000
+  },
+  "final_selection": {
+    "prompt_name": "grounded-v2",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "top_k": 1,
+    "selection_source": "D1 DEV development search only",
+    "metrics_at_selection": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530864197530863,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7580645161290323,
+          "recall": 0.734375,
+          "f1": 0.7460317460317459,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 62,
+        "CONTRADICT": 35,
+        "SUPPORT": 65
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 62,
+      "abstention_rate": 0.38271604938271603,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 14,
+        "insufficient_or_ambiguous_evidence": 17,
+        "annotated_evidence_not_retrieved": 7
+      },
+      "evidence_tokens": {
+        "mean_before": 534.1604938271605,
+        "mean_after": 534.1604938271605,
+        "truncated_count": 0
+      }
+    }
+  },
+  "mapping_summary": {
+    "claim_count": 162,
+    "label_counts": {
+      "INSUFFICIENT": 64,
+      "CONTRADICT": 28,
+      "SUPPORT": 70
+    },
+    "claims_with_annotated_evidence": 98,
+    "claims_without_annotated_evidence": 64,
+    "annotated_evidence_document_assignments": 108,
+    "annotated_evidence_sets": 189,
+    "test_labels_loaded": false
+  },
+  "conditions": {
+    "D1": {
+      "name": "zero_shot_BGE",
+      "role": "primary",
+      "rankings": "runs/scifact_dev_v1/bge-rankings.json"
+    },
+    "D2": {
+      "name": "random_negative_BGE_seed_20261003_epoch_3",
+      "role": "diagnostic",
+      "selection_basis": "highest frozen retrieval NDCG@10 among the already-selected random checkpoints; no verification results used",
+      "rankings": "runs/milestone4b-replication-v1/seed-20261003/random/epoch-3-rankings.json",
+      "retrieval_ndcg_at_10": 0.7635846369134991
+    },
+    "D3": {
+      "name": "original_SciFact_annotated_evidence_documents",
+      "role": "diagnostic_reference_not_strict_upper_bound"
+    }
+  },
+  "development_candidates": [
+    {
+      "prompt_name": "grounded-v2",
+      "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+      "top_k": 1,
+      "metrics": {
+        "accuracy": 0.7654320987654321,
+        "macro_f1": 0.7530864197530863,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.8461538461538461,
+            "recall": 0.7857142857142857,
+            "f1": 0.8148148148148148,
+            "accuracy": 0.7857142857142857,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.6285714285714286,
+            "recall": 0.7857142857142857,
+            "f1": 0.6984126984126985,
+            "accuracy": 0.7857142857142857,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 0.7580645161290323,
+            "recall": 0.734375,
+            "f1": 0.7460317460317459,
+            "accuracy": 0.734375,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INSUFFICIENT": 62,
+          "CONTRADICT": 35,
+          "SUPPORT": 65
+        },
+        "invalid_output_count": 0,
+        "invalid_output_rate": 0.0,
+        "citation_valid_count": 162,
+        "citation_valid_rate": 1.0,
+        "abstention_count": 62,
+        "abstention_rate": 0.38271604938271603,
+        "annotated_evidence_coverage_count": 84,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.8571428571428571,
+        "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+        "error_categories": {
+          "evidence_retrieved_but_model_misclassified": 14,
+          "insufficient_or_ambiguous_evidence": 17,
+          "annotated_evidence_not_retrieved": 7
+        },
+        "evidence_tokens": {
+          "mean_before": 534.1604938271605,
+          "mean_after": 534.1604938271605,
+          "truncated_count": 0
+        }
+      }
+    },
+    {
+      "prompt_name": "grounded-v2",
+      "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+      "top_k": 3,
+      "metrics": {
+        "accuracy": 0.7283950617283951,
+        "macro_f1": 0.7268961261588341,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.8305084745762712,
+            "recall": 0.7,
+            "f1": 0.7596899224806201,
+            "accuracy": 0.7,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.6666666666666666,
+            "recall": 0.7142857142857143,
+            "f1": 0.689655172413793,
+            "accuracy": 0.7142857142857143,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 0.7,
+            "recall": 0.765625,
+            "f1": 0.7313432835820896,
+            "accuracy": 0.765625,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INSUFFICIENT": 70,
+          "CONTRADICT": 30,
+          "SUPPORT": 59,
+          "INVALID": 3
+        },
+        "invalid_output_count": 3,
+        "invalid_output_rate": 0.018518518518518517,
+        "citation_valid_count": 159,
+        "citation_valid_rate": 0.9814814814814815,
+        "abstention_count": 70,
+        "abstention_rate": 0.43209876543209874,
+        "annotated_evidence_coverage_count": 93,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.9489795918367347,
+        "accuracy_when_annotated_evidence_retrieved": 0.7204301075268817,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.4,
+        "error_categories": {
+          "evidence_retrieved_but_model_misclassified": 25,
+          "insufficient_or_ambiguous_evidence": 14,
+          "citation_or_output_failure": 3,
+          "annotated_evidence_not_retrieved": 2
+        },
+        "evidence_tokens": {
+          "mean_before": 1655.3395061728395,
+          "mean_after": 1655.3395061728395,
+          "truncated_count": 0
+        }
+      }
+    },
+    {
+      "prompt_name": "grounded-v2",
+      "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+      "top_k": 5,
+      "metrics": {
+        "accuracy": 0.6790123456790124,
+        "macro_f1": 0.7033679209027704,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.8478260869565217,
+            "recall": 0.5571428571428572,
+            "f1": 0.6724137931034483,
+            "accuracy": 0.5571428571428572,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.7142857142857143,
+            "recall": 0.7142857142857143,
+            "f1": 0.7142857142857143,
+            "accuracy": 0.7142857142857143,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 0.6623376623376623,
+            "recall": 0.796875,
+            "f1": 0.7234042553191489,
+            "accuracy": 0.796875,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INSUFFICIENT": 77,
+          "CONTRADICT": 28,
+          "SUPPORT": 46,
+          "INVALID": 11
+        },
+        "invalid_output_count": 11,
+        "invalid_output_rate": 0.06790123456790123,
+        "citation_valid_count": 151,
+        "citation_valid_rate": 0.9320987654320988,
+        "abstention_count": 77,
+        "abstention_rate": 0.47530864197530864,
+        "annotated_evidence_coverage_count": 95,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.9693877551020408,
+        "accuracy_when_annotated_evidence_retrieved": 0.6105263157894737,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.3333333333333333,
+        "error_categories": {
+          "evidence_retrieved_but_model_misclassified": 29,
+          "insufficient_or_ambiguous_evidence": 11,
+          "citation_or_output_failure": 11,
+          "annotated_evidence_not_retrieved": 1
+        },
+        "evidence_tokens": {
+          "mean_before": 2773.0,
+          "mean_after": 2773.0,
+          "truncated_count": 0
+        }
+      }
+    },
+    {
+      "prompt_name": "baseline-v1",
+      "prompt_sha256": "eef1b77d607e6efed4590b5be253b5d18d804d63710f9728c03d3ef6c23f062a",
+      "top_k": 3,
+      "metrics": {
+        "accuracy": 0.30246913580246915,
+        "macro_f1": 0.3988456403738079,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.7674418604651163,
+            "recall": 0.4714285714285714,
+            "f1": 0.5840707964601769,
+            "accuracy": 0.4714285714285714,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.6153846153846154,
+            "recall": 0.2857142857142857,
+            "f1": 0.3902439024390244,
+            "accuracy": 0.2857142857142857,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 1.0,
+            "recall": 0.125,
+            "f1": 0.2222222222222222,
+            "accuracy": 0.125,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INSUFFICIENT": 8,
+          "INVALID": 98,
+          "CONTRADICT": 13,
+          "SUPPORT": 43
+        },
+        "invalid_output_count": 98,
+        "invalid_output_rate": 0.6049382716049383,
+        "citation_valid_count": 92,
+        "citation_valid_rate": 0.5679012345679012,
+        "abstention_count": 8,
+        "abstention_rate": 0.04938271604938271,
+        "annotated_evidence_coverage_count": 93,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.9489795918367347,
+        "accuracy_when_annotated_evidence_retrieved": 0.44086021505376344,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.0,
+        "error_categories": {
+          "citation_or_output_failure": 98,
+          "insufficient_or_ambiguous_evidence": 11,
+          "evidence_retrieved_but_model_misclassified": 4
+        },
+        "evidence_tokens": {
+          "mean_before": 1655.3395061728395,
+          "mean_after": 1655.3395061728395,
+          "truncated_count": 0
+        }
+      }
+    },
+    {
+      "prompt_name": "baseline-v1",
+      "prompt_sha256": "eef1b77d607e6efed4590b5be253b5d18d804d63710f9728c03d3ef6c23f062a",
+      "top_k": 5,
+      "metrics": {
+        "accuracy": 0.2345679012345679,
+        "macro_f1": 0.3686072138141285,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.6923076923076923,
+            "recall": 0.12857142857142856,
+            "f1": 0.21686746987951805,
+            "accuracy": 0.12857142857142856,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.8888888888888888,
+            "recall": 0.2857142857142857,
+            "f1": 0.43243243243243246,
+            "accuracy": 0.2857142857142857,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 0.75,
+            "recall": 0.328125,
+            "f1": 0.45652173913043476,
+            "accuracy": 0.328125,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INSUFFICIENT": 28,
+          "INVALID": 112,
+          "SUPPORT": 13,
+          "CONTRADICT": 9
+        },
+        "invalid_output_count": 112,
+        "invalid_output_rate": 0.691358024691358,
+        "citation_valid_count": 69,
+        "citation_valid_rate": 0.42592592592592593,
+        "abstention_count": 28,
+        "abstention_rate": 0.1728395061728395,
+        "annotated_evidence_coverage_count": 95,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.9693877551020408,
+        "accuracy_when_annotated_evidence_retrieved": 0.17894736842105263,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.0,
+        "error_categories": {
+          "citation_or_output_failure": 112,
+          "evidence_retrieved_but_model_misclassified": 9,
+          "insufficient_or_ambiguous_evidence": 3
+        },
+        "evidence_tokens": {
+          "mean_before": 2773.0,
+          "mean_after": 2773.0,
+          "truncated_count": 0
+        }
+      }
+    },
+    {
+      "prompt_name": "baseline-v1",
+      "prompt_sha256": "eef1b77d607e6efed4590b5be253b5d18d804d63710f9728c03d3ef6c23f062a",
+      "top_k": 1,
+      "metrics": {
+        "accuracy": 0.17901234567901234,
+        "macro_f1": 0.22412807318467695,
+        "per_label": {
+          "SUPPORT": {
+            "precision": 0.7222222222222222,
+            "recall": 0.37142857142857144,
+            "f1": 0.490566037735849,
+            "accuracy": 0.37142857142857144,
+            "support": 70
+          },
+          "CONTRADICT": {
+            "precision": 0.6,
+            "recall": 0.10714285714285714,
+            "f1": 0.18181818181818182,
+            "accuracy": 0.10714285714285714,
+            "support": 28
+          },
+          "INSUFFICIENT": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "accuracy": 0.0,
+            "support": 64
+          }
+        },
+        "count": 162,
+        "prediction_counts": {
+          "INVALID": 121,
+          "SUPPORT": 36,
+          "CONTRADICT": 5
+        },
+        "invalid_output_count": 121,
+        "invalid_output_rate": 0.7469135802469136,
+        "citation_valid_count": 75,
+        "citation_valid_rate": 0.46296296296296297,
+        "abstention_count": 0,
+        "abstention_rate": 0.0,
+        "annotated_evidence_coverage_count": 84,
+        "annotated_evidence_eligible_count": 98,
+        "annotated_evidence_coverage": 0.8571428571428571,
+        "accuracy_when_annotated_evidence_retrieved": 0.32142857142857145,
+        "accuracy_when_annotated_evidence_not_retrieved": 0.14285714285714285,
+        "error_categories": {
+          "citation_or_output_failure": 121,
+          "evidence_retrieved_but_model_misclassified": 4,
+          "insufficient_or_ambiguous_evidence": 8
+        },
+        "evidence_tokens": {
+          "mean_before": 534.1604938271605,
+          "mean_after": 534.1604938271605,
+          "truncated_count": 0
+        }
+      }
+    }
+  ],
+  "final_metrics": {
+    "D1": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530864197530863,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7580645161290323,
+          "recall": 0.734375,
+          "f1": 0.7460317460317459,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 62,
+        "CONTRADICT": 35,
+        "SUPPORT": 65
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 62,
+      "abstention_rate": 0.38271604938271603,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8333333333333334,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 14,
+        "insufficient_or_ambiguous_evidence": 17,
+        "annotated_evidence_not_retrieved": 7
+      },
+      "evidence_tokens": {
+        "mean_before": 534.1604938271605,
+        "mean_after": 534.1604938271605,
+        "truncated_count": 0
+      }
+    },
+    "D2": {
+      "accuracy": 0.7654320987654321,
+      "macro_f1": 0.7530787426081543,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.8333333333333334,
+          "recall": 0.7857142857142857,
+          "f1": 0.8088235294117647,
+          "accuracy": 0.7857142857142857,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.6285714285714286,
+          "recall": 0.7857142857142857,
+          "f1": 0.6984126984126985,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7704918032786885,
+          "recall": 0.734375,
+          "f1": 0.7519999999999999,
+          "accuracy": 0.734375,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 61,
+        "CONTRADICT": 35,
+        "SUPPORT": 66
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 61,
+      "abstention_rate": 0.3765432098765432,
+      "annotated_evidence_coverage_count": 84,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 0.8571428571428571,
+      "accuracy_when_annotated_evidence_retrieved": 0.8214285714285714,
+      "accuracy_when_annotated_evidence_not_retrieved": 0.5714285714285714,
+      "error_categories": {
+        "insufficient_or_ambiguous_evidence": 17,
+        "evidence_retrieved_but_model_misclassified": 15,
+        "annotated_evidence_not_retrieved": 6
+      },
+      "evidence_tokens": {
+        "mean_before": 528.1543209876543,
+        "mean_after": 528.1543209876543,
+        "truncated_count": 0
+      }
+    },
+    "D3": {
+      "accuracy": 0.8765432098765432,
+      "macro_f1": 0.8636110958393656,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.9491525423728814,
+          "recall": 0.8,
+          "f1": 0.8682170542635659,
+          "accuracy": 0.8,
+          "support": 70
+        },
+        "CONTRADICT": {
+          "precision": 0.8461538461538461,
+          "recall": 0.7857142857142857,
+          "f1": 0.8148148148148148,
+          "accuracy": 0.7857142857142857,
+          "support": 28
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8311688311688312,
+          "recall": 1.0,
+          "f1": 0.9078014184397163,
+          "accuracy": 1.0,
+          "support": 64
+        }
+      },
+      "count": 162,
+      "prediction_counts": {
+        "INSUFFICIENT": 77,
+        "CONTRADICT": 26,
+        "SUPPORT": 59
+      },
+      "invalid_output_count": 0,
+      "invalid_output_rate": 0.0,
+      "citation_valid_count": 162,
+      "citation_valid_rate": 1.0,
+      "abstention_count": 77,
+      "abstention_rate": 0.47530864197530864,
+      "annotated_evidence_coverage_count": 98,
+      "annotated_evidence_eligible_count": 98,
+      "annotated_evidence_coverage": 1.0,
+      "accuracy_when_annotated_evidence_retrieved": 0.7959183673469388,
+      "accuracy_when_annotated_evidence_not_retrieved": null,
+      "error_categories": {
+        "evidence_retrieved_but_model_misclassified": 20
+      },
+      "evidence_tokens": {
+        "mean_before": 334.8024691358025,
+        "mean_after": 334.8024691358025,
+        "truncated_count": 0
+      }
+    }
+  },
+  "D1_D2_comparison": {
+    "same_top_document": 129,
+    "same_prediction": 156,
+    "D1_correct_D2_wrong": 2,
+    "D2_correct_D1_wrong": 2,
+    "exact_D1_replay": true
+  },
+  "error_category_definitions": {
+    "annotated_evidence_not_retrieved": "Gold SUPPORT/CONTRADICT claim whose annotated evidence document is absent from the supplied top-k context.",
+    "evidence_retrieved_but_model_misclassified": "At least one annotated evidence document is supplied, but the predicted label differs from the benchmark label.",
+    "insufficient_or_ambiguous_evidence": "The original claim has no annotated evidence and the model predicts SUPPORT or CONTRADICT; this can reflect model error, unjudged evidence, or annotation scope.",
+    "citation_or_output_failure": "Output fails strict JSON/schema/citation validation.",
+    "unclear": "Available artifacts do not support a more specific category."
+  },
+  "validation": {
+    "tests_passed": 22,
+    "all_final_condition_counts": {
+      "D1": 162,
+      "D2": 162,
+      "D3": 162
+    },
+    "invalid_outputs": {
+      "D1": 0,
+      "D2": 0,
+      "D3": 0
+    },
+    "test_qrels_or_labels_loaded": false
+  },
+  "hashes": {
+    "config_sha256": "8f76d378e6ea918e906d2ea1abe07567d1501876520b158c57b24bca4013d46b",
+    "prompt_sha256": "21c9360a72834e37fcc37936190e290638a924e8985c50bf6dcff99472ba50b4",
+    "inference_script_sha256": "162bf2a7f0d8973b9145b9ca1055290bdd88adbfbc9204936d2421a2953c29f7",
+    "evaluation_script_sha256": "024975979b079bff147b0426ee2d7427208811799b87eb2f15e6719a99d466f6",
+    "report_script_sha256": "b10317f22f3f6324d8d563bb7c11745d8ca5c159811e23cb59f6bca645a5ff8f"
+  },
+  "artifacts": {
+    "run": "/home/boweiye2/rag/runs/milestone5a-verification-v1",
+    "mapping": "/home/boweiye2/rag/runs/milestone5a-verification-v1/verification-mapping.json",
+    "development": "/home/boweiye2/rag/runs/milestone5a-verification-v1/development-summary.json",
+    "final_summary": "/home/boweiye2/rag/runs/milestone5a-verification-v1/final-summary.json",
+    "error_analysis": "/home/boweiye2/rag/runs/milestone5a-verification-v1/error-analysis.json",
+    "source_config_dependency_snapshot": "/home/boweiye2/rag/runs/milestone5a-verification-v1/source/exact-source-config-dependencies.tar.gz"
+  },
+  "limitations": [
+    "Prompt and top-k were selected and evaluated on the same 162 DEV claims.",
+    "No annotated evidence does not establish that no evidence exists.",
+    "D3 supplies annotated documents but is not a strict upper bound.",
+    "Condition differences combine retrieval-context and model-interaction effects."
+  ]
+}

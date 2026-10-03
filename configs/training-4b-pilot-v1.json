@@ -1,0 +1,90 @@
+{
+  "status": "authorized_4b_pilot",
+  "base_model": "BAAI/bge-base-en-v1.5",
+  "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "split": "configs/splits/scifact_train_dev_v1.json",
+  "split_sha256": "6a4dcc3d654621590b860ce6ec4ed5722c91913546386470d545c425f01a2ff0",
+  "data": {
+    "random": {
+      "path": "data/scifact/training_v1/random.jsonl",
+      "sha256": "1238051a846c8ae6612a4bc060f5ffe6e415f39c1935658e66a5a2fcaa39bc89"
+    },
+    "hard": {
+      "path": "data/scifact/training_v1/hard.jsonl",
+      "sha256": "381c5a3f61080a2cbdb2817d96e5af4330aa7f784b69dfdd323aa7abbb309245"
+    }
+  },
+  "arms": [
+    "random",
+    "hard"
+  ],
+  "loss": {
+    "name": "per_query_explicit_negative_InfoNCE",
+    "implementation": "torch.nn.functional.cross_entropy on [batch,6] cosine logits; target column 0",
+    "temperature": 0.05,
+    "in_batch_negatives": false,
+    "candidate_layout": "one positive then five explicit negatives, independently per row"
+  },
+  "model": {
+    "pooling": "CLS",
+    "normalize": true,
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "document_format": "title + space + abstract",
+    "max_query_length": 512,
+    "max_document_length": 512
+  },
+  "training": {
+    "batch_size": 16,
+    "gradient_accumulation": 1,
+    "effective_batch_size": 16,
+    "drop_last": false,
+    "epochs": 3,
+    "steps_per_epoch": 47,
+    "total_optimizer_steps": 141,
+    "optimizer": "AdamW",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "no_decay_parameters": [
+      "bias",
+      "LayerNorm.weight"
+    ],
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-08,
+    "scheduler": "linear",
+    "warmup_steps": 15,
+    "max_gradient_norm": 1.0,
+    "precision": "float32",
+    "development_seed": 20261002,
+    "final_seeds": [
+      20261002,
+      20261003,
+      20261004
+    ],
+    "row_order": "same seeded permutation of paired row indices per epoch for both arms",
+    "negative_resampling": false,
+    "search_budget": "one fixed configuration per arm initially",
+    "checkpoint_selection": "highest DEV NDCG@10 among epoch-end checkpoints; earliest epoch on ties",
+    "early_stopping": false,
+    "gradient_checkpointing": true,
+    "gradient_checkpointing_note": "Non-reentrant recomputation for memory headroom in both arms; RNG state preserved."
+  },
+  "mining": {
+    "source": "frozen zero-shot BGE",
+    "candidate_depth": 50,
+    "negative_count": 5,
+    "hard_selection": "first five distinct non-positive content fingerprints from top 50",
+    "random_selection": "first five eligible documents from corpus permutation seeded with 20261002 + integer query ID",
+    "filter": "all known positives and normalized title+abstract duplicates",
+    "query_population": "647 TRAIN only",
+    "candidate_corpus": "full 5183 documents"
+  },
+  "limitations": [
+    "Unjudged relevant hard negatives observed; sample flags retained without relabeling.",
+    "No in-batch negatives: conclusions apply to five explicit negatives per query.",
+    "Multiple-positive queries contribute multiple rows; pair-uniform weighting."
+  ],
+  "stop_rule": "Exactly random/hard seed 20261002, 3 epochs each; stop before replication, test or serving."
+}
