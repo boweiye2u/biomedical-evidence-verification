@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      RAG_ROOT: ${{ runner.temp }}/rag
+      RAG_ROOT: /tmp/scientific-rag-ci-empty
 
     steps:
       - name: Check out repository
