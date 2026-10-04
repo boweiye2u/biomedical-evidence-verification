@@ -155,8 +155,8 @@ SciFact corpus, cached FAISS index, and Qwen checkpoint. The service writes its
 structured request log below `/artifacts/runs/`, so that mount must be writable.
 GPU execution requires an NVIDIA driver and NVIDIA Container Toolkit; model weights
 are never baked into the image.
-A GitHub Actions workflow is provided to validate the Docker image build from a
-clean checkout. GPU container serving has not yet been runtime-validated.
+The image build passes in GitHub Actions from a clean checkout. GPU container
+serving has not yet been runtime-validated.
 
 ### Continuous integration
 
