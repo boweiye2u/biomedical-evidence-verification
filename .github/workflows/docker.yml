@@ -1,0 +1,54 @@
+name: Docker build
+
+on:
+  push:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - environments/serving-requirements.txt
+      - configs/serving-6b-v1.json
+      - retrieval/__init__.py
+      - retrieval/verification.py
+      - serving/**
+      - .github/workflows/docker.yml
+  pull_request:
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - environments/serving-requirements.txt
+      - configs/serving-6b-v1.json
+      - retrieval/__init__.py
+      - retrieval/verification.py
+      - serving/**
+      - .github/workflows/docker.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf \
+            /usr/share/dotnet \
+            /usr/local/lib/android \
+            /opt/ghc \
+            /opt/hostedtoolcache/CodeQL
+          df -h /
+
+      - name: Build Docker image
+        run: docker build -t biomedical-evidence-verification:ci .
+
+      - name: Smoke-import serving application
+        run: docker run --rm biomedical-evidence-verification:ci python -c "import serving.app"
+
+      - name: Report image size
+        run: docker images biomedical-evidence-verification:ci
