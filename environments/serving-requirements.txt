@@ -1,0 +1,9 @@
+# Runtime dependencies for the frozen FastAPI + vLLM serving application.
+# Install the CUDA 12.6 PyTorch wheel first when reproducing the measured stack.
+torch==2.7.0
+vllm==0.9.2
+transformers==4.53.2
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+httpx==0.28.1
+faiss-cpu==1.11.0.post1

@@ -1,5 +1,7 @@
 # Biomedical Evidence Retrieval & Verification
 
+[![Tests](https://github.com/boweiye2u/biomedical-evidence-verification/actions/workflows/tests.yml/badge.svg)](https://github.com/boweiye2u/biomedical-evidence-verification/actions/workflows/tests.yml)
+
 An evidence-grounded biomedical claim verification system evaluated on SciFact. It retrieves scientific articles with zero-shot BGE and exact FAISS search, supplies the top-ranked full abstract to Qwen2.5-7B-Instruct, and returns a structured `SUPPORT`, `CONTRADICT`, or `INSUFFICIENT` decision with citations. The repository covers controlled retrieval experiments, evidence-selection diagnostics, a single frozen held-out TEST evaluation, and local serving with FastAPI and vLLM.
 
 ## Architecture
@@ -115,6 +117,50 @@ conda create --prefix "$RAG_ROOT/envs/serving" python=3.11 pip -y
 scripts/start_vllm_6b.sh   # terminal 1
 scripts/start_api_6b.sh    # terminal 2
 ```
+
+### Docker serving
+
+The container packages the frozen FastAPI and vLLM serving code; model checkpoints,
+the SciFact corpus, cached embeddings, the FAISS index, and request logs remain
+external under `$RAG_ROOT`. Build the Python 3.11 image from the repository root:
+
+```bash
+docker build -t biomedical-evidence-verification:6b .
+```
+
+Run vLLM and FastAPI in separate terminals on the same Linux host network, mounting
+the existing artifact root at `/artifacts`:
+
+```bash
+# Terminal 1: frozen Qwen generator
+docker run --rm --gpus all --network host --ipc=host \
+  -v "$RAG_ROOT:/artifacts" \
+  biomedical-evidence-verification:6b \
+  vllm serve /artifacts/models/Qwen2.5-7B-Instruct \
+    --served-model-name qwen2.5-7b-instruct --dtype bfloat16 \
+    --max-model-len 16384 --gpu-memory-utilization 0.72 --max-num-seqs 16 \
+    --generation-config vllm --host 127.0.0.1 --port 8001 \
+    --disable-log-requests
+
+# Terminal 2: BGE retrieval and FastAPI
+docker run --rm --gpus all --network host \
+  -v "$RAG_ROOT:/artifacts" \
+  -e RAG_ROOT=/artifacts \
+  biomedical-evidence-verification:6b
+```
+
+The mount must contain the artifact paths referenced by
+[serving-6b-v1.json](configs/serving-6b-v1.json), including the BGE snapshot,
+SciFact corpus, cached FAISS index, and Qwen checkpoint. The service writes its
+structured request log below `/artifacts/runs/`, so that mount must be writable.
+GPU execution requires an NVIDIA driver and NVIDIA Container Toolkit; model weights
+are never baked into the image.
+
+### Continuous integration
+
+GitHub Actions runs the model-free CPU test selection automatically on pushes and
+pull requests. GPU inference, vLLM startup, model downloads, full-corpus evaluation,
+and serving benchmarks are intentionally excluded from hosted CI.
 
 ### Serving examples
 

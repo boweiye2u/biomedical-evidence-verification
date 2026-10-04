@@ -1,0 +1,3 @@
+# Minimal dependencies for the model-free CPU test selection in GitHub Actions.
+numpy>=1.26,<3
+pytest>=8,<10
