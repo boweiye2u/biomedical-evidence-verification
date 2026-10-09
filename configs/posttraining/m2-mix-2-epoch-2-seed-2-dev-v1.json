@@ -1,0 +1,67 @@
+{
+  "status": "frozen_before_M2_DEV_generation",
+  "scope": {
+    "split": "frozen_DEV_only",
+    "query_count": 162,
+    "benchmark_access_allowed": false
+  },
+  "retrieval": {
+    "name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "rankings": "runs/scifact_dev_v1/bge-rankings.json",
+    "top_k": 1,
+    "corpus_size": 5183,
+    "index": "faiss.IndexFlatIP"
+  },
+  "prompt": {
+    "name": "posttraining-v2-evidence-conditioned-v2",
+    "text": "Verify one biomedical claim using only the supplied document. Determine whether the document directly establishes the same entities, relation, population, and polarity. Choose SUPPORT only when the document entails the claim, CONTRADICT only when it establishes the opposite, and INSUFFICIENT otherwise. Do not use outside knowledge. Return exactly one JSON object with keys decision and rationale_sentences. decision must be SUPPORT, CONTRADICT, or INSUFFICIENT. rationale_sentences must be the zero-based indices of supplied sentences that justify the decision, and must be empty for INSUFFICIENT. The first output character must be { and the final output character must be }. Follow this literal form exactly: {\"decision\":\"SUPPORT\",\"rationale_sentences\":[0]}. Return JSON only, without markdown, labels outside the object, or explanation.",
+    "sha256": "000f68b1f43603bbd3710275e61a81bd09358dfac7eccacaf84762715efd9211",
+    "output_schema": {
+      "decision": "SUPPORT|CONTRADICT|INSUFFICIENT",
+      "rationale_sentences": [
+        "zero-based supplied sentence index"
+      ]
+    },
+    "evidence_format": "one full abstract with original zero-based SciFact sentence indices",
+    "fewshot": false,
+    "exemplars": null
+  },
+  "inference": {
+    "vllm_version": "0.9.2",
+    "transformers_version": "4.53.2",
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 1,
+    "max_model_len": 16384,
+    "max_num_seqs": 16,
+    "request_concurrency": 8,
+    "gpu_memory_utilization": 0.72,
+    "temperature": 0.0,
+    "repetition_penalty": 1.05,
+    "max_new_tokens": 192,
+    "seed": 20261009
+  },
+  "scoring": {
+    "gold": "original claim-level SciFact label under recovered v1 rule",
+    "invalid_decision": "INVALID and scored incorrect",
+    "rationale_validity": "reported separately from JSON and decision validity"
+  },
+  "mapping": "runs/milestone5a-verification-v1/verification-mapping.json",
+  "corpus": "data/scifact/original/corpus.jsonl",
+  "baseline_id": "m2-mix-2-epoch-2-seed-2",
+  "model": {
+    "name": "Qwen/Qwen2.5-3B-Instruct + M2 mixed-evidence LoRA (merged)",
+    "served_model_name": "m2-mix-2-epoch-2-seed-2",
+    "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "local_path": "/home/boweiye2/rag/checkpoints/posttraining/m2/dev-finalists/mix-2-epoch-2/seed-2/merged",
+    "base_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "adapter_training_config": "configs/posttraining/train-m2-lora-mixed-v1.json",
+    "mixture": "mix-2",
+    "selected_epochs": 2,
+    "training_seed": 2,
+    "cv_selection_config": "configs/posttraining/m2-cv-finalists-v1.json"
+  },
+  "implementation_correction": "v1 zero-shot prompt produced non-JSON shorthand on all DEV records; v2 adds one literal JSON formatting example without changing labels, schema, evidence, scoring, or exemplars.",
+  "evaluation_role": "one_of_six_predefined_M2_DEV_finalist_replications"
+}

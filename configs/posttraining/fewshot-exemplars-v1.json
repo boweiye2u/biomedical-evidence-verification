@@ -1,0 +1,90 @@
+{
+  "status": "frozen_before_DEV_generation",
+  "version": "fewshot-exemplars-v1",
+  "selection_policy": "Three manually inspected TRAIN-only examples, one per label; SUPPORT/CONTRADICT have one direct annotated rationale and INSUFFICIENT uses an obviously unrelated TRAIN-associated document.",
+  "labels": [
+    "SUPPORT",
+    "CONTRADICT",
+    "INSUFFICIENT"
+  ],
+  "train_only": true,
+  "dev_overlap_count": 0,
+  "benchmark_examples_used": false,
+  "claims_train_sha256": "f4c8fa82d8bd0653a9cc8d61a6ea48c25eacea64e90af5dbf390ebb1b74372f0",
+  "corpus_sha256": "b8d6c89624cb2ed74dee8938effc4f5d8bd2086887880af8110d64be4ceade62",
+  "split_sha256": "6a4dcc3d654621590b860ce6ec4ed5722c91913546386470d545c425f01a2ff0",
+  "examples": [
+    {
+      "claim_id": "34",
+      "document_id": "11705328",
+      "decision": "SUPPORT",
+      "rationale_sentences": [
+        4
+      ],
+      "selection_reason": "Single annotated TRAIN pair with one direct rationale sentence; concise positive relation.",
+      "claim": "A deficiency of folate increases blood levels of homocysteine.",
+      "document": {
+        "doc_id": 11705328,
+        "title": "Randomized trial of folic acid supplementation and serum homocysteine levels.",
+        "abstract": [
+          "BACKGROUND Lowering serum homocysteine levels with folic acid is expected to reduce mortality from ischemic heart disease.",
+          "Homocysteine reduction is known to be maximal at a folic acid dosage of 1 mg/d, but the effect of lower doses (relevant to food fortification) is unclear.   \n",
+          "METHODS We randomized 151 patients with ischemic heart disease to 1 of 5 dosages of folic acid (0.2, 0.4, 0.6, 0.8, and 1.0 mg/d) or placebo.",
+          "Fasting blood samples for serum homocysteine and serum folate analysis were taken initially, after 3 months of supplementation, and 3 months after folic acid use was discontinued.   \n",
+          "RESULTS Median serum homocysteine level decreased with increasing folic acid dosage, to a maximum at 0.8 mg of folic acid per day, when the homocysteine reduction (placebo adjusted) was 2.7 micromol/L (23%), similar to the known effect of folic acid dosages of 1 mg/d and above.",
+          "The higher a person's initial serum homocysteine level, the greater was the response to folic acid, but there were statistically significant reductions regardless of the initial level.",
+          "Serum folate level increased approximately linearly (5.5 nmol/L for every 0.1 mg of folic acid).",
+          "Within-person fluctuations over time in serum homocysteine levels, measured in the placebo group, were large compared with the effect of folic acid, indicating that monitoring of the reduction in an individual is impractical.   \n",
+          "CONCLUSIONS A dosage of folic acid of 0.8 mg/d appears necessary to achieve the maximum reduction in serum homocysteine level across the range of homocysteine levels in the population.",
+          "Current US food fortification levels will achieve only a small proportion of the achievable homocysteine reduction."
+        ],
+        "structured": true
+      }
+    },
+    {
+      "claim_id": "2",
+      "document_id": "13734012",
+      "decision": "CONTRADICT",
+      "rationale_sentences": [
+        4
+      ],
+      "selection_reason": "Single annotated TRAIN pair with one direct numerical contradiction sentence.",
+      "claim": "1 in 5 million in UK have abnormal PrP positivity.",
+      "document": {
+        "doc_id": 13734012,
+        "title": "Prevalent abnormal prion protein in human appendixes after bovine spongiform encephalopathy epizootic: large scale survey",
+        "abstract": [
+          "OBJECTIVES To carry out a further survey of archived appendix samples to understand better the differences between existing estimates of the prevalence of subclinical infection with prions after the bovine spongiform encephalopathy epizootic and to see whether a broader birth cohort was affected, and to understand better the implications for the management of blood and blood products and for the handling of surgical instruments.   \n",
+          "DESIGN Irreversibly unlinked and anonymised large scale survey of archived appendix samples.   \n",
+          "SETTING Archived appendix samples from the pathology departments of 41 UK hospitals participating in the earlier survey, and additional hospitals in regions with lower levels of participation in that survey.   ",
+          "SAMPLE 32,441 archived appendix samples fixed in formalin and embedded in paraffin and tested for the presence of abnormal prion protein (PrP).   \n",
+          "RESULTS Of the 32,441 appendix samples 16 were positive for abnormal PrP, indicating an overall prevalence of 493 per million population (95% confidence interval 282 to 801 per million).",
+          "The prevalence in those born in 1941-60 (733 per million, 269 to 1596 per million) did not differ significantly from those born between 1961 and 1985 (412 per million, 198 to 758 per million) and was similar in both sexes and across the three broad geographical areas sampled.",
+          "Genetic testing of the positive specimens for the genotype at PRNP codon 129 revealed a high proportion that were valine homozygous compared with the frequency in the normal population, and in stark contrast with confirmed clinical cases of vCJD, all of which were methionine homozygous at PRNP codon 129.   \n",
+          "CONCLUSIONS This study corroborates previous studies and suggests a high prevalence of infection with abnormal PrP, indicating vCJD carrier status in the population compared with the 177 vCJD cases to date.",
+          "These findings have important implications for the management of blood and blood products and for the handling of surgical instruments."
+        ],
+        "structured": true
+      }
+    },
+    {
+      "claim_id": "4",
+      "document_id": "31460499",
+      "decision": "INSUFFICIENT",
+      "rationale_sentences": [],
+      "selection_reason": "TRAIN claim paired with an unrelated document associated only with other TRAIN claims; demonstrates evidence-conditioned abstention.",
+      "claim": "1-1% of colorectal cancer patients are diagnosed with regional or distant metastases.",
+      "document": {
+        "doc_id": 31460499,
+        "title": "Resistance to antimicrobials in humans and animals.",
+        "abstract": [
+          "Overusing antibiotics is not the only cause and reducing use is not the only solution   W arning signs of antimicrobial resistance, chinks in the antimicrobial armour, began to appear in the middle of the last century, and by the 1990s various reports had signalled the dangers of excessive or inappropriate use of antibiotics in clinical medicine and of the use of antibiotics in animal feed as growth promoters.1\u20133 Overuse of antimicrobials emerged as the main culprit, and reducing their use was seen as the answer.",
+          "But it may not be that simple.  ",
+          "The idea that reducing antibiotic use would redress the problem formed part of a positive response on the part of the United Kingdom government to the House of Lords report,1 including a public information campaign, surveillance of resistance along the food chain, targets with respect to hospital acquired infections, and setting up of an overarching advisory body on all aspects of antibiotic use.",
+          "However, the concept of overuse has proved too simplistic, for, although the evidence of overprescribing as the \u2026"
+        ],
+        "structured": false
+      }
+    }
+  ]
+}

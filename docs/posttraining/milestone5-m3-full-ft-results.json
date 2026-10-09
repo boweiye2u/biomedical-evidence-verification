@@ -1,0 +1,1749 @@
+{
+  "status": "complete",
+  "milestone": "M3_full_parameter_fine_tuning",
+  "implementation_validated": true,
+  "configuration": {
+    "status": "frozen_before_fit_test_and_DEV",
+    "model_id": "Qwen/Qwen2.5-3B-Instruct",
+    "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "local_model_path": "/home/boweiye2/rag/models/Qwen2.5-3B-Instruct",
+    "training_data": {
+      "mixture": "mix-2",
+      "path": "/home/boweiye2/rag/data/posttraining/mixtures-v1/mix-2.jsonl",
+      "sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+      "rows": 573,
+      "counts": {
+        "A": 344,
+        "B": 86,
+        "C": 86,
+        "D": 57
+      }
+    },
+    "optimization": {
+      "all_parameters_trainable": true,
+      "lora_active": false,
+      "micro_batch_size_per_gpu": 2,
+      "global_batch_size": 16,
+      "scientific_gpu_count": 4,
+      "scientific_gradient_accumulation": 2,
+      "learning_rate": 1e-05,
+      "learning_rate_rationale": "single pre-DEV stability choice for full-parameter AdamW; no search",
+      "weight_decay": 0.01,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "epsilon": 1e-08,
+      "scheduler": "linear",
+      "warmup_ratio": 0.1,
+      "candidate_epochs": [
+        2,
+        3
+      ],
+      "scheduler_horizon_epochs": 3,
+      "max_gradient_norm": 1.0,
+      "precision": "bfloat16_compute_fp32_master",
+      "gradient_checkpointing": true,
+      "max_sequence_length": 4096,
+      "prompt_loss_mask": true
+    },
+    "fsdp": {
+      "sharding_strategy": "FULL_SHARD",
+      "auto_wrap_policy": "transformer_auto_wrap_policy(Qwen2DecoderLayer)",
+      "mixed_precision": {
+        "param_dtype": "bfloat16",
+        "reduce_dtype": "bfloat16",
+        "buffer_dtype": "bfloat16"
+      },
+      "cpu_offload": false,
+      "use_orig_params": true,
+      "sync_module_states": true,
+      "forward_prefetch": false,
+      "limit_all_gathers": true,
+      "state_dict": "FULL_STATE_DICT_rank0_only_offload_to_cpu_for_checkpoint_export"
+    },
+    "cross_validation": {
+      "folds": 5,
+      "group": "claim_id",
+      "seed": 20261019,
+      "fold_file": "configs/posttraining/m2-cv-folds-v1.json",
+      "fold_file_sha256": "8c438f6ffe82af27dd0292746d4402699e8caefa0d6ff78930730417df6122b8",
+      "primary_selection_metric": "mean_macro_f1",
+      "tie_margin": 0.005,
+      "finalist_count": 2,
+      "tie_break": [
+        "fewer_epochs"
+      ]
+    },
+    "final_training": {
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "inferential_seed": 0,
+      "selection": "best three-seed mean DEV Macro F1; ties within 0.005 choose fewer epochs"
+    },
+    "evaluation": {
+      "cv_engine": "transformers_greedy_from_full_checkpoint",
+      "dev_engine": "vllm_0.9.2",
+      "temperature": 0.0,
+      "repetition_penalty": 1.05,
+      "max_new_tokens": 192,
+      "dev_split": "frozen_162_claim_DEV",
+      "dev_evidence": "frozen_BGE_top1_full_abstract",
+      "fixed_benchmark_access_allowed_before_freeze": false
+    },
+    "environment": "/home/boweiye2/rag/envs/posttraining",
+    "git_commit": "db145b5e6526afefd7ad9fead083e4100fe53de2"
+  },
+  "trainable_parameters": 3085938688,
+  "cv": {
+    "status": "complete_before_DEV",
+    "candidates": {
+      "2": {
+        "fold_accuracy": [
+          0.8416666666666667,
+          0.8181818181818182,
+          0.8016528925619835,
+          0.8558558558558559,
+          0.8018018018018018
+        ],
+        "mean_accuracy": 0.8238318070136252,
+        "fold_macro_f1": [
+          0.8039501544656185,
+          0.8105742296918766,
+          0.7868836048488838,
+          0.8396681749622926,
+          0.7868856377892522
+        ],
+        "mean_macro_f1": 0.8055923603515847
+      },
+      "3": {
+        "fold_accuracy": [
+          0.8333333333333334,
+          0.9272727272727272,
+          0.8347107438016529,
+          0.9009009009009009,
+          0.8108108108108109
+        ],
+        "mean_accuracy": 0.8614057032238851,
+        "fold_macro_f1": [
+          0.817939324478282,
+          0.9199258850315908,
+          0.8236796634362556,
+          0.8834656084656084,
+          0.8031330251669235
+        ],
+        "mean_macro_f1": 0.8496287013157321
+      }
+    },
+    "finalists": [
+      2,
+      3
+    ],
+    "benchmark_loaded": false
+  },
+  "selected_epoch": 3,
+  "dev": {
+    "2": {
+      "seeds": [
+        {
+          "seed": 0,
+          "accuracy": 0.7160493827160493,
+          "macro_f1": 0.6884942084942085,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.725,
+              "recall": 0.8285714285714286,
+              "f1": 0.7733333333333333,
+              "accuracy": 0.8285714285714286,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5142857142857142,
+              "recall": 0.6428571428571429,
+              "f1": 0.5714285714285714,
+              "accuracy": 0.6428571428571429,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.851063829787234,
+              "recall": 0.625,
+              "f1": 0.7207207207207208,
+              "accuracy": 0.625,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 47,
+            "SUPPORT": 80,
+            "CONTRADICT": 35
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 47,
+            "SUPPORT": 80,
+            "CONTRADICT": 35
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.45679012345679,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 4.973586201667786,
+            "requests_per_second": 32.572070419866606,
+            "mean_request_ms": 239.7191744113778,
+            "p50_request_ms": 236.68435402214527,
+            "p95_request_ms": 297.573447227478,
+            "peak_gpu_memory_mib": 33892
+          }
+        },
+        {
+          "seed": 1,
+          "accuracy": 0.6975308641975309,
+          "macro_f1": 0.6714941551278969,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.7209302325581395,
+              "recall": 0.8857142857142857,
+              "f1": 0.7948717948717948,
+              "accuracy": 0.8857142857142857,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5111111111111111,
+              "recall": 0.8214285714285714,
+              "f1": 0.6301369863013698,
+              "accuracy": 0.8214285714285714,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.9032258064516129,
+              "recall": 0.4375,
+              "f1": 0.5894736842105263,
+              "accuracy": 0.4375,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 31,
+            "SUPPORT": 86,
+            "CONTRADICT": 45
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 31,
+            "SUPPORT": 86,
+            "CONTRADICT": 45
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.61111111111111,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 5.099234841763973,
+            "requests_per_second": 31.76947228889727,
+            "mean_request_ms": 245.14854503910482,
+            "p50_request_ms": 239.54293876886368,
+            "p95_request_ms": 291.9578105211258,
+            "peak_gpu_memory_mib": 33892
+          }
+        },
+        {
+          "seed": 2,
+          "accuracy": 0.6851851851851852,
+          "macro_f1": 0.6669653010712614,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.7160493827160493,
+              "recall": 0.8285714285714286,
+              "f1": 0.7682119205298013,
+              "accuracy": 0.8285714285714286,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5102040816326531,
+              "recall": 0.8928571428571429,
+              "f1": 0.6493506493506493,
+              "accuracy": 0.8928571428571429,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.875,
+              "recall": 0.4375,
+              "f1": 0.5833333333333334,
+              "accuracy": 0.4375,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 32,
+            "CONTRADICT": 49,
+            "SUPPORT": 81
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 32,
+            "CONTRADICT": 49,
+            "SUPPORT": 81
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.666666666666666,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 5.097938358783722,
+            "requests_per_second": 31.777551747143985,
+            "mean_request_ms": 246.17767566240127,
+            "p50_request_ms": 240.6411375850439,
+            "p95_request_ms": 314.375177025795,
+            "peak_gpu_memory_mib": 33892
+          }
+        }
+      ],
+      "mean_sample_sd": {
+        "accuracy": {
+          "mean": 0.6995884773662552,
+          "sample_sd": 0.01553463875570109
+        },
+        "macro_f1": {
+          "mean": 0.6756512215644556,
+          "sample_sd": 0.011350522663072786
+        },
+        "support_f1": {
+          "mean": 0.7788056829116431,
+          "sample_sd": 0.014147338350839797
+        },
+        "support_recall": {
+          "mean": 0.8476190476190476,
+          "sample_sd": 0.03299144395369285
+        },
+        "contradict_f1": {
+          "mean": 0.6169720690268635,
+          "sample_sd": 0.04059493616274132
+        },
+        "contradict_recall": {
+          "mean": 0.7857142857142857,
+          "sample_sd": 0.12876968840942818
+        },
+        "insufficient_f1": {
+          "mean": 0.6311759127548601,
+          "sample_sd": 0.0776088297325498
+        },
+        "insufficient_recall": {
+          "mean": 0.5,
+          "sample_sd": 0.10825317547305482
+        }
+      }
+    },
+    "3": {
+      "seeds": [
+        {
+          "seed": 0,
+          "accuracy": 0.7345679012345679,
+          "macro_f1": 0.7158067158067158,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.7435897435897436,
+              "recall": 0.8285714285714286,
+              "f1": 0.7837837837837838,
+              "accuracy": 0.8285714285714286,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5526315789473685,
+              "recall": 0.75,
+              "f1": 0.6363636363636364,
+              "accuracy": 0.75,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.8695652173913043,
+              "recall": 0.625,
+              "f1": 0.7272727272727273,
+              "accuracy": 0.625,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 46,
+            "CONTRADICT": 38,
+            "SUPPORT": 78
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 46,
+            "CONTRADICT": 38,
+            "SUPPORT": 78
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.493827160493828,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 5.006839759647846,
+            "requests_per_second": 32.355738904532906,
+            "mean_request_ms": 240.97318473605463,
+            "p50_request_ms": 235.03027483820915,
+            "p95_request_ms": 297.28277772665024,
+            "peak_gpu_memory_mib": 33892
+          }
+        },
+        {
+          "seed": 1,
+          "accuracy": 0.6728395061728395,
+          "macro_f1": 0.652629414833226,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.6987951807228916,
+              "recall": 0.8285714285714286,
+              "f1": 0.758169934640523,
+              "accuracy": 0.8285714285714286,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5116279069767442,
+              "recall": 0.7857142857142857,
+              "f1": 0.619718309859155,
+              "accuracy": 0.7857142857142857,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.8055555555555556,
+              "recall": 0.453125,
+              "f1": 0.58,
+              "accuracy": 0.453125,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 36,
+            "CONTRADICT": 43,
+            "SUPPORT": 83
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 36,
+            "CONTRADICT": 43,
+            "SUPPORT": 83
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.561728395061728,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 4.991114288568497,
+            "requests_per_second": 32.45768191905365,
+            "mean_request_ms": 240.81138749089507,
+            "p50_request_ms": 236.51421815156937,
+            "p95_request_ms": 297.1743680536747,
+            "peak_gpu_memory_mib": 33892
+          }
+        },
+        {
+          "seed": 2,
+          "accuracy": 0.7222222222222222,
+          "macro_f1": 0.703463430717571,
+          "per_label": {
+            "SUPPORT": {
+              "precision": 0.75,
+              "recall": 0.8142857142857143,
+              "f1": 0.7808219178082193,
+              "accuracy": 0.8142857142857143,
+              "support": 70
+            },
+            "CONTRADICT": {
+              "precision": 0.5384615384615384,
+              "recall": 0.75,
+              "f1": 0.6268656716417911,
+              "accuracy": 0.75,
+              "support": 28
+            },
+            "INSUFFICIENT": {
+              "precision": 0.8297872340425532,
+              "recall": 0.609375,
+              "f1": 0.7027027027027027,
+              "accuracy": 0.609375,
+              "support": 64
+            }
+          },
+          "count": 162,
+          "prediction_counts": {
+            "INSUFFICIENT": 47,
+            "SUPPORT": 76,
+            "CONTRADICT": 39
+          },
+          "true_label_distribution": {
+            "INSUFFICIENT": 64,
+            "CONTRADICT": 28,
+            "SUPPORT": 70
+          },
+          "prediction_counts_including_invalid": {
+            "INSUFFICIENT": 47,
+            "SUPPORT": 76,
+            "CONTRADICT": 39
+          },
+          "json_valid_count": 162,
+          "json_valid_rate": 1.0,
+          "schema_valid_count": 162,
+          "schema_valid_rate": 1.0,
+          "decision_valid_count": 162,
+          "decision_valid_rate": 1.0,
+          "rationale_index_valid_count": 162,
+          "rationale_index_valid_rate": 1.0,
+          "invalid_output_count": 0,
+          "prompt_tokens": {
+            "mean": 579.5864197530864,
+            "max": 1189
+          },
+          "output_tokens": {
+            "mean": 13.530864197530864,
+            "max": 16
+          },
+          "efficiency": {
+            "wall_seconds": 5.058563839644194,
+            "requests_per_second": 32.02489978092174,
+            "mean_request_ms": 243.03395547156717,
+            "p50_request_ms": 240.68164825439453,
+            "p95_request_ms": 296.53940722346306,
+            "peak_gpu_memory_mib": 33892
+          }
+        }
+      ],
+      "mean_sample_sd": {
+        "accuracy": {
+          "mean": 0.7098765432098766,
+          "sample_sd": 0.0326635964328962
+        },
+        "macro_f1": {
+          "mean": 0.6906331871191709,
+          "sample_sd": 0.03348588064646716
+        },
+        "support_f1": {
+          "mean": 0.774258545410842,
+          "sample_sd": 0.014011627667884316
+        },
+        "support_recall": {
+          "mean": 0.8238095238095239,
+          "sample_sd": 0.00824786098842326
+        },
+        "contradict_f1": {
+          "mean": 0.6276492059548607,
+          "sample_sd": 0.008350279523765398
+        },
+        "contradict_recall": {
+          "mean": 0.7619047619047619,
+          "sample_sd": 0.020619652471058052
+        },
+        "insufficient_f1": {
+          "mean": 0.6699918099918101,
+          "sample_sd": 0.07889750266037851
+        },
+        "insufficient_recall": {
+          "mean": 0.5625,
+          "sample_sd": 0.09504316453590968
+        }
+      }
+    }
+  },
+  "selected_dev_minus_M2": {
+    "accuracy": 0.0473251028806585,
+    "macro_f1": 0.04385733339122477,
+    "support_recall": 0.11428571428571432,
+    "contradict_recall": -0.011904761904761862,
+    "insufficient_recall": 0.0
+  },
+  "benchmark": {
+    "status": "complete",
+    "benchmark_role": "fixed SciFact benchmark split, previously evaluated in v1 and not used for M3 training or model selection",
+    "M3": {
+      "accuracy": 0.7133333333333334,
+      "macro_f1": 0.7018448248455007,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.7674418604651163,
+          "recall": 0.7983870967741935,
+          "f1": 0.7826086956521738,
+          "accuracy": 0.7983870967741935,
+          "support": 124
+        },
+        "CONTRADICT": {
+          "precision": 0.5555555555555556,
+          "recall": 0.78125,
+          "f1": 0.6493506493506493,
+          "accuracy": 0.78125,
+          "support": 64
+        },
+        "INSUFFICIENT": {
+          "precision": 0.8024691358024691,
+          "recall": 0.5803571428571429,
+          "f1": 0.6735751295336788,
+          "accuracy": 0.5803571428571429,
+          "support": 112
+        }
+      },
+      "count": 300,
+      "prediction_counts": {
+        "INSUFFICIENT": 81,
+        "CONTRADICT": 90,
+        "SUPPORT": 129
+      },
+      "true_label_distribution": {
+        "INSUFFICIENT": 112,
+        "SUPPORT": 124,
+        "CONTRADICT": 64
+      },
+      "prediction_counts_including_invalid": {
+        "INSUFFICIENT": 81,
+        "CONTRADICT": 90,
+        "SUPPORT": 129
+      },
+      "json_valid_rate": 1.0,
+      "decision_valid_rate": 1.0,
+      "rationale_index_valid_rate": 1.0,
+      "calibration": {
+        "ece": 0.20709659419292603,
+        "brier_score": 0.49190955649068685,
+        "nll": 1.21984085831565,
+        "restricted_generation_agreement_count": 294,
+        "restricted_generation_agreement_rate": 0.98,
+        "restricted_argmax_accuracy": 0.71,
+        "ece_bins": [
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 3,
+            "accuracy": 0.0,
+            "confidence": 0.44179487559126135
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 6,
+            "accuracy": 0.5,
+            "confidence": 0.5556513717414013
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 21,
+            "accuracy": 0.6190476190476191,
+            "confidence": 0.6506162293074456
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 19,
+            "accuracy": 0.47368421052631576,
+            "confidence": 0.757491197003649
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 34,
+            "accuracy": 0.4411764705882353,
+            "confidence": 0.8506247656393785
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 217,
+            "accuracy": 0.7972350230414746,
+            "confidence": 0.9838394922137836
+          }
+        ]
+      },
+      "rationale": {
+        "eligible_count": 149,
+        "excluded_count": 151,
+        "exclusion_reasons": {
+          "gold_insufficient": 112,
+          "retrieved_document_without_valid_gold_rationale": 39
+        },
+        "precision": 0.8120805369127517,
+        "recall": 0.7897091722595079,
+        "f1": 0.796420581655481,
+        "per_example": [
+          {
+            "claim_id": "5",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "42",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "49",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "50",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "51",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "53",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "54",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "56",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "57",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "70",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "100",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "113",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "115",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "124",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "129",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "130",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "133",
+            "f1": 0.6666666666666666,
+            "precision": 1.0,
+            "recall": 0.5
+          },
+          {
+            "claim_id": "137",
+            "f1": 0.6666666666666666,
+            "precision": 1.0,
+            "recall": 0.5
+          },
+          {
+            "claim_id": "141",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "142",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "143",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "146",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "148",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "163",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "171",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "179",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "180",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "183",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "208",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "216",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "217",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "218",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "219",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "230",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "233",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "236",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "248",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "249",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "274",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "275",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "279",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "327",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "338",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "343",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "380",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "386",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "399",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "436",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "443",
+            "f1": 0.5,
+            "precision": 1.0,
+            "recall": 0.3333333333333333
+          },
+          {
+            "claim_id": "452",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "501",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "513",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "516",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "521",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "525",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "528",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "532",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "533",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "536",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "539",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "578",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "589",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "593",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "597",
+            "f1": 0.6666666666666666,
+            "precision": 1.0,
+            "recall": 0.5
+          },
+          {
+            "claim_id": "613",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "636",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "641",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "692",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "693",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "718",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "721",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "723",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "728",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "729",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "742",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "743",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "759",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "770",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "781",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "784",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "793",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "805",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "808",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "811",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "823",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "832",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "837",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "839",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "847",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "859",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "879",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "880",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "882",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "903",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "904",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "911",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "921",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "922",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "957",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "960",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "967",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "971",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "982",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "985",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1012",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1020",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1021",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1029",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1062",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1086",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1088",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1089",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1104",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1121",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1130",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1137",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1140",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1144",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1146",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1150",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1163",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1180",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1185",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1187",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1202",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1216",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1225",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1232",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1241",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1259",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1262",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1266",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1270",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1271",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1273",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1290",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1298",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1303",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1320",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1337",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1339",
+            "f1": 0.5,
+            "precision": 1.0,
+            "recall": 0.3333333333333333
+          },
+          {
+            "claim_id": "1352",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1359",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1368",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1370",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1379",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1382",
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          {
+            "claim_id": "1385",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          {
+            "claim_id": "1389",
+            "f1": 0.6666666666666666,
+            "precision": 1.0,
+            "recall": 0.5
+          }
+        ]
+      },
+      "generation": {
+        "system": "M3",
+        "count": 300,
+        "wall_seconds": 9.332085967063904,
+        "requests_per_second": 32.1471534937421,
+        "mean_request_ms": 246.2806243697802,
+        "p50_request_ms": 240.3426207602024,
+        "p95_request_ms": 302.63936147093773,
+        "mean_prompt_tokens": 604.1266666666667,
+        "max_prompt_tokens": 1695,
+        "mean_output_tokens": 13.683333333333334
+      }
+    },
+    "saved_M2": {
+      "accuracy": 0.6733333333333333,
+      "macro_f1": 0.6602128749005893,
+      "per_label": {
+        "SUPPORT": {
+          "precision": 0.7567567567567568,
+          "recall": 0.6774193548387096,
+          "f1": 0.7148936170212766,
+          "accuracy": 0.6774193548387096,
+          "support": 124
+        },
+        "CONTRADICT": {
+          "precision": 0.46153846153846156,
+          "recall": 0.65625,
+          "f1": 0.5419354838709677,
+          "accuracy": 0.65625,
+          "support": 64
+        },
+        "INSUFFICIENT": {
+          "precision": 0.7755102040816326,
+          "recall": 0.6785714285714286,
+          "f1": 0.7238095238095238,
+          "accuracy": 0.6785714285714286,
+          "support": 112
+        }
+      },
+      "count": 300,
+      "prediction_counts": {
+        "INSUFFICIENT": 98,
+        "CONTRADICT": 91,
+        "SUPPORT": 111
+      }
+    },
+    "test6_M3_vs_M2": {
+      "id": 6,
+      "left": "M3",
+      "right": "M2",
+      "outside_original_Holm_family": true,
+      "accuracy_difference": 0.040000000000000036,
+      "macro_f1_difference": 0.04163194994491137,
+      "m3_correct_m2_wrong": 38,
+      "m2_correct_m3_wrong": 26,
+      "discordant": 64,
+      "mcnemar_exact_raw_p": 0.16864291143970336,
+      "macro_f1_bootstrap_95_ci": [
+        -0.011926031934054511,
+        0.09582111020072266
+      ],
+      "bootstrap_resamples": 10000,
+      "bootstrap_seed": 20261028
+    },
+    "integrity": {
+      "claim_count": 300,
+      "M2_regenerated": false,
+      "main_benchmark_rerun": false,
+      "config_sha256": "bad1ed9753d39fab5f0b51534295f133714a5656c2577cd77d6a2c3789a47fb4"
+    }
+  },
+  "compute": {
+    "cv_training_seconds": 2202.9182891845703,
+    "cv_gpu_hours": 2.447686987982856,
+    "final_training_seconds": 1631.7423248291016,
+    "final_gpu_hours": 1.8130470275878907,
+    "total_training_seconds": 3834.660614013672,
+    "total_gpu_hours": 4.260734015570747,
+    "peak_memory_mib": 22892.658203125,
+    "mean_final_tokens_per_second": 2068.388203370713
+  },
+  "checkpoint": "/home/boweiye2/rag/checkpoints/posttraining/m3/dev-finalists/seed-0/epoch-3/model",
+  "checkpoint_weights": {
+    "model-00001-of-00004.safetensors": "e95734ca700a9acec797d2139b48ea05e6d0d8a14924d32192f2d36da0600ece",
+    "model-00002-of-00004.safetensors": "956dc27bc939f907b823e9b24d8e05413d87ce17af84b2af2101c41d1fae6297",
+    "model-00003-of-00004.safetensors": "1b06e4e6b65568d5f6a168f49cf95b7169297e844f3213b750c19f6418ce69f0",
+    "model-00004-of-00004.safetensors": "707129b0aaef9b2c055f13f6d203eead13733a70aec5d37695673cc1c26174d8"
+  },
+  "limitations": [
+    "DistributedSampler pads the 573-row dataset to 576 samples per epoch across four ranks; no new source rows are introduced.",
+    "The benchmark was previously evaluated in v1 and is not a pristine unseen test set.",
+    "M3 is a secondary comparison and test 6 remains outside the original Holm family."
+  ],
+  "conclusion": "M3 has positive DEV and benchmark point estimates, but Test 6 is not statistically reliable; at about 4.5x M2 training GPU-hours plus multi-GPU/FSDP complexity, current evidence does not justify replacing M2 LoRA as the default."
+}

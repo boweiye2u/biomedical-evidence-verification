@@ -1,0 +1,22 @@
+{
+  "status": "frozen_before_mixture_construction",
+  "version": "m2-mixtures-v1",
+  "scope": {
+    "source_split": "TRAIN_only",
+    "dev_or_fixed_benchmark_access_allowed": false
+  },
+  "source_pools": {
+    "A": {"path": "/home/boweiye2/rag/data/posttraining/train_gold.jsonl", "sha256": "2f4397bcd42f845dba64445d5d63864f2b0e620f3982134bfe11010d3a39f590", "rows": 456, "condition": "A_gold"},
+    "B": {"path": "/home/boweiye2/rag/data/posttraining/train_retrieved.jsonl", "sha256": "29b52fd103d54459f23bdae664ed5436d26f5d943e868408ee357a23b0142f3e", "rows": 86, "condition": "B_retrieved_non_gold", "required_filter_version": "pool-b-frozen-v1", "maximum_score_inclusive": 0.66},
+    "C": {"path": "/home/boweiye2/rag/data/posttraining/train_hard_negative.jsonl", "sha256": "01f26d469d9975c643ff7dbe84b0fde594cc9ff89db7cd97bd195bb5de4aa628", "rows": 5716, "condition": "C_hard_negative", "required_filter_version": "pool-c-frozen-v1"},
+    "D": {"path": "/home/boweiye2/rag/data/posttraining/train_random_negative.jsonl", "sha256": "dda762c06c238ec032c043296c5af7d0749fe7188c93bde34367de0944a28c5b", "rows": 647, "condition": "D_random_negative", "required_source_seed": 20261010}
+  },
+  "pool_decisions": {"B": "retain", "C": "retain", "mix_3_active": false},
+  "construction_rule": "largest integer dataset preserving target proportions by Hamilton rounding without row oversampling; limiting pool determines total size",
+  "candidates": {
+    "mix-1": {"percentages": {"A": 0.45, "B": 0.20, "C": 0.20, "D": 0.15}, "sampling_seed": 20261020, "expected_total": 430, "expected_counts": {"A": 194, "B": 86, "C": 86, "D": 64}},
+    "mix-2": {"percentages": {"A": 0.60, "B": 0.15, "C": 0.15, "D": 0.10}, "sampling_seed": 20261021, "expected_total": 573, "expected_counts": {"A": 344, "B": 86, "C": 86, "D": 57}}
+  },
+  "inactive_fallback": {"name": "mix-3", "reason": "Pool C retained after frozen-filter audit", "percentages": {"A": 0.60, "B": 0.25, "C": 0.0, "D": 0.15}},
+  "output_root": "/home/boweiye2/rag/data/posttraining/mixtures-v1"
+}

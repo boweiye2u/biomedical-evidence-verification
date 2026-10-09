@@ -1,0 +1,1079 @@
+{
+  "status": "complete",
+  "benchmark_role": "fixed SciFact benchmark split, previously evaluated in v1 and not used for M3 training or model selection",
+  "M3": {
+    "accuracy": 0.7133333333333334,
+    "macro_f1": 0.7018448248455007,
+    "per_label": {
+      "SUPPORT": {
+        "precision": 0.7674418604651163,
+        "recall": 0.7983870967741935,
+        "f1": 0.7826086956521738,
+        "accuracy": 0.7983870967741935,
+        "support": 124
+      },
+      "CONTRADICT": {
+        "precision": 0.5555555555555556,
+        "recall": 0.78125,
+        "f1": 0.6493506493506493,
+        "accuracy": 0.78125,
+        "support": 64
+      },
+      "INSUFFICIENT": {
+        "precision": 0.8024691358024691,
+        "recall": 0.5803571428571429,
+        "f1": 0.6735751295336788,
+        "accuracy": 0.5803571428571429,
+        "support": 112
+      }
+    },
+    "count": 300,
+    "prediction_counts": {
+      "INSUFFICIENT": 81,
+      "CONTRADICT": 90,
+      "SUPPORT": 129
+    },
+    "true_label_distribution": {
+      "INSUFFICIENT": 112,
+      "SUPPORT": 124,
+      "CONTRADICT": 64
+    },
+    "prediction_counts_including_invalid": {
+      "INSUFFICIENT": 81,
+      "CONTRADICT": 90,
+      "SUPPORT": 129
+    },
+    "json_valid_rate": 1.0,
+    "decision_valid_rate": 1.0,
+    "rationale_index_valid_rate": 1.0,
+    "calibration": {
+      "ece": 0.20709659419292603,
+      "brier_score": 0.49190955649068685,
+      "nll": 1.21984085831565,
+      "restricted_generation_agreement_count": 294,
+      "restricted_generation_agreement_rate": 0.98,
+      "restricted_argmax_accuracy": 0.71,
+      "ece_bins": [
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 3,
+          "accuracy": 0.0,
+          "confidence": 0.44179487559126135
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 6,
+          "accuracy": 0.5,
+          "confidence": 0.5556513717414013
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 21,
+          "accuracy": 0.6190476190476191,
+          "confidence": 0.6506162293074456
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 19,
+          "accuracy": 0.47368421052631576,
+          "confidence": 0.757491197003649
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 34,
+          "accuracy": 0.4411764705882353,
+          "confidence": 0.8506247656393785
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 217,
+          "accuracy": 0.7972350230414746,
+          "confidence": 0.9838394922137836
+        }
+      ]
+    },
+    "rationale": {
+      "eligible_count": 149,
+      "excluded_count": 151,
+      "exclusion_reasons": {
+        "gold_insufficient": 112,
+        "retrieved_document_without_valid_gold_rationale": 39
+      },
+      "precision": 0.8120805369127517,
+      "recall": 0.7897091722595079,
+      "f1": 0.796420581655481,
+      "per_example": [
+        {
+          "claim_id": "5",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "42",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "49",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "50",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "51",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "53",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "54",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "56",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "57",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "70",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "100",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "113",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "115",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "124",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "129",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "130",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "133",
+          "f1": 0.6666666666666666,
+          "precision": 1.0,
+          "recall": 0.5
+        },
+        {
+          "claim_id": "137",
+          "f1": 0.6666666666666666,
+          "precision": 1.0,
+          "recall": 0.5
+        },
+        {
+          "claim_id": "141",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "142",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "143",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "146",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "148",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "163",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "171",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "179",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "180",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "183",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "208",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "216",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "217",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "218",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "219",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "230",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "233",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "236",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "248",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "249",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "274",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "275",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "279",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "327",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "338",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "343",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "380",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "386",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "399",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "436",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "443",
+          "f1": 0.5,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        {
+          "claim_id": "452",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "501",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "513",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "516",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "521",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "525",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "528",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "532",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "533",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "536",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "539",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "578",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "589",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "593",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "597",
+          "f1": 0.6666666666666666,
+          "precision": 1.0,
+          "recall": 0.5
+        },
+        {
+          "claim_id": "613",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "636",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "641",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "692",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "693",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "718",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "721",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "723",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "728",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "729",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "742",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "743",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "759",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "770",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "781",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "784",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "793",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "805",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "808",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "811",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "823",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "832",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "837",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "839",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "847",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "859",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "879",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "880",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "882",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "903",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "904",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "911",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "921",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "922",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "957",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "960",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "967",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "971",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "982",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "985",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1012",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1020",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1021",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1029",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1062",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1086",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1088",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1089",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1104",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1121",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1130",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1137",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1140",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1144",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1146",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1150",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1163",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1180",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1185",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1187",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1202",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1216",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1225",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1232",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1241",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1259",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1262",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1266",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1270",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1271",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1273",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1290",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1298",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1303",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1320",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1337",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1339",
+          "f1": 0.5,
+          "precision": 1.0,
+          "recall": 0.3333333333333333
+        },
+        {
+          "claim_id": "1352",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1359",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1368",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1370",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1379",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1382",
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0
+        },
+        {
+          "claim_id": "1385",
+          "f1": 1.0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        {
+          "claim_id": "1389",
+          "f1": 0.6666666666666666,
+          "precision": 1.0,
+          "recall": 0.5
+        }
+      ]
+    },
+    "generation": {
+      "system": "M3",
+      "count": 300,
+      "wall_seconds": 9.332085967063904,
+      "requests_per_second": 32.1471534937421,
+      "mean_request_ms": 246.2806243697802,
+      "p50_request_ms": 240.3426207602024,
+      "p95_request_ms": 302.63936147093773,
+      "mean_prompt_tokens": 604.1266666666667,
+      "max_prompt_tokens": 1695,
+      "mean_output_tokens": 13.683333333333334
+    }
+  },
+  "saved_M2": {
+    "accuracy": 0.6733333333333333,
+    "macro_f1": 0.6602128749005893,
+    "per_label": {
+      "SUPPORT": {
+        "precision": 0.7567567567567568,
+        "recall": 0.6774193548387096,
+        "f1": 0.7148936170212766,
+        "accuracy": 0.6774193548387096,
+        "support": 124
+      },
+      "CONTRADICT": {
+        "precision": 0.46153846153846156,
+        "recall": 0.65625,
+        "f1": 0.5419354838709677,
+        "accuracy": 0.65625,
+        "support": 64
+      },
+      "INSUFFICIENT": {
+        "precision": 0.7755102040816326,
+        "recall": 0.6785714285714286,
+        "f1": 0.7238095238095238,
+        "accuracy": 0.6785714285714286,
+        "support": 112
+      }
+    },
+    "count": 300,
+    "prediction_counts": {
+      "INSUFFICIENT": 98,
+      "CONTRADICT": 91,
+      "SUPPORT": 111
+    }
+  },
+  "test6_M3_vs_M2": {
+    "id": 6,
+    "left": "M3",
+    "right": "M2",
+    "outside_original_Holm_family": true,
+    "accuracy_difference": 0.040000000000000036,
+    "macro_f1_difference": 0.04163194994491137,
+    "m3_correct_m2_wrong": 38,
+    "m2_correct_m3_wrong": 26,
+    "discordant": 64,
+    "mcnemar_exact_raw_p": 0.16864291143970336,
+    "macro_f1_bootstrap_95_ci": [
+      -0.011926031934054511,
+      0.09582111020072266
+    ],
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20261028
+  },
+  "integrity": {
+    "claim_count": 300,
+    "M2_regenerated": false,
+    "main_benchmark_rerun": false,
+    "config_sha256": "bad1ed9753d39fab5f0b51534295f133714a5656c2577cd77d6a2c3789a47fb4"
+  },
+  "conclusion": "M3 has positive point estimates versus M2, but the macro-F1 bootstrap interval crosses zero and exact McNemar p=0.1686; no statistically reliable superiority was established."
+}

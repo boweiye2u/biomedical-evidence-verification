@@ -1,0 +1,4 @@
+# Direct post-training additions installed over the cloned retrieval environment.
+peft==0.21.2
+trl==1.15.0
+bitsandbytes==0.50.2

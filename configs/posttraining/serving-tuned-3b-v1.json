@@ -1,0 +1,94 @@
+{
+  "status": "frozen_before_serving_integration",
+  "run_id": "posttraining-serving-v1",
+  "deployment_candidate": "M2",
+  "scientific_quality_changes_allowed": false,
+  "generator": {
+    "model_name": "Qwen/Qwen2.5-3B-Instruct + M2 mixed-evidence LoRA merged",
+    "served_model_name": "posttraining-m2-3b",
+    "local_path": "/home/boweiye2/rag/checkpoints/posttraining/m2/dev-finalists/mix-2-epoch-3/seed-0/merged",
+    "weight_sha256": {
+      "model-00001-of-00002.safetensors": "c76fc29521b759e0b5f302116ec1c0a3d55d8b694846ee3b6e6dd0967a3cd2d2",
+      "model-00002-of-00002.safetensors": "66d2737fde38a876994f3f14ee27f7930fdcaf986a1839a00086d50d2298e828"
+    },
+    "base_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "finalist_config": "configs/posttraining/m2-finalist-v1.json",
+    "finalist_config_sha256": "490d28f33dd38b440ca329ed2b56c0ed113d86432dac0ea45085ed12a48c7d09",
+    "dtype": "bfloat16",
+    "base_url": "http://127.0.0.1:8001",
+    "max_model_len": 16384,
+    "max_num_seqs": 16,
+    "gpu_memory_utilization": 0.72,
+    "temperature": 0.0,
+    "repetition_penalty": 1.05,
+    "max_new_tokens": 192,
+    "seed": 20261009
+  },
+  "retriever": {
+    "model_name": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "local_path": "/home/boweiye2/rag/cache/huggingface/hub/models--BAAI--bge-base-en-v1.5/snapshots/a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "embedding_cache": "/home/boweiye2/rag/embeddings/scifact-bge-a53fd0d3b47586f0",
+    "corpus": "/home/boweiye2/rag/data/scifact/original/corpus.jsonl",
+    "corpus_sha256": "b8d6c89624cb2ed74dee8938effc4f5d8bd2086887880af8110d64be4ceade62",
+    "index_sha256": "2e6949dba6abc35da5164d95a70b46023ca5548e3f58716f24f791bd6b141fd4",
+    "metadata_sha256": "454b14c600dbd7b10edda19e8637ccc4e1a2ff0dee47336e62a6eeef08d74e8b",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "document_format": "title + abstract",
+    "pooling": "CLS",
+    "normalize": true,
+    "dtype": "float32",
+    "max_length": 512,
+    "production_top_k": 1,
+    "corpus_size": 5183,
+    "index": "faiss.IndexFlatIP"
+  },
+  "prompt": {
+    "name": "posttraining-v2-evidence-conditioned-v2",
+    "sha256": "000f68b1f43603bbd3710275e61a81bd09358dfac7eccacaf84762715efd9211",
+    "fewshot": false,
+    "evidence": "top-1 full abstract with original zero-based sentence indices"
+  },
+  "parser": {
+    "implementation": "posttraining.evaluation.baselines.parse_output",
+    "schema_version": "posttraining-v2",
+    "repair_invalid_generations": false,
+    "decision_labels": [
+      "SUPPORT",
+      "CONTRADICT",
+      "INSUFFICIENT"
+    ]
+  },
+  "service": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "request_log": "/home/boweiye2/rag/runs/posttraining/serving-v1/service-requests.jsonl",
+    "max_debug_k": 10
+  },
+  "benchmark": {
+    "concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "warmup_requests": 20,
+    "measured_requests": 100,
+    "workload": "frozen 162-claim DEV inputs for operational measurement only",
+    "quality_evaluation": false,
+    "seed": 20261029
+  },
+  "regression": {
+    "count": 10,
+    "selection": "first 10 numeric frozen DEV claim IDs",
+    "reference_predictions": "/home/boweiye2/rag/runs/posttraining/lora-mixed-v1/dev-finalists/mix-2-epoch-3/seed-0/dev-evaluation/predictions.jsonl",
+    "reference_predictions_sha256": "6f92f514a25301b46397cebe3349fe5e276f72708ed6ab775d965dfd16fa7d71"
+  },
+  "run_root": "/home/boweiye2/rag/runs/posttraining/serving-v1",
+  "log_root": "/home/boweiye2/rag/logs/posttraining/serving-v1",
+  "environment": "/home/boweiye2/rag/envs/serving",
+  "git_commit": "db145b5e6526afefd7ad9fead083e4100fe53de2",
+  "completed_run_overwrite_allowed": false
+}

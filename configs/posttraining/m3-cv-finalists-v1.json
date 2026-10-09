@@ -1,0 +1,59 @@
+{
+  "status": "frozen_after_CV_before_DEV",
+  "milestone": "M3_full_parameter_fine_tuning",
+  "training_config": "configs/posttraining/train-m3-full-ft-v1.json",
+  "training_config_sha256": "a3e492261579c8dcf8cb46042116cc58f9fbbeca37e33591ee4b616684b95e81",
+  "cv_folds": "configs/posttraining/m2-cv-folds-v1.json",
+  "cv_folds_sha256": "8c438f6ffe82af27dd0292746d4402699e8caefa0d6ff78930730417df6122b8",
+  "training_data_sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+  "cv_summary": "/home/boweiye2/rag/runs/posttraining/full-ft-v1/cv-summary.json",
+  "cv_summary_sha256": "9efa36d6e34231663786ca5d6e6ff8ee47194088d76a548c6f28a56025b3d4e8",
+  "finalists": [
+    {
+      "epoch": 2,
+      "fold_accuracy": [
+        0.8416666666666667,
+        0.8181818181818182,
+        0.8016528925619835,
+        0.8558558558558559,
+        0.8018018018018018
+      ],
+      "mean_accuracy": 0.8238318070136252,
+      "fold_macro_f1": [
+        0.8039501544656185,
+        0.8105742296918766,
+        0.7868836048488838,
+        0.8396681749622926,
+        0.7868856377892522
+      ],
+      "mean_macro_f1": 0.8055923603515847
+    },
+    {
+      "epoch": 3,
+      "fold_accuracy": [
+        0.8333333333333334,
+        0.9272727272727272,
+        0.8347107438016529,
+        0.9009009009009009,
+        0.8108108108108109
+      ],
+      "mean_accuracy": 0.8614057032238851,
+      "fold_macro_f1": [
+        0.817939324478282,
+        0.9199258850315908,
+        0.8236796634362556,
+        0.8834656084656084,
+        0.8031330251669235
+      ],
+      "mean_macro_f1": 0.8496287013157321
+    }
+  ],
+  "final_seeds": [
+    0,
+    1,
+    2
+  ],
+  "selection": "best three-seed mean DEV Macro F1; ties within 0.005 choose fewer epochs",
+  "inferential_seed": 0,
+  "fixed_benchmark_access_allowed": false
+}

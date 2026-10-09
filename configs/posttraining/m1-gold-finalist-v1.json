@@ -1,0 +1,23 @@
+{
+  "status": "frozen_after_cv_before_dev",
+  "milestone": "M1_gold_evidence_LoRA_SFT",
+  "training_config": "configs/posttraining/train-m1-lora-gold-v1.json",
+  "training_config_sha256": "d65581affc1f89b827b882c9365d7c44c9d9ce8cfaba137586d9ae75f3d54c2d",
+  "cv_folds": "configs/posttraining/m1-gold-cv-folds-v1.json",
+  "cv_folds_sha256": "5ca6ac4dd4cd4e7fc52b78d71a3bac2cee3fb9f2d87dd201e79b63007fbaa0ea",
+  "cv_summary": "/home/boweiye2/rag/runs/posttraining/lora-gold-v1/cv-summary.json",
+  "cv_summary_sha256": "d1509e75311ca2c04b4b017ad2f5645189a2f5f57bbffefe96eec9657af13bb9",
+  "selected_epochs": 3,
+  "selection_metric": "mean_macro_f1",
+  "epoch_2_mean_macro_f1": 0.49124016118696207,
+  "epoch_3_mean_macro_f1": 0.5209697141857879,
+  "tie_margin": 0.005,
+  "final_seeds": [
+    0,
+    1,
+    2
+  ],
+  "dev_protocol": "frozen_162_claim_DEV_BGE_top1_full_abstract",
+  "dev_selection_prohibited": true,
+  "fixed_benchmark_access_allowed": false
+}

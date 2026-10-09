@@ -1,0 +1,379 @@
+{
+  "status": "complete",
+  "baseline_gpu_count": 2,
+  "parameter_count_global": 3085938688,
+  "one_gpu": {
+    "fit": false,
+    "first_attempt": "FSDP world-size-1 BF16 gradient-view dtype incompatibility",
+    "controlled_native_retry": "CUDA OOM at first AdamW state allocation",
+    "peak_process_memory_mib_before_failure": 45434,
+    "available_gpu_mib": 46068
+  },
+  "two_gpu": {
+    "status": "complete",
+    "mode": "scaling",
+    "seed": 20261023,
+    "fold": null,
+    "world_size": 2,
+    "gpu_model": "NVIDIA L40S",
+    "rows": 573,
+    "epochs_requested": 3,
+    "epochs_completed": 1,
+    "optimizer_steps": 12,
+    "micro_batch_size_per_gpu": 2,
+    "gradient_accumulation": 4,
+    "global_batch_size": 16,
+    "training_seconds": 45.355308532714844,
+    "gpu_hours": 0.025197393629286025,
+    "tokens_processed": 126228,
+    "samples_processed": 192,
+    "tokens_per_second": 2783.092080807952,
+    "samples_per_second": 4.233242066064001,
+    "mean_step_seconds": 3.7794636487960815,
+    "measurement": {
+      "after_step": 2,
+      "steps": 10,
+      "seconds": 33.79470372200012,
+      "tokens": 104995,
+      "samples": 160,
+      "tokens_per_second": 3106.8477730624095,
+      "samples_per_second": 4.7344696765558885
+    },
+    "peak_memory_mib_per_gpu": [
+      29590.203125,
+      29567.94140625
+    ],
+    "parameter_count": 3085938688,
+    "trainable_parameter_count": 1542969344,
+    "all_parameters_trainable": true,
+    "lora_active": false,
+    "config_sha256": "a3e492261579c8dcf8cb46042116cc58f9fbbeca37e33591ee4b616684b95e81",
+    "dataset_sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+    "environment": {
+      "python": "3.11.16",
+      "pytorch": "2.9.1+cu126",
+      "cuda_runtime": "12.6",
+      "nccl": [
+        2,
+        27,
+        5
+      ]
+    },
+    "distributed": {
+      "backend": "nccl",
+      "sharding_strategy": "FULL_SHARD",
+      "cpu_offload": false,
+      "auto_wrap": "Qwen2DecoderLayer",
+      "mixed_precision": "BF16 compute/reduce/buffers; FP32 master parameters"
+    },
+    "timing_trace": [
+      {
+        "step": 1,
+        "epoch": 1,
+        "loss": 0.5375355035066605,
+        "gradient_norm": 73.66140747070312,
+        "learning_rate": 9.090909090909091e-07,
+        "step_seconds": 8.062108993530273,
+        "tokens": 10397,
+        "samples": 16
+      },
+      {
+        "step": 2,
+        "epoch": 1,
+        "loss": 0.5939783114008605,
+        "gradient_norm": 102.56333923339844,
+        "learning_rate": 1.8181818181818183e-06,
+        "step_seconds": 3.496751070022583,
+        "tokens": 10836,
+        "samples": 16
+      },
+      {
+        "step": 3,
+        "epoch": 1,
+        "loss": 0.5602351687848568,
+        "gradient_norm": 69.30951690673828,
+        "learning_rate": 2.7272727272727272e-06,
+        "step_seconds": 3.4074339866638184,
+        "tokens": 10833,
+        "samples": 16
+      },
+      {
+        "step": 4,
+        "epoch": 1,
+        "loss": 0.8873037844896317,
+        "gradient_norm": 58.89382553100586,
+        "learning_rate": 3.6363636363636366e-06,
+        "step_seconds": 3.1244187355041504,
+        "tokens": 9866,
+        "samples": 16
+      },
+      {
+        "step": 5,
+        "epoch": 1,
+        "loss": 0.20143065368756652,
+        "gradient_norm": 24.080644607543945,
+        "learning_rate": 4.5454545454545455e-06,
+        "step_seconds": 3.275516986846924,
+        "tokens": 10455,
+        "samples": 16
+      },
+      {
+        "step": 6,
+        "epoch": 1,
+        "loss": 0.37925693579018116,
+        "gradient_norm": 20.45248031616211,
+        "learning_rate": 5.4545454545454545e-06,
+        "step_seconds": 3.252530574798584,
+        "tokens": 10012,
+        "samples": 16
+      },
+      {
+        "step": 7,
+        "epoch": 1,
+        "loss": 0.38610602356493473,
+        "gradient_norm": 27.240158081054688,
+        "learning_rate": 6.363636363636364e-06,
+        "step_seconds": 3.6519367694854736,
+        "tokens": 11482,
+        "samples": 16
+      },
+      {
+        "step": 8,
+        "epoch": 1,
+        "loss": 0.2507746806368232,
+        "gradient_norm": 19.26277732849121,
+        "learning_rate": 7.272727272727273e-06,
+        "step_seconds": 3.212965965270996,
+        "tokens": 9523,
+        "samples": 16
+      },
+      {
+        "step": 9,
+        "epoch": 1,
+        "loss": 0.12845605053007603,
+        "gradient_norm": 7.450552940368652,
+        "learning_rate": 8.181818181818183e-06,
+        "step_seconds": 3.632219076156616,
+        "tokens": 10943,
+        "samples": 16
+      },
+      {
+        "step": 10,
+        "epoch": 1,
+        "loss": 0.18774298764765263,
+        "gradient_norm": 6.32712459564209,
+        "learning_rate": 9.090909090909091e-06,
+        "step_seconds": 3.3324711322784424,
+        "tokens": 10425,
+        "samples": 16
+      },
+      {
+        "step": 11,
+        "epoch": 1,
+        "loss": 0.10084678744897246,
+        "gradient_norm": 8.6655855178833,
+        "learning_rate": 1e-05,
+        "step_seconds": 3.628361463546753,
+        "tokens": 10719,
+        "samples": 16
+      },
+      {
+        "step": 12,
+        "epoch": 1,
+        "loss": 0.20074795745313168,
+        "gradient_norm": 9.963220596313477,
+        "learning_rate": 9.896907216494846e-06,
+        "step_seconds": 3.2768490314483643,
+        "tokens": 10737,
+        "samples": 16
+      }
+    ]
+  },
+  "four_gpu": {
+    "status": "complete",
+    "mode": "scaling",
+    "seed": 20261023,
+    "fold": null,
+    "world_size": 4,
+    "gpu_model": "NVIDIA L40S",
+    "rows": 573,
+    "epochs_requested": 3,
+    "epochs_completed": 1,
+    "optimizer_steps": 12,
+    "micro_batch_size_per_gpu": 2,
+    "gradient_accumulation": 2,
+    "global_batch_size": 16,
+    "training_seconds": 67.24007415771484,
+    "gpu_hours": 0.07471119350857205,
+    "tokens_processed": 126228,
+    "samples_processed": 192,
+    "tokens_per_second": 1877.2733608818771,
+    "samples_per_second": 2.855440039367814,
+    "mean_step_seconds": 5.603274385134379,
+    "measurement": {
+      "after_step": 2,
+      "steps": 10,
+      "seconds": 49.52060270309448,
+      "tokens": 104995,
+      "samples": 160,
+      "tokens_per_second": 2120.2286375532944,
+      "samples_per_second": 3.2309784466739093
+    },
+    "peak_memory_mib_per_gpu": [
+      20256.05078125,
+      20152.587890625,
+      19225.736328125,
+      19708.162109375
+    ],
+    "parameter_count": 3085938688,
+    "trainable_parameter_count": 771484672,
+    "all_parameters_trainable": true,
+    "lora_active": false,
+    "config_sha256": "a3e492261579c8dcf8cb46042116cc58f9fbbeca37e33591ee4b616684b95e81",
+    "dataset_sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+    "environment": {
+      "python": "3.11.16",
+      "pytorch": "2.9.1+cu126",
+      "cuda_runtime": "12.6",
+      "nccl": [
+        2,
+        27,
+        5
+      ]
+    },
+    "distributed": {
+      "backend": "nccl",
+      "sharding_strategy": "FULL_SHARD",
+      "cpu_offload": false,
+      "auto_wrap": "Qwen2DecoderLayer",
+      "mixed_precision": "BF16 compute/reduce/buffers; FP32 master parameters"
+    },
+    "timing_trace": [
+      {
+        "step": 1,
+        "epoch": 1,
+        "loss": 0.335950156673789,
+        "gradient_norm": 71.38818359375,
+        "learning_rate": 9.090909090909091e-07,
+        "step_seconds": 12.714637756347656,
+        "tokens": 10397,
+        "samples": 16
+      },
+      {
+        "step": 2,
+        "epoch": 1,
+        "loss": 0.4150368571281433,
+        "gradient_norm": 101.84922790527344,
+        "learning_rate": 1.8181818181818183e-06,
+        "step_seconds": 5.00405216217041,
+        "tokens": 10836,
+        "samples": 16
+      },
+      {
+        "step": 3,
+        "epoch": 1,
+        "loss": 0.607885092496872,
+        "gradient_norm": 68.718994140625,
+        "learning_rate": 2.7272727272727272e-06,
+        "step_seconds": 4.951564311981201,
+        "tokens": 10833,
+        "samples": 16
+      },
+      {
+        "step": 4,
+        "epoch": 1,
+        "loss": 0.878113865852356,
+        "gradient_norm": 59.28190994262695,
+        "learning_rate": 3.6363636363636366e-06,
+        "step_seconds": 4.894104480743408,
+        "tokens": 9866,
+        "samples": 16
+      },
+      {
+        "step": 5,
+        "epoch": 1,
+        "loss": 0.2400723984465003,
+        "gradient_norm": 25.577123641967773,
+        "learning_rate": 4.5454545454545455e-06,
+        "step_seconds": 4.919735908508301,
+        "tokens": 10455,
+        "samples": 16
+      },
+      {
+        "step": 6,
+        "epoch": 1,
+        "loss": 0.4632493853569031,
+        "gradient_norm": 20.278093338012695,
+        "learning_rate": 5.4545454545454545e-06,
+        "step_seconds": 4.92388391494751,
+        "tokens": 10012,
+        "samples": 16
+      },
+      {
+        "step": 7,
+        "epoch": 1,
+        "loss": 0.25050046760588884,
+        "gradient_norm": 26.576391220092773,
+        "learning_rate": 6.363636363636364e-06,
+        "step_seconds": 5.0243306159973145,
+        "tokens": 11482,
+        "samples": 16
+      },
+      {
+        "step": 8,
+        "epoch": 1,
+        "loss": 0.12759860791265965,
+        "gradient_norm": 18.096397399902344,
+        "learning_rate": 7.272727272727273e-06,
+        "step_seconds": 4.896486282348633,
+        "tokens": 9523,
+        "samples": 16
+      },
+      {
+        "step": 9,
+        "epoch": 1,
+        "loss": 0.09310577064752579,
+        "gradient_norm": 7.139002799987793,
+        "learning_rate": 8.181818181818183e-06,
+        "step_seconds": 4.986163139343262,
+        "tokens": 10943,
+        "samples": 16
+      },
+      {
+        "step": 10,
+        "epoch": 1,
+        "loss": 0.20654286444187164,
+        "gradient_norm": 6.318018436431885,
+        "learning_rate": 9.090909090909091e-06,
+        "step_seconds": 4.934020042419434,
+        "tokens": 10425,
+        "samples": 16
+      },
+      {
+        "step": 11,
+        "epoch": 1,
+        "loss": 0.15678837895393372,
+        "gradient_norm": 8.510523796081543,
+        "learning_rate": 1e-05,
+        "step_seconds": 5.088472366333008,
+        "tokens": 10719,
+        "samples": 16
+      },
+      {
+        "step": 12,
+        "epoch": 1,
+        "loss": 0.17970312759280205,
+        "gradient_norm": 9.850104331970215,
+        "learning_rate": 9.896907216494846e-06,
+        "step_seconds": 4.901841640472412,
+        "tokens": 10737,
+        "samples": 16
+      }
+    ]
+  },
+  "strong_scaling": {
+    "speedup_4_vs_2": 0.6824372458594559,
+    "efficiency_4_vs_2": 0.34121862292972793
+  },
+  "reporting_correction": "Raw scaling metrics trainable_parameter_count reflects the local FSDP shard in runs created before the global-count reporting fix; parameter_count and parameter_count_global are the correct 3,085,938,688 trainable parameters."
+}

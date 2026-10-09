@@ -1,0 +1,96 @@
+{
+  "status": "frozen_before_fit_test_and_DEV",
+  "model_id": "Qwen/Qwen2.5-3B-Instruct",
+  "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "local_model_path": "/home/boweiye2/rag/models/Qwen2.5-3B-Instruct",
+  "training_data": {
+    "mixture": "mix-2",
+    "path": "/home/boweiye2/rag/data/posttraining/mixtures-v1/mix-2.jsonl",
+    "sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+    "rows": 573,
+    "counts": {
+      "A": 344,
+      "B": 86,
+      "C": 86,
+      "D": 57
+    }
+  },
+  "optimization": {
+    "all_parameters_trainable": true,
+    "lora_active": false,
+    "micro_batch_size_per_gpu": 2,
+    "global_batch_size": 16,
+    "scientific_gpu_count": 4,
+    "scientific_gradient_accumulation": 2,
+    "learning_rate": 1e-05,
+    "learning_rate_rationale": "single pre-DEV stability choice for full-parameter AdamW; no search",
+    "weight_decay": 0.01,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epsilon": 1e-08,
+    "scheduler": "linear",
+    "warmup_ratio": 0.1,
+    "candidate_epochs": [
+      2,
+      3
+    ],
+    "scheduler_horizon_epochs": 3,
+    "max_gradient_norm": 1.0,
+    "precision": "bfloat16_compute_fp32_master",
+    "gradient_checkpointing": true,
+    "max_sequence_length": 4096,
+    "prompt_loss_mask": true
+  },
+  "fsdp": {
+    "sharding_strategy": "FULL_SHARD",
+    "auto_wrap_policy": "transformer_auto_wrap_policy(Qwen2DecoderLayer)",
+    "mixed_precision": {
+      "param_dtype": "bfloat16",
+      "reduce_dtype": "bfloat16",
+      "buffer_dtype": "bfloat16"
+    },
+    "cpu_offload": false,
+    "use_orig_params": true,
+    "sync_module_states": true,
+    "forward_prefetch": false,
+    "limit_all_gathers": true,
+    "state_dict": "FULL_STATE_DICT_rank0_only_offload_to_cpu_for_checkpoint_export"
+  },
+  "cross_validation": {
+    "folds": 5,
+    "group": "claim_id",
+    "seed": 20261019,
+    "fold_file": "configs/posttraining/m2-cv-folds-v1.json",
+    "fold_file_sha256": "8c438f6ffe82af27dd0292746d4402699e8caefa0d6ff78930730417df6122b8",
+    "primary_selection_metric": "mean_macro_f1",
+    "tie_margin": 0.005,
+    "finalist_count": 2,
+    "tie_break": [
+      "fewer_epochs"
+    ]
+  },
+  "final_training": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "inferential_seed": 0,
+    "selection": "best three-seed mean DEV Macro F1; ties within 0.005 choose fewer epochs"
+  },
+  "evaluation": {
+    "cv_engine": "transformers_greedy_from_full_checkpoint",
+    "dev_engine": "vllm_0.9.2",
+    "temperature": 0.0,
+    "repetition_penalty": 1.05,
+    "max_new_tokens": 192,
+    "dev_split": "frozen_162_claim_DEV",
+    "dev_evidence": "frozen_BGE_top1_full_abstract",
+    "fixed_benchmark_access_allowed_before_freeze": false
+  },
+  "environment": "/home/boweiye2/rag/envs/posttraining",
+  "git_commit": "db145b5e6526afefd7ad9fead083e4100fe53de2"
+}

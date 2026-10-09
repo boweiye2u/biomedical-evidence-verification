@@ -1,0 +1,184 @@
+{
+  "status": "milestone2_complete_no_training_started",
+  "benchmark_loaded": false,
+  "counts": {
+    "A": 456,
+    "B": 86,
+    "C": 5716,
+    "D": 647
+  },
+  "context_label_counts": {
+    "CONTRADICT": 164,
+    "SUPPORT": 292,
+    "INSUFFICIENT": 6449
+  },
+  "condition_a_labels": {
+    "CONTRADICT": 164,
+    "SUPPORT": 292
+  },
+  "audits": {
+    "B": {
+      "candidate_count": 310,
+      "retained_by_filter": 86,
+      "usable_count": 86,
+      "pre_filter_audit": {
+        "count": 50,
+        "label_counts": {
+          "INSUFFICIENT": 40,
+          "CONTRADICT": 4,
+          "SUPPORT": 6
+        },
+        "contaminated_count": 10,
+        "contamination_rate": 0.2,
+        "wilson_95_ci": [
+          0.1124375001577611,
+          0.3303710593222542
+        ]
+      },
+      "frozen_filter_audit": {
+        "count": 50,
+        "label_counts": {
+          "INSUFFICIENT": 49,
+          "CONTRADICT": 1
+        },
+        "contaminated_count": 1,
+        "contamination_rate": 0.02,
+        "wilson_95_ci": [
+          0.003539259271646236,
+          0.10495443589637815
+        ]
+      },
+      "filter": {
+        "type": "absolute_score_max",
+        "max_score_inclusive": 0.66,
+        "version": "pool-b-frozen-v1",
+        "basis": "The 50-item filter-development sample had 10 contaminated contexts (20%); the lowest contaminated BGE cosine was 0.664836764, so 0.660 was frozen before the fresh audit."
+      },
+      "threshold": 0.15,
+      "decision": "retain"
+    },
+    "C": {
+      "candidate_count": 5716,
+      "retained_by_filter": 5716,
+      "usable_count": 5716,
+      "pre_filter_audit": {
+        "count": 50,
+        "label_counts": {
+          "INSUFFICIENT": 49,
+          "CONTRADICT": 1
+        },
+        "contaminated_count": 1,
+        "contamination_rate": 0.02,
+        "wilson_95_ci": [
+          0.003539259271646236,
+          0.10495443589637815
+        ]
+      },
+      "frozen_filter_audit": {
+        "count": 50,
+        "label_counts": {
+          "INSUFFICIENT": 49,
+          "SUPPORT": 1
+        },
+        "contaminated_count": 1,
+        "contamination_rate": 0.02,
+        "wilson_95_ci": [
+          0.003539259271646236,
+          0.10495443589637815
+        ]
+      },
+      "filter": {
+        "type": "no_filter",
+        "version": "pool-c-frozen-v1",
+        "basis": "The independent 50-item filter-development sample had one contaminated context (2%), below the 15% heuristic; no filter was frozen before the fresh audit."
+      },
+      "threshold": 0.15,
+      "decision": "retain"
+    }
+  },
+  "random_seed": 20261010,
+  "mixed_train_claims": 0,
+  "artifacts": {
+    "A": {
+      "path": "/home/boweiye2/rag/data/posttraining/train_gold.jsonl",
+      "sha256": "2f4397bcd42f845dba64445d5d63864f2b0e620f3982134bfe11010d3a39f590",
+      "bytes": 1088849,
+      "rows": 456,
+      "unique_claims": 407,
+      "unique_documents": 284
+    },
+    "B": {
+      "path": "/home/boweiye2/rag/data/posttraining/train_retrieved.jsonl",
+      "sha256": "29b52fd103d54459f23bdae664ed5436d26f5d943e868408ee357a23b0142f3e",
+      "bytes": 201654,
+      "rows": 86,
+      "unique_claims": 86,
+      "unique_documents": 77
+    },
+    "C": {
+      "path": "/home/boweiye2/rag/data/posttraining/train_hard_negative.jsonl",
+      "sha256": "01f26d469d9975c643ff7dbe84b0fde594cc9ff89db7cd97bd195bb5de4aa628",
+      "bytes": 13213364,
+      "rows": 5716,
+      "unique_claims": 647,
+      "unique_documents": 2703
+    },
+    "D": {
+      "path": "/home/boweiye2/rag/data/posttraining/train_random_negative.jsonl",
+      "sha256": "dda762c06c238ec032c043296c5af7d0749fe7188c93bde34367de0944a28c5b",
+      "bytes": 1337719,
+      "rows": 647,
+      "unique_claims": 647,
+      "unique_documents": 616
+    }
+  },
+  "condition_a_diagnostics": {
+    "rationale_sentence_count": {
+      "1": 432,
+      "2": 20,
+      "3": 3,
+      "4": 1
+    },
+    "alternative_rationale_set_count": {
+      "1": 250,
+      "2": 130,
+      "3": 51,
+      "4": 20,
+      "5": 5
+    },
+    "total_preserved_alternative_sets": 768,
+    "contradict_examples": 164
+  },
+  "candidate_counts": {
+    "B": 310,
+    "C": 5716
+  },
+  "effective_mixture_availability": {
+    "raw_only_no_final_mix_created": true,
+    "limiting_condition_for_mix_1_and_mix_2_without_resampling": "B (86 usable rows)",
+    "note": "Mixture selection belongs to grouped TRAIN cross-validation; no mixture was selected from DEV."
+  },
+  "config_sha256": "d554fe70dccb171baa04571a9a8b80f0f9a7072fad55bea171e4226b4e30f962",
+  "audit_artifacts": {
+    "pool-b-filter-development.csv": {
+      "path": "/home/boweiye2/rag/data/posttraining/audits/pool-b-filter-development.csv",
+      "sha256": "bf221af46bc405be04d1ee8b3c4a9c7cf24d26fdf4ae2225508f63283632fa6b",
+      "rows": 50
+    },
+    "pool-b-frozen-filter-audit.csv": {
+      "path": "/home/boweiye2/rag/data/posttraining/audits/pool-b-frozen-filter-audit.csv",
+      "sha256": "02b35926e969d0e8cd18f15854d2a5f30e95d430c0d008d7cb3b0494ca0c8f88",
+      "rows": 50
+    },
+    "pool-c-filter-development.csv": {
+      "path": "/home/boweiye2/rag/data/posttraining/audits/pool-c-filter-development.csv",
+      "sha256": "9fb5825b907035333999f989bd3860ced95781fa77c02675923bff3c4fe530f9",
+      "rows": 50
+    },
+    "pool-c-frozen-filter-audit.csv": {
+      "path": "/home/boweiye2/rag/data/posttraining/audits/pool-c-frozen-filter-audit.csv",
+      "sha256": "f8374fcd299f7d4c788d5eea94c85e5a27ce3e8dd0432b9f4aa8cd7eaf264c56",
+      "rows": 50
+    }
+  }
+}

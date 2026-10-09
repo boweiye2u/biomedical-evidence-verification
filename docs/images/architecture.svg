@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1180" height="190" viewBox="0 0 1180 190" role="img" aria-labelledby="title desc">
   <title id="title">Biomedical retrieval and verification architecture</title>
-  <desc id="desc">A biomedical claim passes through BGE encoding, exact FAISS search over the SciFact corpus, top-one abstract selection, and grounded Qwen verification to produce a label, evidence identifiers, and an explanation.</desc>
+  <desc id="desc">A biomedical claim passes through BGE encoding, exact FAISS search over the SciFact corpus, top-one abstract selection, and the M2 Qwen verifier to produce a decision and rationale sentence identifiers.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
@@ -39,11 +39,11 @@
   <text class="label" x="676" y="116">abstract</text>
 
   <rect class="box accent" x="778" y="52" width="190" height="96" rx="10"/>
-  <text class="label" x="873" y="88">Qwen2.5-7B-Instruct</text>
-  <text class="detail" x="873" y="116">grounded-v2 prompt</text>
+  <text class="label" x="873" y="88">M2 Qwen2.5-3B</text>
+  <text class="detail" x="873" y="116">mixed-evidence LoRA</text>
 
   <rect class="box output" x="995" y="52" width="165" height="96" rx="10"/>
-  <text class="label" x="1077.5" y="84">Label</text>
-  <text class="detail" x="1077.5" y="109">evidence IDs</text>
-  <text class="detail" x="1077.5" y="129">and explanation</text>
+  <text class="label" x="1077.5" y="84">Decision</text>
+  <text class="detail" x="1077.5" y="109">rationale</text>
+  <text class="detail" x="1077.5" y="129">sentence IDs</text>
 </svg>

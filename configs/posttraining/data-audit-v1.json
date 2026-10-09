@@ -1,0 +1,52 @@
+{
+  "status": "filters_frozen_before_fresh_audits",
+  "scope": {
+    "source_split": "TRAIN_only",
+    "train_claim_count": 647,
+    "dev_or_benchmark_access_allowed": false
+  },
+  "retrieval": {
+    "model": "BAAI/bge-base-en-v1.5",
+    "revision": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+    "query_prefix": "Represent this sentence for searching relevant passages: ",
+    "pooling": "CLS",
+    "normalize": true,
+    "corpus_size": 5183,
+    "candidate_depth": 10
+  },
+  "rationale_selection": "minimum (sentence_count, sentence_index_tuple); retain all alternatives in provenance",
+  "random_negative": {
+    "seed": 20261010,
+    "count_per_train_claim": 1,
+    "exclude_annotated_and_cited_documents": true
+  },
+  "audit": {
+    "sample_size": 50,
+    "stop_threshold": 0.15,
+    "threshold_comparison": "drop pool only when frozen-filter contamination is strictly greater than 0.15",
+    "judgment_provenance": "analyst-assisted language-model review; not independent human annotation",
+    "pool_b": {
+      "filter_development_seed": 20261011,
+      "frozen_filter_audit_seed": 20261012,
+      "filter": {
+        "type": "absolute_score_max",
+        "max_score_inclusive": 0.66,
+        "version": "pool-b-frozen-v1",
+        "basis": "The 50-item filter-development sample had 10 contaminated contexts (20%); the lowest contaminated BGE cosine was 0.664836764, so 0.660 was frozen before the fresh audit."
+      }
+    },
+    "pool_c": {
+      "filter_development_seed": 20261013,
+      "frozen_filter_audit_seed": 20261014,
+      "filter": {
+        "type": "no_filter",
+        "version": "pool-c-frozen-v1",
+        "basis": "The independent 50-item filter-development sample had one contaminated context (2%), below the 15% heuristic; no filter was frozen before the fresh audit."
+      }
+    }
+  },
+  "outputs": {
+    "root": "/home/boweiye2/rag/data/posttraining",
+    "run": "/home/boweiye2/rag/runs/posttraining/data-audit-v1"
+  }
+}

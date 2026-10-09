@@ -1,0 +1,64 @@
+{
+  "status": "frozen_before_training",
+  "model_id": "Qwen/Qwen2.5-3B-Instruct",
+  "model_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "local_model_path": "/home/boweiye2/rag/models/Qwen2.5-3B-Instruct",
+  "training_data": {
+    "path": "/home/boweiye2/rag/data/posttraining/train_gold.jsonl",
+    "sha256": "2f4397bcd42f845dba64445d5d63864f2b0e620f3982134bfe11010d3a39f590",
+    "condition": "A_gold",
+    "rows": 456,
+    "support": 292,
+    "contradict": 164
+  },
+  "lora": {
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.05,
+    "bias": "none",
+    "target_modules": ["q_proj", "v_proj"]
+  },
+  "optimization": {
+    "micro_batch_size": 2,
+    "gradient_accumulation": 8,
+    "effective_batch_size": 16,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-8,
+    "scheduler": "linear",
+    "warmup_ratio": 0.1,
+    "candidate_epochs": [2, 3],
+    "scheduler_horizon_epochs": 3,
+    "max_gradient_norm": 1.0,
+    "precision": "bfloat16",
+    "gradient_checkpointing": true,
+    "max_sequence_length": 4096,
+    "prompt_loss_mask": true
+  },
+  "cross_validation": {
+    "folds": 5,
+    "group": "claim_id",
+    "seed": 20261019,
+    "fold_file": "configs/posttraining/m1-gold-cv-folds-v1.json",
+    "primary_selection_metric": "mean_macro_f1",
+    "tie_margin": 0.005,
+    "tie_break": "fewer_epochs"
+  },
+  "final_training": {
+    "seeds": [0, 1, 2],
+    "inferential_seed": 0,
+    "selection": "best 3-seed DEV mean Macro F1 applies when comparing later finalists; no seed selection"
+  },
+  "evaluation": {
+    "cv_engine": "transformers_greedy",
+    "dev_engine": "vllm_0.9.2_after_merge",
+    "temperature": 0.0,
+    "repetition_penalty": 1.05,
+    "max_new_tokens": 192,
+    "dev_split": "frozen_162_claim_DEV",
+    "dev_evidence": "frozen_BGE_top1_full_abstract",
+    "fixed_benchmark_access_allowed": false
+  }
+}

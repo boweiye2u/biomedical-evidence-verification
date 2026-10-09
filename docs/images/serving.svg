@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="940" height="190" viewBox="0 0 940 190" role="img" aria-labelledby="title desc">
   <title id="title">Local serving architecture</title>
-  <desc id="desc">An HTTP client calls FastAPI, which runs BGE and FAISS retrieval followed by Qwen generation through vLLM and returns validated JSON.</desc>
+  <desc id="desc">An HTTP client calls FastAPI, which runs BGE and FAISS retrieval followed by M2 Qwen generation through vLLM and returns validated JSON.</desc>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
@@ -32,8 +32,8 @@
   <text class="detail" x="459" y="120">exact retrieval</text>
 
   <rect class="box service" x="571" y="52" width="180" height="96" rx="10"/>
-  <text class="label" x="661" y="94">vLLM / Qwen</text>
-  <text class="detail" x="661" y="120">grounded generation</text>
+  <text class="label" x="661" y="94">vLLM / M2 Qwen</text>
+  <text class="detail" x="661" y="120">structured generation</text>
 
   <rect class="box output" x="778" y="52" width="142" height="96" rx="10"/>
   <text class="label" x="849" y="94">Validated</text>

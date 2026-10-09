@@ -1,0 +1,48 @@
+{
+  "status": "frozen_before_scaling",
+  "training_config": "configs/posttraining/train-m3-full-ft-v1.json",
+  "training_data_sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+  "gpu_counts": [
+    1,
+    2,
+    4
+  ],
+  "micro_batch_size_per_gpu": 2,
+  "global_batch_size": 16,
+  "gradient_accumulation": {
+    "1": 8,
+    "2": 4,
+    "4": 2
+  },
+  "optimizer_steps": 12,
+  "warmup_measurement_steps": 2,
+  "measurement_steps": [
+    3,
+    12
+  ],
+  "seed": 20261023,
+  "cpu_offload": false,
+  "hold_fixed": [
+    "model",
+    "revision",
+    "tokenizer",
+    "dataset",
+    "dataset_hash",
+    "precision",
+    "sequence_length",
+    "optimizer",
+    "learning_rate",
+    "scheduler",
+    "optimizer_steps",
+    "global_batch_size",
+    "micro_batch_size_per_gpu",
+    "gradient_checkpointing"
+  ],
+  "only_vary": [
+    "gpu_count",
+    "gradient_accumulation"
+  ],
+  "environment": "/home/boweiye2/rag/envs/posttraining",
+  "git_commit": "db145b5e6526afefd7ad9fead083e4100fe53de2",
+  "training_config_sha256": "a3e492261579c8dcf8cb46042116cc58f9fbbeca37e33591ee4b616684b95e81"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "frozen_after_three_seed_DEV_selection",
+  "milestone": "M2_mixed_evidence_LoRA_SFT",
+  "selected_mixture": "mix-2",
+  "selected_epochs": 3,
+  "three_seed_dev_means": {
+    "2": {
+      "accuracy": 0.6213991769547326,
+      "macro_f1": 0.6116475661336112
+    },
+    "3": {
+      "accuracy": 0.6625514403292181,
+      "macro_f1": 0.6467758537279461
+    }
+  },
+  "selection_metric": "best three-seed mean DEV Macro F1",
+  "tie_margin": 0.005,
+  "tie_break": [
+    "fewer_epochs",
+    "fewer_training_rows",
+    "mixture_name"
+  ],
+  "inferential_seed": 0,
+  "inferential_checkpoint": "/home/boweiye2/rag/checkpoints/posttraining/m2/dev-finalists/mix-2-epoch-3/seed-0/merged",
+  "cv_finalists_config": "configs/posttraining/m2-cv-finalists-v1.json",
+  "cv_finalists_config_sha256": "920defa19b996a920a3a9fb25b3ebf329f8a51e247f829472a0ee62c0dc04263",
+  "training_config_sha256": "7b560e90192c9e523ae66c63a0db97b717b49da4c8a85efcef75037a5fea70f5",
+  "mixture_data_sha256": "7ca1013d3ff393eddb805f0e3ce5b5dc85b18055775c264dcdc073867514dfeb",
+  "fixed_benchmark_access_allowed": false
+}

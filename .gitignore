@@ -28,12 +28,17 @@ Thumbs.db
 *.pdf
 2026-09-30-biomedical-retrieval-project-proposal-v4.md
 2026-09-30-biomedical-retrieval-project-v4.1-patch.md
+/2026-10-08-biomedical-llm-finetuning-proposal-final-v4-FROZEN-v2.md
+/2026-10-08-biomedical-llm-posttraining-implementation-FINAL-FROZEN.md
 
 # Datasets, models, indexes, caches, and training artifacts
 data/
+!posttraining/data/
+!posttraining/data/*.py
 datasets/
 models/
 checkpoints/
+artifacts/
 embeddings/
 indexes/
 cache/
